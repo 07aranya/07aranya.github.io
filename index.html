@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aranya :)</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="images/icon.png">
+</head>
+
+<body>
+
+  <!-- ── PRELOADER ── -->
+  <div id="pre">
+    <div class="pre-top">
+      <div class="pre-logo"><span>ara<em>.</em></span></div>
+      <div class="pre-tag">initiating cosmic tour</div>
+    </div>
+    <div id="pre-counter"><span id="preNum">0</span></div>
+    <div class="pre-bottom">
+      <div class="pre-bar-wrap">
+        <div id="pre-bar"></div>
+      </div>
+      <div class="pre-pct"><span id="prePct">0%</span></div>
+    </div>
+  </div>
+
+  <div id="cur"></div>
+  <div id="curR"></div>
+  <div id="pgOv"></div>
+
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- CMD -->
+  <div id="cmdW">
+    <div id="cmdB">
+      <div id="cmdRow"><span style="opacity:.35;font-size:.95rem">⌘</span><input id="cmdIn"
+          placeholder="Type to navigate…" autocomplete="off"></div>
+      <div id="cmdList"></div>
+    </div>
+  </div>
+
+  <!-- KONAMI GAME -->
+  <div id="konamiOverlay">
+    <button class="k-close" id="konamiClose">× close [ESC]</button>
+    <div class="k-title">⬆⬆⬇⬇⬅➡⬅➡ B A — you found it</div>
+    <canvas id="kCanvas" width="480" height="340"></canvas>
+    <div class="k-hint">← → arrow keys / wasd — paddle | space — pause</div>
+  </div>
+
+  <nav id="nav">
+    <a href="index.html" class="nl" data-page="index.html">ara<em>.</em></a>
+    <div class="n-links">
+      <a href="#hero" class="n-link">Home</a>
+      <a href="#about" class="n-link">About</a>
+      <a href="#interests" class="n-link">Interests</a>
+      <a href="#work" class="n-link">Projects</a>
+      <a href="#timeline" class="n-link">Timeline</a>
+      <a href="#contact" class="n-link">Contact</a>
+    </div>
+    <div class="nr">
+      <div class="n-cmd" id="cmdBtn">⌘K</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" style="position:relative;overflow:hidden">
+    <img src="https://cdn-icons-png.flaticon.com/512/3306/3306571.png" class="space-obj"
+      style="width:60px;top:20%;right:12%;--dur:10s;--dx:-25px;--dy:20px;--rot:15deg;opacity:.12" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" class="space-obj"
+      style="width:22px;bottom:30%;left:8%;--dur:8s;--delay:2s;--dx:12px;--dy:-18px;--rot:-12deg;opacity:.15" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909587.png" class="space-obj"
+      style="width:32px;top:60%;right:5%;--dur:12s;--delay:3s;--dx:-15px;--dy:10px;--rot:20deg;opacity:.1" alt="">
+    <div class="h-content">
+      <div class="h-lbl"><span>CSE · pune · class of 2029 </span></div>
+      <h1 class="h1">
+        <span class="row r1"><span class="inner"><span class="mt">hi i'm</span></span></span>
+        <span class="row r2"><span class="inner"><span class="name-hover" id="nameHover">aranya :)</span></span></span>
+      </h1>
+      <p class="h-sub"><span>aranya is <span class="swap" id="swapEl">building things</span></span></p>
+    </div>
+    <div class="h-scroll">
+      <div class="pipe">
+        <div class="pip-i"></div>
+      </div>
+      <span class="slbl">scroll</span>
+    </div>
+  </section>
+
+  <div class="mq">
+    <div class="mq-t" id="mqT"></div>
+  </div>
+
+  <!-- SCRUB -->
+  <div class="scrub-sec" id="scrubSec">
+    <div class="scrub-t" id="scrubT"></div>
+  </div>
+
+  <!-- ABOUT ME HEADER -->
+  <section id="about"
+    style="padding: 8rem 3rem 0; border-top: 1px solid var(--bd); position: relative; z-index: 2; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(2, 0, 16, 0.25);">
+    <div class="sh" data-reveal style="margin-bottom: 0;"><span class="shn">001</span>
+      <h2>about me</h2>
+      <div class="shl"></div>
+    </div>
+  </section>
+
+  <!-- SPLIT -->
+  <div class="split" style="border-top: none;">
+    <!-- Space objects -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3306/3306571.png" class="space-obj"
+      style="width:50px;top:15%;right:8%;--dur:9s;--dx:20px;--dy:-25px;--rot:15deg;opacity:.15" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909572.png" class="space-obj"
+      style="width:35px;bottom:20%;left:5%;--dur:11s;--delay:2s;--dx:-15px;--dy:10px;--rot:-8deg;opacity:.12" alt="">
+    <div class="sp-l">
+      <div class="sp-title">a <span class="gw">builder</span><br>at <span class="gw t">heart</span>.</div>
+      <p class="sp-bio">first-year <strong>CSE student</strong> at VIT Pune. obsessed with <strong>game
+          dev</strong>, dsa, and learning new things. i learn by building and breaking things.</p>
+      <div class="tags">
+        <span class="tg">C#</span><span class="tg">Python</span><span class="tg">JavaScript</span>
+        <span class="tg">DSA</span><span class="tg">Game Dev</span><span class="tg">Github</span>
+        <span class="tg">Unity</span><span class="tg">Pune</span>
+      </div>
+    </div>
+    <div class="sp-r">
+      <div class="si" data-reveal>
+        <div class="si-n">01 / CREATE</div>
+        <div class="si-t">Game Development</div>
+        <p class="si-d">i love building games as much i love playing them. currently learning unity for game
+          development.
+        </p>
+      </div>
+      <div class="si" data-reveal style="transition-delay:.1s">
+        <div class="si-n">02 / CODE</div>
+        <div class="si-t">DSA & Problem Solving</div>
+        <p class="si-d">problem solvibng has always fascinated me. always ready to tackle new challenges.</p>
+      </div>
+      <div class="si" data-reveal style="transition-delay:.2s">
+        <div class="si-n">03 / LEARN</div>
+        <div class="si-t">First Year in College</div>
+        <p class="si-d">as a first-year cse student, i'm diving into the fundamentals of computer science while
+          exploring new areas that spark my interest.</p>
+      </div>
+      <div class="si" data-reveal style="transition-delay:.3s">
+        <div class="si-n">04 / OTHER</div>
+        <div class="si-t">Other Things</div>
+        <p class="si-d">web development and app development are the things im exploring these days apart from
+          game dev.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOVER PHOTO SECTION -->
+  <section class="photo-hover-sec" id="interests">
+    <img src="https://cdn-icons-png.flaticon.com/512/3306/3306607.png" class="space-obj"
+      style="width:45px;top:10%;right:5%;--dur:10s;--dx:-18px;--dy:15px;--rot:20deg;opacity:.18" alt="">
+    <div id="floatImg"></div>
+    <div class="ph-bg-img" id="phBgImg"></div>
+    <div class="sh" data-reveal><span class="shn">002</span>
+      <h2>interests</h2>
+      <div class="shl"></div>
+    </div>
+    <div class="ph-items" id="phItems"></div>
+  </section>
+
+  <!-- PROJECTS SHOWCASE -->
+  <section class="sec" id="work" style="border-top:1px solid var(--bd)">
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909587.png" class="space-obj"
+      style="width:55px;top:12%;left:3%;--dur:12s;--delay:1s;--dx:25px;--dy:-20px;--rot:-15deg;opacity:.14" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" class="space-obj"
+      style="width:30px;bottom:15%;right:6%;--dur:7s;--delay:3s;--dx:-12px;--dy:18px;--rot:25deg;opacity:.2" alt="">
+    <div class="sh" data-reveal><span class="shn">003</span>
+      <h2>my <span class="gw c">projects</span></h2>
+      <div class="shl"></div>
+    </div>
+    <div class="proj-showcase">
+      <!-- Featured Project -->
+      <div class="proj-feat" data-reveal>
+        <div class="proj-feat-img">
+          <img src="images/projects/chatbot.png" alt="Chatbot Screenshot">
+        </div>
+        <div class="proj-feat-info">
+          <div class="proj-num">01 / project</div>
+          <div class="proj-name">AI EDUCATIONAL VERNACULAR CHATBOT</div>
+          <p class="proj-desc">an educational chatbot built to help students in studies in over 9 indian vernacular
+            languages. has dual persona and syllabus personalization.
+            (tap the link below to preview, requires api)</p>
+          <div class="proj-tech">
+            <span>TypeScript</span><span>React</span><span>Gemini API</span><span>Over 9 Languages</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://ai-vernacular-chatbot.vercel.app/" target="_blank" rel="noopener noreferrer"
+              class="proj-link primary">🚀 Live
+              Demo</a>
+            <a href="https://github.com/07aranya/VernacularChatbot" target="_blank" rel="noopener noreferrer"
+              class="proj-link secondary">⌨️
+              Source Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Grid -->
+      <div class="proj-grid">
+        <div class="proj-card" data-reveal>
+          <div class="proj-card-img">
+            <img src="images/projects/vrgame.jpeg" alt="vr game">
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-num">02 / game</div>
+            <div class="proj-name">VR HORROR GAME</div>
+            <p class="proj-desc">built a vr horror game with my team using unity for our college fest</p>
+            <div class="proj-tech"><span>Unity</span><span>C#</span><span>VR</span></div>
+            <div class="proj-links">
+              <a href="javascript:void(0)" onclick="openMediaModal('video')" class="proj-link primary">Watch a
+                Glimpse</a>
+              <a href="javascript:void(0)" onclick="openMediaModal('photo')" class="proj-link primary">Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card" data-reveal style="transition-delay:.1s">
+          <div class="proj-card-img">
+            <img src="images/projects/cbse.png" alt="cbse website">
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-num">03 / website</div>
+            <div class="proj-name">CBSE WEBSITE</div>
+            <p class="proj-desc">built a cbse website with better ui/ux design and features</p>
+            <div class="proj-tech"><span>JavaScript</span><span>HTML/CSS</span><span>Design</span></div>
+            <div class="proj-links">
+              <a href="https://cbse-website-new.vercel.app/" target="_blank" rel="noopener noreferrer"
+                class="proj-link primary">Visit</a>
+              <a href="https://github.com/07aranya/CBSE-Website" target="_blank" rel="noopener noreferrer"
+                class="proj-link secondary">Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card" data-reveal style="transition-delay:.2s">
+          <div class="proj-card-img">
+            <img src="images/projects/fruitninja.jpg" alt="Fruit Ninja Game">
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-num">04 / IN PROGRESS</div>
+            <div class="proj-name"> HAND GESTURE FRUIT NINJA GAME</div>
+            <p class="proj-desc">a game where you control the game using hand gestures</p>
+            <div class="proj-tech"><span>Python</span><span>Visuals</span><span>opencv</span></div>
+            <div class="proj-links">
+              <!-- <a href='' class="proj-link primary">View</a>
+              <a href='' class="proj-link secondary">Code</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOW WIDGET -->
+  <section class="now-sec">
+    <img src="https://cdn-icons-png.flaticon.com/512/3306/3306571.png" class="space-obj"
+      style="width:40px;top:20%;right:4%;--dur:8s;--delay:1s;--dx:-20px;--dy:-15px;--rot:18deg;opacity:.15" alt="">
+    <div class="sh" data-reveal><span class="shn">004</span>
+      <h2>right <span class="gw v">now</span></h2>
+      <div class="shl"></div>
+    </div>
+    <div class="now-grid">
+      <div class="now-card" style="--nc:var(--lime)" data-reveal>
+        <div class="now-pulse">live</div>
+        <div class="now-label">playing</div>
+        <div class="now-val" id="nowPlaying">sekiro & spiderman-2</div>
+        <div class="now-sub">been playing these two games a lot</div>
+      </div>
+      <div class="now-card" style="--nc:var(--teal)" data-reveal style="transition-delay:.1s">
+        <div class="now-pulse" style="--nc:var(--teal)">building</div>
+        <div class="now-label">working on</div>
+        <div class="now-val">college projects</div>
+        <div class="now-sub">gesture based fruit ninja game, gyro based ball controller and a haptic based helmet
+          prototype!</div>
+      </div>
+      <div class="now-card" style="--nc:var(--violet)" data-reveal style="transition-delay:.2s">
+        <div class="now-pulse" style="--nc:var(--violet)">learning</div>
+        <div class="now-label">grinding</div>
+        <div class="now-val">trees and 2D-game </div>
+        <div class="now-sub">2-d game mechanics in unity and data structures</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="sec" id="timeline" style="border-top:1px solid var(--bd)">
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909572.png" class="space-obj"
+      style="width:42px;top:5%;right:6%;--dur:10s;--delay:2s;--dx:18px;--dy:22px;--rot:-10deg;opacity:.15" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/3306/3306607.png" class="space-obj"
+      style="width:30px;bottom:8%;left:5%;--dur:9s;--delay:4s;--dx:-14px;--dy:-18px;--rot:22deg;opacity:.12" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" class="space-obj"
+      style="width:25px;top:40%;left:2%;--dur:7s;--delay:1s;--dx:10px;--dy:12px;--rot:15deg;opacity:.1" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/3306/3306571.png" class="space-obj"
+      style="width:35px;bottom:25%;right:3%;--dur:11s;--delay:3s;--dx:-20px;--dy:-10px;--rot:-18deg;opacity:.13" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909587.png" class="space-obj"
+      style="width:28px;top:65%;right:8%;--dur:8s;--delay:5s;--dx:15px;--dy:-15px;--rot:20deg;opacity:.1" alt="">
+    <div class="tl-outer">
+      <div class="sh" data-reveal><span class="shn">005</span>
+        <h2>the <span class="gw v">journey</span></h2>
+        <div class="shl"></div>
+      </div>
+      <p class="tl-intro" data-reveal>my projects, achievements and my journey, documented.</p>
+      <div class="tl" id="tlWrap">
+        <div class="tl-track">
+          <div class="tl-track-fill" id="tlFill"></div>
+        </div>
+
+        <div class="tl-e" id="tl0">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">🐣</span> life</div>
+            <div class="tl-t">Born in 2007</div>
+            <div class="tl-img">
+              <img src="images/born in 2007/ara1.jpeg" alt="my childhood photo"
+                data-images='["images/born in 2007/ara1.jpeg", "images/born in 2007/ara2.jpeg", "images/born in 2007/WhatsApp Image 2026-05-01 at 15.13.33.jpeg", "images/born in 2007/WhatsApp Image 2026-05-01 at 15.13.34.jpeg"]'>
+            </div>
+            <p class="tl-d">born in ngp,india and raised in over 7 different cities. guess im just a nomad xd</p>
+            <div class="tl-foot"><span class="ty">2007</span></div>
+          </div>
+        </div>
+
+        <div class="tl-e" id="tl1">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">🏫</span> school years</div>
+            <div class="tl-t">My Years in School</div>
+            <div class="tl-img">
+              <img src="images/my years in school/school1.jpeg" alt="School picture"
+                data-images='["images/my years in school/school1.jpeg", "images/my years in school/12th.jpeg", "images/my years in school/WhatsApp Image 2026-05-01 at 15.15.27.jpeg", "images/my years in school/compteam.jpeg", "images/my years in school/cricteam.jpeg"]'>
+            </div>
+            <p class="tl-d">schooling was a very memorable phase of my life. changed schools a lot but learned to adapt
+              in different environments. made a lot of great friends and memories. would definitely love to relive those
+              days again!</p>
+            <div class="tl-foot"><span class="ty">2010-2022</span><span class="tb tbp">schooling</span></div>
+          </div>
+        </div>
+
+        <div class="tl-e" id="tl2">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">⚽</span> Football and badminton achievements</div>
+            <div class="tl-t">State Level</div>
+            <div class="tl-img">
+              <img src="images/state level/football medal.jpeg" alt="Football medal"
+                data-images='["images/state level/football medal.jpeg", "images/state level/footballteam.jpeg"]'>
+            </div>
+            <p class="tl-d">was the runner up in Maharashtra State Level Football-Tennis Tournament U-14 Category.
+              played interschool Badminton matches for my school and won many matches.</p>
+            <div class="tl-foot"><span class="ty">2019-2020</span><span class="tb tbm">milestone</span></div>
+          </div>
+        </div>
+
+        <div class="tl-e" id="tl3">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">🏆</span> extracurriculars and olympiads</div>
+            <div class="tl-t">Art, Dance and Olympiads</div>
+            <div class="tl-img">
+              <img src="images/art dance and olympiads/allmedals.jpeg" alt="all medals"
+                data-images='["images/art dance and olympiads/allmedals.jpeg"]'>
+            </div>
+            <p class="tl-d">i've been participating in dance and art competitions ever since i was in class 1st, won
+              many competetions. was state rank <strong> 23 </strong> at Spell Bee State Level Competition.
+              <br><br><br>participated
+              and secured first
+              place in many olympiads like SOF and SilverZone which contributed to developing my competitive spirit and
+              gather <strong> 20+ medals & 70+ certificates </strong>
+            </p>
+            <div class="tl-foot"><span class="ty">2016-2022</span><span class="tb tbm">milestone</span></div>
+          </div>
+        </div>
+
+        <div class="tl-e" id="tl4">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">🎊</span> sweet end of a chapter.</div>
+            <div class="tl-t">Class 10, 12 and the end of school life.</div>
+            <div class="tl-img">
+              <img src="images/10th, 12th/farewell.jpeg" alt="class 12 picture"
+                data-images='["images/10th, 12th/farewell.jpeg", "images/10th, 12th/12th(1).jpeg", "images/10th, 12th/highschool.jpeg"]'>
+            </div>
+            <p class="tl-d">class 10th and 12th was fun, it was one of my first major exams, but it taught me a lot of
+              things and helped me grow as a person.
+              <br><br>
+              scored 95.6% in 10th and 96.4% in 12th. school topper in class 12th and was also the
+              headboy
+              of my school in 12th which taught me a lot about leadership and responsibility. the farewell was
+              something else! wish i could go back and do it all over again.
+            </p>
+            <div class="tl-foot"><span class="ty">2023–2025</span><span class="tb tbl">high school</span></div>
+          </div>
+        </div>
+
+        <div class="tl-e" id="tl5">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">📍</span> places</div>
+            <div class="tl-t">Places I've Lived In and travelled to.</div>
+            <div class="tl-img">
+              <img src="images/places/goa1.jpeg" alt="places I've lived in and travelled to"
+                data-images='["images/places/goa1.jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.27 (1).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.27 (2).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.27.jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.28 (1).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.28.jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.42 (1).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.42 (2).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.42 (3).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.42.jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.43 (1).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.43.jpeg"]'>
+            </div>
+            <p class="tl-d">places i've lived in: Pune, Mumbai, Nagpur, Goa, Hyderabad, Baramati, Kolhapur and Solapur.
+              <br><br>
+              places i've visited: goa, nainital, agra, hampi, dandeli and many more. travelling is becoming a hobby of
+              mine :)
+            </p>
+            <div class="tl-foot"><span class="ty">2010-2025</span><span class="tb tbp">places</span></div>
+          </div>
+        </div>
+
+        <div class="tl-e" id="tl6">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">🏫</span> college </div>
+            <div class="tl-t">Joining College and a new begining.</div>
+            <div class="tl-img">
+              <img src="images/college/vitp.jpeg" alt="VIT"
+                data-images='["images/college/vitp.jpeg", "images/college/WhatsApp Image 2026-05-01 at 15.11.34.jpeg", "images/college/WhatsApp Image 2026-05-01 at 15.12.17 (1).jpeg", "images/college/WhatsApp Image 2026-05-01 at 15.12.17 (2).jpeg", "images/college/WhatsApp Image 2026-05-01 at 15.12.17.jpeg"]'>
+            </div>
+            <p class="tl-d">pursuing B.Tech in <strong>Computer Science and Engineering</strong> from VIT, Pune. College
+              life's amazing :) Made many new friends and memories in a short time. Glad to have such loving friends
+              cant wait for whats in store for us :) <br><br>
+              scored 9.3 SGPA in semester 1. exploring various clubs and domains in tech to find my niche.
+            </p>
+            <div class="tl-foot"><span class="ty">2025</span><span class="tb tbp">open source</span></div>
+          </div>
+        </div>
+
+        <div class="tl-e" id="tl7">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">💡</span> project</div>
+            <div class="tl-t">My Projects</div>
+            <div class="tl-img">
+              <img src="images/projects/chatbot.png" alt="Projects"
+                data-images='["images/projects/chatbot.png", "images/projects/cbse.png", "images/projects/fruitninja.jpg", "images/projects/vrgame.jpeg"]'>
+            </div>
+            <p class="tl-d">started working on many cool projects like an ai powered vernacular chatbot, multilevel
+              parking system, cbse clone website, hardware projects like haptic based helmet and gyro ball controller
+              etc.
+              <br><br>more cool projects coming up soon!
+            </p>
+            <div class="tl-foot"><span class="ty">2025</span><span class="tb tbp">project</span></div>
+          </div>
+        </div>
+
+        <div class="tl-e now-e" id="tl8">
+          <div class="tl-dot-w">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-kind"><span class="tl-kind-icon">✨</span> now</div>
+            <div class="tl-t">This Portfolio</div>
+            <p class="tl-d">building a personal space to document everything — present, past, and whatever comes next.
+            </p>
+            <div class="tl-foot"><span class="ty">2025</span><span class="tb tbn">present</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact" style="position:relative;overflow:hidden">
+    <img src="https://cdn-icons-png.flaticon.com/512/3306/3306607.png" class="space-obj"
+      style="width:30px;top:25%;right:8%;--dur:9s;--dx:12px;--dy:-15px;--rot:10deg;opacity:.12" alt="">
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909572.png" class="space-obj"
+      style="width:25px;bottom:30%;left:6%;--dur:11s;--delay:2s;--dx:-10px;--dy:12px;--rot:-15deg;opacity:.1" alt="">
+    <div class="fi">
+      <div>
+        <div class="fb">ara<em>.</em></div>
+        <div class="fst">cse student · builder · Pune, IN</div>
+      </div>
+      <div class="fls">
+        <a href="https://github.com/07aranya" class="fl" target="_blank"><svg viewBox="0 0 24 24">
+            <path
+              d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+          </svg>GitHub</a>
+        <a href="https://www.linkedin.com/in/aranya-ghargade-207821385/" class="fl" target="_blank"><svg
+            viewBox="0 0 24 24">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>LinkedIn</a>
+
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com" target="_blank" class="fl"><svg
+            viewBox="0 0 24 24">
+            <path
+              d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+          </svg>Email</a>
+      </div>
+    </div>
+    <div class="fcp">built with ♥ by aranya · 2026</div>
+  </footer>
+
+
+  <nav id="pnav">
+    <a href="index.html" class="pb active" data-page="index.html">home</a>
+    <a href="personal.html" class="pb" data-page="personal.html">personal</a>
+    <a href="professional.html" class="pb" data-page="professional.html">professional</a>
+  </nav>
+
+  <!-- MEDIA MODAL -->
+  <div id="mediaModal" class="media-modal">
+    <button class="mm-close" id="mmClose">×</button>
+    <div class="mm-content" id="mmContent"></div>
+    <div class="mm-nav" id="mmNav">
+      <button id="mmPrev">←</button>
+      <button id="mmNext">→</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
