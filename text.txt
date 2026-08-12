@@ -1,1 +1,0 @@
-on the personal page, add the respective album covers to the songs which i ihave added in the images folder. also remove the tap to play animation as nothing is being played and add another animation in place of it. also want to link my spotify account to the page. add a cool button for it. 
