@@ -1720,27 +1720,39 @@
     });
 
     /* MUSIC */
-    const songs = [
-      { t: 'Nights', a: 'Frank Ocean', d: '5:07', img: 'images/album covers/nights.jpg' },
-      { t: 'Raindance', a: 'Dave', d: '3:39', img: 'images/album covers/raindance.jpg' },
-      { t: 'Creep', a: 'Radiohead', d: '3:58', img: 'images/album covers/creep.jpg' },
-      { t: 'Wish You Were Here', a: 'Pink Floyd', d: '5:35', img: 'images/album covers/wish you were here.jpg' },
-      { t: 'butterflies.', a: 'Brent Faiyaz', d: '4:08', img: 'images/album covers/butterflies.webp' }
+    // Just paste your Spotify track links here!
+    const spotifyLinks = [
+      'https://open.spotify.com/track/7eqoqGkKwgOaWNNHx90uEZ', // Nights - Frank Ocean
+      'https://open.spotify.com/track/7lPN2DXiMsVn7XUKtOW1CS', // Dave (Placeholder)
+      'https://open.spotify.com/track/70LcF31zb1H0PyJoS1YWSR', // Creep - Radiohead
+      'https://open.spotify.com/track/3TQsOWKAG3hW87kC0E2d12', // Wish You Were Here - Pink Floyd
+      'https://open.spotify.com/track/30KcwkiLUH7F9K4c5Y2JqH'  // butterflies - Brent Faiyaz
     ];
+    
     const mpTrEl = document.getElementById('mpTr');
-    let playIdx = -1;
-    songs.forEach((s, i) => {
-      const d = document.createElement('div'); d.className = 'mp-tr';
-      d.innerHTML = `<div class="mp-num">${String(i + 1).padStart(2, '0')}</div><img src="${s.img}" alt="${s.t}" class="mp-cover" onerror="this.onerror=null; this.src='https://placehold.co/84x84/1a1a2e/b07aee?text=🎵';"><div class="mp-info"><div class="mp-t">${s.t}</div><div class="mp-a">${s.a}</div></div><div class="mp-dur">${s.d}</div>`;
-      d.addEventListener('click', () => {
-        if (playIdx === i) { d.classList.remove('selected'); playIdx = -1; return }
-        mpTrEl.querySelectorAll('.mp-tr').forEach(t => t.classList.remove('selected'));
-        d.classList.remove('selected');
-        void d.offsetWidth; // trigger reflow
-        d.classList.add('selected');
-        playIdx = i;
-      });
-      mpTrEl.appendChild(d);
+    mpTrEl.style.display = 'flex';
+    mpTrEl.style.flexDirection = 'column';
+    mpTrEl.style.gap = '12px';
+
+    spotifyLinks.forEach(link => {
+      // Automatically convert regular track links to embed links
+      let embedUrl = link;
+      if (link.includes('/track/')) {
+        const trackId = link.split('/track/')[1].split('?')[0];
+        embedUrl = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`;
+      }
+      
+      const iframe = document.createElement('iframe');
+      iframe.style.borderRadius = '12px';
+      iframe.width = '100%';
+      iframe.height = '152';
+      iframe.frameBorder = '0';
+      iframe.allowFullscreen = true;
+      iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+      iframe.loading = 'lazy';
+      iframe.src = embedUrl;
+      
+      mpTrEl.appendChild(iframe);
     });
 
     /* GAMES */
