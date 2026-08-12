@@ -1535,7 +1535,7 @@
           <div style="display:flex;gap:8px;">
             <a class="ps-link" id="fnPhotosBtn"
               style="cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none;"
-              title="View Screenshots" onclick="alert('Photos coming soon!')">📸</a>
+              title="View Screenshots">📸</a>
             <a href="https://github.com/07aranya/python-fruit-ninja" target="_blank" rel="noopener noreferrer" class="ps-link" title="GitHub">↗</a>
           </div>
         </div>
@@ -1549,6 +1549,9 @@
         <div class="ps-header">
           <div class="ps-num">05</div>
           <div style="display:flex;gap:8px;">
+            <a class="ps-link" id="asepPhotosBtn"
+              style="cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none;"
+              title="View Screenshots">📸</a>
             <a href="https://haptic-helmet-nav.onrender.com" target="_blank" rel="noopener noreferrer" class="ps-link" title="Live">⬡</a>
             <a href="https://github.com/07aranya/haptic-helmet-nav" target="_blank" rel="noopener noreferrer" class="ps-link" title="GitHub">↗</a>
           </div>
@@ -1563,7 +1566,7 @@
           <div style="display:flex;gap:8px;">
             <a class="ps-link" id="aemPhotosBtn"
               style="cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none;"
-              title="View Screenshots" onclick="alert('Photos coming soon!')">📸</a>
+              title="View Screenshots">📸</a>
             <a href="https://github.com/07aranya/gyro-ball-controller" target="_blank" rel="noopener noreferrer" class="ps-link" title="GitHub">↗</a>
           </div>
         </div>
@@ -1761,8 +1764,10 @@
     /* PHOTOS MODAL */
     const projectPhotos = {
       vr: ['images/projects/vrgame.jpeg'],
-      cbse: ['images/projects/cbse.png'],
-      fn: ['images/projects/fruitninja.jpg']
+      cbse: ['images/projects/cbse_new.png'],
+      fn: ['images/projects/fruitninja.jpg'],
+      asep: ['images/projects/asep.png'],
+      aem: ['images/projects/aem.jpg']
     };
     let activePhotos = [];
     let photoIdx = 0;
@@ -1796,6 +1801,8 @@
     document.getElementById('vrPhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('vr'); });
     document.getElementById('cbsePhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('cbse'); });
     document.getElementById('fnPhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('fn'); });
+    document.getElementById('asepPhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('asep'); });
+    document.getElementById('aemPhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('aem'); });
     document.getElementById('pmClose')?.addEventListener('click', () => pm.classList.remove('open'));
     document.getElementById('pmPrev')?.addEventListener('click', (e) => { e.stopPropagation(); updatePhoto(-1); });
     document.getElementById('pmNext')?.addEventListener('click', (e) => { e.stopPropagation(); updatePhoto(1); });
