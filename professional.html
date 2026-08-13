@@ -109,6 +109,53 @@
     </div>
   </div>
 
+  <!-- TECH STACK -->
+  <section class="stack-sec">
+    <div class="sec-head" data-reveal><span class="sec-n">001.5</span>
+      <h2 class="sec-h">my <span class="gw c">tech stack</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    
+    <div class="stack-grid">
+      <div class="stack-item" data-reveal>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" class="stack-icon">
+        <span class="stack-name">C#</span>
+      </div>
+      <div class="stack-item" data-reveal style="transition-delay: .05s">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="stack-icon">
+        <span class="stack-name">Python</span>
+      </div>
+      <div class="stack-item" data-reveal style="transition-delay: .1s">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="stack-icon">
+        <span class="stack-name">JavaScript</span>
+      </div>
+      <div class="stack-item" data-reveal style="transition-delay: .15s">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="stack-icon">
+        <span class="stack-name">TypeScript</span>
+      </div>
+      <div class="stack-item" data-reveal style="transition-delay: .2s">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="stack-icon">
+        <span class="stack-name">React</span>
+      </div>
+      <div class="stack-item" data-reveal style="transition-delay: .25s">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="Unity" class="stack-icon">
+        <span class="stack-name">Unity</span>
+      </div>
+      <div class="stack-item" data-reveal style="transition-delay: .3s">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="stack-icon">
+        <span class="stack-name">C++</span>
+      </div>
+      <div class="stack-item" data-reveal style="transition-delay: .35s">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="stack-icon">
+        <span class="stack-name">Arduino</span>
+      </div>
+      <div class="stack-item" data-reveal style="transition-delay: .4s">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="stack-icon">
+        <span class="stack-name">Git/GitHub</span>
+      </div>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section class="proj-section">
     <div class="sec-head"><span class="sec-n">002</span>
@@ -202,7 +249,7 @@
         </div>
         <div class="ps-name">🧭 ASEP2 HAPTIC NAVIGATION</div>
         <p class="ps-desc">a project focused on haptic feedback and navigation.</p>
-        <div class="ps-tags"><span class="ps-tag">Placeholder</span><span class="ps-tag">Placeholder</span></div>
+        <div class="ps-tags"><span class="ps-tag">Hardware</span><span class="ps-tag">C++</span></div>
       </div>
       <div class="proj-sm" id="ps4">
         <div class="ps-header">
@@ -216,7 +263,7 @@
         </div>
         <div class="ps-name">⚖️ AEM BALL BALANCING</div>
         <p class="ps-desc">a ball balancing game project for the aem course.</p>
-        <div class="ps-tags"><span class="ps-tag">Placeholder</span><span class="ps-tag">Placeholder</span></div>
+        <div class="ps-tags"><span class="ps-tag">Python</span><span class="ps-tag">OpenCV</span></div>
       </div>
     </div>
   </section>
@@ -301,6 +348,37 @@
     </div>
   </section>
 
+
+  <!-- BRAIN DUMP / NOTES -->
+  <section class="notes-sec">
+    <div class="sec-head" data-reveal><span class="sec-n">004</span>
+      <h2 class="sec-h">brain <span class="gw t">dump</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    
+    <div class="notes-grid">
+      <div class="note-card" data-reveal>
+        <div class="note-date">Aug 12, 2026</div>
+        <h3 class="note-title">The Beauty of Shaders</h3>
+        <p class="note-body">spent the weekend messing around with unity shader graph. there's something magical about turning a few math nodes into a glowing, pulsating forcefield. definitely going down the tech art rabbit hole.</p>
+        <div class="note-tag">#GameDev</div>
+      </div>
+      
+      <div class="note-card" data-reveal style="transition-delay: .1s">
+        <div class="note-date">Jul 28, 2026</div>
+        <h3 class="note-title">Taming Dynamic Programming</h3>
+        <p class="note-body">DP used to terrify me. the trick was to stop trying to memorize the table and start thinking about the subproblems as a tree. once you see the overlapping branches, memoization feels obvious.</p>
+        <div class="note-tag">#DSA</div>
+      </div>
+      
+      <div class="note-card" data-reveal style="transition-delay: .2s">
+        <div class="note-date">Jul 15, 2026</div>
+        <h3 class="note-title">Building this Website</h3>
+        <p class="note-body">wanted to build a portfolio that didn't feel like a template. focused heavily on typography, subtle animations, and keeping everything vanilla HTML/CSS/JS for max performance.</p>
+        <div class="note-tag">#WebDev</div>
+      </div>
+    </div>
+  </section>
 
   <!-- LET'S CONNECT -->
   <section id="connect" class="sec">
@@ -467,6 +545,16 @@
     document.getElementById('pmNext')?.addEventListener('click', (e) => { e.stopPropagation(); updatePhoto(1); });
     pm?.addEventListener('click', (e) => { if (e.target === pm) pm.classList.remove('open'); });
   </script>
+  <!-- SCROLL TO TOP BUTTON -->
+  <div class="scroll-top-btn" id="scrollTopBtn">
+    <svg class="st-circ" width="44" height="44">
+      <circle class="st-bg" cx="22" cy="22" r="20"></circle>
+      <circle class="st-prog" cx="22" cy="22" r="20"></circle>
+    </svg>
+    <div class="st-arr">↑</div>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 
 </html>

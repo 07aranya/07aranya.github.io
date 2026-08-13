@@ -1189,3 +1189,31 @@ if (mtTerm) {
     }
   });
 }
+
+/* ── SCROLL PROGRESS / BACK TO TOP ── */
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+if (scrollTopBtn) {
+  const progCircle = scrollTopBtn.querySelector('.st-prog');
+  const circumference = 2 * Math.PI * 20; // 125.6
+  
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    
+    if (docHeight > 0) {
+      const scrollPercent = scrollPos / docHeight;
+      const dashOffset = circumference - (scrollPercent * circumference);
+      progCircle.style.strokeDashoffset = dashOffset;
+    }
+    
+    if (scrollPos > 300) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  }, { passive: true });
+  
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
