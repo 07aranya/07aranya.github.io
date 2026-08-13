@@ -1146,6 +1146,11 @@ if (mtTerm) {
     started = true;
     mtTerm.style.cursor = 'default';
     
+    // Clear previous output and restore original prompt cursor
+    mtOut.innerHTML = '';
+    const firstCursor = document.querySelector('.mt-cursor');
+    if (firstCursor) firstCursor.style.display = 'inline-block';
+    
     // Typing effect for the command
     const cmd = commands[0];
     let i = 0;
@@ -1173,8 +1178,12 @@ if (mtTerm) {
         } else {
           clearInterval(outInterval);
           // Add a new prompt line
-          mtOut.innerHTML += `<div style="margin-top:0.5rem"><span class="mt-prompt">$</span> <span class="mt-cursor">_</span></div>`;
-          document.querySelector('.mt-cursor').style.display = 'none'; // hide first cursor
+          mtOut.innerHTML += `<div style="margin-top:0.5rem"><span class="mt-prompt">$</span> <span class="mt-cursor"></span></div>`;
+          if (firstCursor) firstCursor.style.display = 'none'; // hide first cursor
+          
+          // Allow replay
+          started = false;
+          mtTerm.style.cursor = 'pointer';
         }
       }, 600);
     }

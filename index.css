@@ -1489,7 +1489,7 @@
     }
     .mt-body {
       padding: 1.2rem;
-      color: var(--fg);
+      color: #e0e8f8;
       min-height: 120px;
     }
     .mt-prompt {
@@ -1500,7 +1500,7 @@
       display: inline-block;
       width: 8px;
       height: 15px;
-      background: var(--fg);
+      background: #e0e8f8;
       vertical-align: middle;
       animation: mtBlink 1s step-end infinite;
       margin-left: 2px;
@@ -1510,7 +1510,7 @@
       50% { opacity: 0; }
     }
     .mt-out div {
-      color: var(--fg3);
+      color: #7088aa;
       margin-top: 0.4rem;
     }
 
