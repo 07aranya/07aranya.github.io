@@ -5,14 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>aranya :)</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
-    rel="stylesheet">
+  <meta name="description" content="Aranya's personal portfolio. CSE student, developer, and builder.">
+  <meta property="og:title" content="aranya :)">
+  <meta property="og:description" content="Aranya's personal portfolio. CSE student, developer, and builder.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/07aranya/portfolio-website-v1/main/images/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="images/icon.png">
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" type="image/jpeg" href="images/icon.jpg">
 </head>
 
 <body>
@@ -85,6 +92,17 @@
         <span class="row r2"><span class="inner"><span class="name-hover" id="nameHover">aranya :)</span></span></span>
       </h1>
       <p class="h-sub"><span>aranya is <span class="swap" id="swapEl">building things</span></span></p>
+      
+      <div class="mock-term" id="mockTerm">
+        <div class="mt-head">
+          <div class="mt-dots"><span></span><span></span><span></span></div>
+          <div class="mt-title">visitor@aranya: ~</div>
+        </div>
+        <div class="mt-body">
+          <div class="mt-line"><span class="mt-prompt">$</span> <span id="mtTyping"></span><span class="mt-cursor">_</span></div>
+          <div class="mt-out" id="mtOut"></div>
+        </div>
+      </div>
     </div>
     <div class="h-scroll">
       <div class="pipe">

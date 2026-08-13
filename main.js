@@ -1123,3 +1123,60 @@ if (mModal) {
     }
   });
 }
+
+/* ══ INTERACTIVE TERMINAL ════════════════════════ */
+const mtTerm = document.getElementById('mockTerm');
+const mtTyping = document.getElementById('mtTyping');
+const mtOut = document.getElementById('mtOut');
+
+if (mtTerm) {
+  const commands = [
+    "./run_aranya.sh",
+    "Loading modules...",
+    "[OK] Coffee injected.",
+    "[OK] Bugs created.",
+    "[OK] Bugs fixed.",
+    "Status: Building cool things 🚀"
+  ];
+  
+  let started = false;
+  
+  mtTerm.addEventListener('click', () => {
+    if (started) return;
+    started = true;
+    mtTerm.style.cursor = 'default';
+    
+    // Typing effect for the command
+    const cmd = commands[0];
+    let i = 0;
+    mtTyping.textContent = '';
+    
+    const typeInterval = setInterval(() => {
+      if (i < cmd.length) {
+        mtTyping.textContent += cmd.charAt(i);
+        i++;
+      } else {
+        clearInterval(typeInterval);
+        setTimeout(runOutput, 400);
+      }
+    }, 50);
+    
+    function runOutput() {
+      let outHtml = '';
+      let lineIdx = 1;
+      
+      const outInterval = setInterval(() => {
+        if (lineIdx < commands.length) {
+          outHtml += `<div>${commands[lineIdx]}</div>`;
+          mtOut.innerHTML = outHtml;
+          lineIdx++;
+        } else {
+          clearInterval(outInterval);
+          // Add a new prompt line
+          mtOut.innerHTML += `<div style="margin-top:0.5rem"><span class="mt-prompt">$</span> <span class="mt-cursor">_</span></div>`;
+          document.querySelector('.mt-cursor').style.display = 'none'; // hide first cursor
+        }
+      }, 600);
+    }
+  });
+}

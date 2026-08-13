@@ -5,1551 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>aranya :) - personal</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --bg: #08080d;
-      --bg2: #0e0e18;
-      --sur: #12121c;
-      --fg: #ede8e0;
-      --fg2: #5a5650;
-      --fg3: #272520;
-      --lime: #c8f53d;
-      --coral: #ff5f5f;
-      --teal: #5ddfd0;
-      --violet: #b07aee;
-      --gold: #f5c540;
-      --bd: rgba(255, 255, 255, .055);
-      --ease: cubic-bezier(.16, 1, .3, 1)
-    }
-
-    [data-theme="light"] {
-      --bg: #efebd8;
-      --bg2: #e4dfc8;
-      --sur: #faf7ec;
-      --fg: #1a1710;
-      --fg2: #7a7460;
-      --fg3: #cdc9b0;
-      --bd: rgba(0, 0, 0, .06)
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box
-    }
-
-    html {
-      overflow-x: hidden
-    }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      cursor: none;
-      overflow-x: hidden
-    }
-
-    #cur {
-      position: fixed;
-      width: 9px;
-      height: 9px;
-      background: var(--violet);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 2999;
-      transform: translate(-50%, -50%);
-      mix-blend-mode: difference;
-      transition: width .2s, height .2s
-    }
-
-    #curR {
-      position: fixed;
-      width: 34px;
-      height: 34px;
-      border: 1px solid rgba(176, 122, 238, .35);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 2998;
-      transform: translate(-50%, -50%)
-    }
-
-    /* CMD */
-    #cmdW {
-      position: fixed;
-      inset: 0;
-      z-index: 900;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, .72);
-      backdrop-filter: blur(18px)
-    }
-
-    #cmdW.open {
-      display: flex
-    }
-
-    #cmdB {
-      background: var(--bg2);
-      border: 1px solid var(--bd);
-      border-radius: 15px;
-      width: min(490px, 88vw);
-      overflow: hidden;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, .6)
-    }
-
-    #cmdRow {
-      display: flex;
-      align-items: center;
-      gap: .7rem;
-      padding: .88rem 1.1rem;
-      border-bottom: 1px solid var(--bd)
-    }
-
-    #cmdIn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .95rem;
-      color: var(--fg)
-    }
-
-    #cmdIn::placeholder {
-      color: var(--fg2)
-    }
-
-    #cmdList {
-      padding: .35rem
-    }
-
-    .ci {
-      display: flex;
-      align-items: center;
-      gap: .65rem;
-      padding: .58rem .82rem;
-      border-radius: 8px;
-      cursor: pointer;
-      color: var(--fg2);
-      font-size: .85rem;
-      transition: background .1s, color .1s
-    }
-
-    .ci:hover,
-    .ci.s {
-      background: rgba(176, 122, 238, .09);
-      color: var(--fg)
-    }
-
-    .ci-ic {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: var(--bd);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .75rem;
-      flex-shrink: 0
-    }
-
-    .ci-kb {
-      margin-left: auto;
-      font-size: .64rem;
-      color: var(--fg2);
-      background: var(--bd);
-      padding: .1rem .38rem;
-      border-radius: 4px;
-      font-family: 'DM Mono', monospace
-    }
-
-    /* NAV */
-    #nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 500;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.3rem 3rem;
-      transition: background .5s, border-color .5s
-    }
-
-    #nav.sc {
-      background: rgba(8, 8, 13, .72);
-      backdrop-filter: blur(22px);
-      border-bottom: 1px solid var(--bd)
-    }
-
-    [data-theme="light"] #nav.sc {
-      background: rgba(239, 235, 216, .78)
-    }
-
-    .nl {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
-      color: var(--fg);
-      text-decoration: none
-    }
-
-    .nl em {
-      color: var(--violet);
-      font-style: normal
-    }
-
-    .nr {
-      display: flex;
-      align-items: center;
-      gap: .8rem
-    }
-
-    .n-pg {
-      font-size: .7rem;
-      color: var(--fg2);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      border: 1px solid var(--bd);
-      padding: .26rem .7rem;
-      border-radius: 99px;
-      font-family: 'DM Mono', monospace
-    }
-
-    .n-cmd {
-      display: flex;
-      align-items: center;
-      gap: .35rem;
-      padding: .28rem .72rem;
-      border-radius: 7px;
-      border: 1px solid var(--bd);
-      background: var(--sur);
-      color: var(--fg2);
-      font-size: .7rem;
-      cursor: pointer;
-      font-family: 'DM Mono', monospace;
-      transition: all .22s
-    }
-
-    .n-cmd:hover {
-      border-color: var(--violet);
-      color: var(--violet)
-    }
-
-    .rope-w {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      user-select: none
-    }
-
-    .rc {
-      width: 1.5px;
-      height: 20px;
-      background: repeating-linear-gradient(to bottom, var(--fg2) 0, var(--fg2) 3px, transparent 3px, transparent 6px);
-      transform-origin: top
-    }
-
-    .rk {
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      background: var(--violet);
-      box-shadow: 0 0 8px rgba(176, 122, 238, .5)
-    }
-
-    .rope-w.pull .rc {
-      animation: rp .38s var(--ease)
-    }
-
-    .rope-w.pull .rk {
-      animation: kp .38s var(--ease)
-    }
-
-    @keyframes rp {
-      0% {
-        transform: scaleY(1)
-      }
-
-      45% {
-        transform: scaleY(1.35)
-      }
-
-      100% {
-        transform: scaleY(1)
-      }
-    }
-
-    @keyframes kp {
-      0% {
-        transform: translateY(0)
-      }
-
-      45% {
-        transform: translateY(6px)
-      }
-
-      100% {
-        transform: translateY(0)
-      }
-    }
-
-    .rl {
-      font-size: 9px;
-      color: var(--fg2);
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      margin-top: 2px
-    }
-
-    #pnav {
-      position: fixed;
-      bottom: 1.7rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 600;
-      display: flex;
-      gap: 2px;
-      background: rgba(11, 11, 18, .88);
-      border: 1px solid var(--bd);
-      border-radius: 99px;
-      padding: 4px;
-      backdrop-filter: blur(22px);
-      box-shadow: 0 4px 28px rgba(0, 0, 0, .55)
-    }
-
-    [data-theme="light"] #pnav {
-      background: rgba(239, 235, 216, .88)
-    }
-
-    .pb {
-      padding: .42rem 1.05rem;
-      border-radius: 99px;
-      border: none;
-      background: transparent;
-      color: var(--fg2);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .76rem;
-      cursor: pointer;
-      transition: all .35s var(--ease);
-      text-decoration: none;
-      display: block;
-      white-space: nowrap
-    }
-
-    .pb.active,
-    .pb:hover {
-      background: var(--violet);
-      color: #fff;
-      font-weight: 500
-    }
-
-    #pgOv {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: var(--violet);
-      transform: translateY(-100%);
-      pointer-events: none
-    }
-
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .8s var(--ease), transform .8s var(--ease)
-    }
-
-    [data-reveal].in {
-      opacity: 1;
-      transform: translateY(0)
-    }
-
-    /* ── HERO ── */
-    .ph {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 3rem 8rem;
-      padding-top: 110px;
-      position: relative;
-      overflow: hidden
-    }
-
-    /* confetti */
-    .conf-bg {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden
-    }
-
-    .cp {
-      position: absolute;
-      border-radius: 2px;
-      animation: cf var(--d, 8s) var(--dl, 0s) linear infinite;
-      opacity: 0
-    }
-
-    @keyframes cf {
-      0% {
-        transform: translate(var(--x), -60px) rotate(0deg);
-        opacity: .7
-      }
-
-      100% {
-        transform: translate(calc(var(--x) + var(--dr, 20px)), 110vh) rotate(720deg);
-        opacity: 0
-      }
-    }
-
-    .ph-ey {
-      font-size: .66rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--violet);
-      margin-bottom: 1.8rem;
-      overflow: hidden
-    }
-
-    .ph-ey span {
-      display: block;
-      transform: translateY(110%);
-      animation: up .7s .2s var(--ease) forwards
-    }
-
-    @keyframes up {
-      to {
-        transform: translateY(0)
-      }
-    }
-
-    .ph-h {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(4rem, 11vw, 9.5rem);
-      font-weight: 800;
-      letter-spacing: -.05em;
-      line-height: .87;
-      position: relative;
-      z-index: 2
-    }
-
-    .ph-h .row {
-      overflow: hidden;
-      display: block
-    }
-
-    .ph-h .inner {
-      display: block;
-      transform: translateY(115%);
-      animation: up .9s var(--ease) forwards
-    }
-
-    .ph-h .r1 .inner {
-      animation-delay: .4s
-    }
-
-    .ph-h .r2 .inner {
-      animation-delay: .55s;
-      color: var(--violet);
-      display: inline-block;
-      animation: up .9s .55s var(--ease) forwards, wobble 4s 1.5s ease-in-out infinite
-    }
-
-    @keyframes wobble {
-
-      0%,
-      100% {
-        transform: rotate(-.5deg)
-      }
-
-      50% {
-        transform: rotate(.8deg)
-      }
-    }
-
-    .ph-sub {
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
-      font-size: 1.3rem;
-      color: var(--fg2);
-      max-width: 460px;
-      margin-top: 2rem;
-      overflow: hidden;
-      position: relative;
-      z-index: 2
-    }
-
-    .ph-sub span {
-      display: block;
-      transform: translateY(110%);
-      animation: up .9s .8s var(--ease) forwards
-    }
-
-    .p-pills {
-      display: flex;
-      gap: .85rem;
-      margin-top: 2.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 2;
-      overflow: hidden
-    }
-
-    .p-pills span {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: .85rem;
-      transform: translateY(110%);
-      animation: up .9s 1s var(--ease) forwards
-    }
-
-    .pp {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .5rem 1.2rem;
-      border-radius: 99px;
-      border: 1px solid var(--bd);
-      background: var(--sur);
-      font-size: .85rem;
-      animation: flt var(--d, 4s) var(--dl, 0s) ease-in-out infinite;
-      transition: all .3s;
-      cursor: default
-    }
-
-    @keyframes flt {
-
-      0%,
-      100% {
-        transform: translateY(0)
-      }
-
-      50% {
-        transform: translateY(-8px)
-      }
-    }
-
-    .pp:hover {
-      transform: scale(1.08) rotate(-2deg) !important;
-      border-color: var(--violet)
-    }
-
-    /* ── ROTATING PHOTO STACK ── */
-    .photo-stack-sec {
-      padding: 8rem 3rem;
-      border-top: 1px solid var(--bd);
-      overflow: hidden
-    }
-
-    .stack-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center
-    }
-
-    /* .stack-text {} */
-
-    .stack-eyebrow {
-      font-size: .66rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--violet);
-      margin-bottom: 1rem
-    }
-
-    .stack-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -.03em;
-      line-height: 1.05;
-      margin-bottom: 1.2rem
-    }
-
-    .stack-desc {
-      font-size: .9rem;
-      color: var(--fg2);
-      line-height: 1.75;
-      margin-bottom: 2rem
-    }
-
-    .stack-links {
-      display: flex;
-      gap: .6rem;
-      flex-wrap: wrap
-    }
-
-    .sl {
-      padding: .38rem .9rem;
-      border-radius: 99px;
-      border: 1px solid var(--bd);
-      font-size: .74rem;
-      color: var(--fg2);
-      background: var(--sur);
-      cursor: default;
-      transition: all .22s
-    }
-
-    .sl:hover {
-      border-color: var(--violet);
-      color: var(--violet)
-    }
-
-    /* The 3D rotating stack */
-    .card-stack {
-      position: relative;
-      width: 280px;
-      height: 340px;
-      margin: 0 auto;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .stack-card {
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      border: 1px solid var(--bd);
-      background: var(--sur);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      transform-origin: center bottom;
-      transition: transform .6s var(--ease), box-shadow .4s;
-      user-select: none;
-      overflow: hidden;
-    }
-
-    .stack-card .card-label {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: .8rem 1rem;
-      background: linear-gradient(transparent, rgba(0, 0, 0, .65));
-      font-family: 'DM Mono', monospace;
-      font-size: .7rem;
-      color: rgba(255, 255, 255, .8);
-      letter-spacing: .06em;
-    }
-
-    .stack-card:nth-child(1) {
-      transform: rotate(-6deg) translateY(0px);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, .4);
-      z-index: 3
-    }
-
-    .stack-card:nth-child(2) {
-      transform: rotate(-2deg) translateY(8px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, .3);
-      z-index: 2
-    }
-
-    .stack-card:nth-child(3) {
-      transform: rotate(3deg) translateY(14px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
-      z-index: 1
-    }
-
-    .card-stack:hover .stack-card:nth-child(1) {
-      transform: rotate(-8deg) translateY(-14px) scale(1.03);
-      box-shadow: 0 20px 60px rgba(176, 122, 238, .25)
-    }
-
-    .card-stack:hover .stack-card:nth-child(2) {
-      transform: rotate(-1deg) translateY(2px)
-    }
-
-    .card-stack:hover .stack-card:nth-child(3) {
-      transform: rotate(5deg) translateY(12px)
-    }
-
-    .card-stack.clicked .stack-card:nth-child(1) {
-      transform: rotate(8deg) translateX(120%) translateY(-20px);
-      transition: transform .55s var(--ease)
-    }
-
-    /* ── TICKER ── */
-    .ticker {
-      overflow: hidden;
-      border-top: 1px solid var(--bd);
-      border-bottom: 1px solid var(--bd);
-      padding: .72rem 0;
-      background: var(--sur)
-    }
-
-    .t-tr {
-      display: flex;
-      width: max-content;
-      animation: tkr 26s linear infinite
-    }
-
-    .t-tr:hover {
-      animation-play-state: paused
-    }
-
-    .t-it {
-      display: flex;
-      align-items: center;
-      gap: .42rem;
-      padding: 0 1.8rem;
-      font-size: .76rem;
-      color: var(--fg2);
-      white-space: nowrap;
-      border-right: 1px solid var(--bd);
-      font-family: 'DM Mono', monospace
-    }
-
-    .t-d {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--violet);
-      flex-shrink: 0
-    }
-
-    @keyframes tkr {
-      from {
-        transform: translateX(0)
-      }
-
-      to {
-        transform: translateX(-50%)
-      }
-    }
-
-    /* ── SECTION ── */
-    .sec {
-      padding: 7rem 3rem
-    }
-
-    .sh {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 3rem
-    }
-
-    .sh h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -.03em
-    }
-
-    .shl {
-      flex: 1;
-      height: 1px;
-      background: var(--bd)
-    }
-
-    .shn {
-      font-family: 'DM Mono', monospace;
-      font-size: .66rem;
-      color: var(--fg2)
-    }
-
-    /* ── ABOUT BENTO ── */
-    .bento {
-      columns: 2;
-      gap: 1.1rem
-    }
-
-    .bc {
-      break-inside: avoid;
-      border-radius: 18px;
-      border: 1px solid var(--bd);
-      background: var(--sur);
-      padding: 1.9rem;
-      margin-bottom: 1.1rem;
-      transition: border-color .3s, transform .3s
-    }
-
-    .bc:hover {
-      border-color: var(--violet);
-      transform: translateY(-3px)
-    }
-
-    .bc-em {
-      font-size: 2rem;
-      margin-bottom: .9rem;
-      display: block
-    }
-
-    .bc-t {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: .35rem
-    }
-
-    .bc-d {
-      font-size: .83rem;
-      color: var(--fg2);
-      line-height: 1.7
-    }
-
-    /* ── HOBBIES ── */
-    .hob-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-
-    .hob {
-      border-radius: 17px;
-      border: 1px solid var(--bd);
-      background: var(--sur);
-      padding: 1.6rem 1.2rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all .35s cubic-bezier(.34, 1.56, .64, 1);
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 1.1
-    }
-
-    .hob:hover {
-      transform: translateY(-8px) scale(1.04) rotate(var(--tlt, 0deg));
-      border-color: var(--hc, var(--violet))
-    }
-
-    .hob::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 110%, var(--hc, var(--violet)), transparent 65%);
-      opacity: 0;
-      transition: opacity .4s;
-      pointer-events: none
-    }
-
-    .hob:hover::after {
-      opacity: .07
-    }
-
-    .h-em {
-      font-size: 2.1rem;
-      margin-bottom: .6rem;
-      display: block;
-      transition: transform .3s
-    }
-
-    .hob:hover .h-em {
-      transform: scale(1.22) rotate(8deg)
-    }
-
-    .h-n {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: .86rem;
-      margin-bottom: .2rem
-    }
-
-    .h-d {
-      font-size: .73rem;
-      color: var(--fg2)
-    }
-
-    /* ── MUSIC PLAYER ── */
-    .mp {
-      border: 1px solid var(--bd);
-      border-radius: 20px;
-      background: var(--sur);
-      padding: 2.2rem;
-      position: relative;
-      overflow: hidden
-    }
-
-    .mp-glow {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 80% 50%, rgba(176, 122, 238, .06), transparent 60%);
-      pointer-events: none
-    }
-
-    .mp-lbl {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .mp-lbl-t {
-      font-size: .64rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--violet);
-      font-family: 'DM Mono', monospace
-    }
-
-    .spotify-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      background: #1DB954;
-      color: #000;
-      padding: .4rem .85rem;
-      border-radius: 99px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      font-size: .68rem;
-      text-decoration: none;
-      transition: all .3s var(--ease);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      box-shadow: 0 4px 15px rgba(29, 185, 84, .25);
-    }
-
-    .spotify-btn:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 6px 20px rgba(29, 185, 84, .4);
-      background: #1ed760;
-    }
-
-    .mp-tracks {
-      display: flex;
-      flex-direction: column;
-      gap: .5rem
-    }
-
-    .mp-tr {
-      display: flex;
-      align-items: center;
-      gap: .9rem;
-      padding: .65rem 1.1rem;
-      border-radius: 11px;
-      border: 1px solid var(--bd);
-      background: var(--bg2);
-      cursor: pointer;
-      transition: all .28s;
-      position: relative;
-      overflow: hidden;
-      transform-origin: center;
-    }
-
-    .mp-tr:hover {
-      border-color: var(--violet);
-      background: rgba(176, 122, 238, .06);
-    }
-
-    .mp-tr.selected {
-      border-color: var(--violet);
-      background: rgba(176, 122, 238, .06);
-      animation: selectPop .4s var(--ease);
-    }
-
-    @keyframes selectPop {
-      0% {
-        transform: scale(1);
-      }
-
-      40% {
-        transform: scale(0.98);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    .mp-tr::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2.5px;
-      background: var(--violet);
-      transform: scaleY(0);
-      transition: transform .3s var(--ease)
-    }
-
-    .mp-tr.selected::before {
-      transform: scaleY(1)
-    }
-
-    .mp-num {
-      font-family: 'DM Mono', monospace;
-      font-size: .68rem;
-      color: var(--fg2);
-      width: 18px;
-      text-align: center;
-      transition: color .3s;
-    }
-
-    .mp-tr.selected .mp-num {
-      color: var(--violet)
-    }
-
-    .mp-cover {
-      width: 42px;
-      height: 42px;
-      border-radius: 6px;
-      object-fit: cover;
-      background: var(--bd);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
-      transition: transform .4s var(--ease), box-shadow .4s var(--ease);
-    }
-
-    .mp-tr.selected .mp-cover {
-      transform: scale(1.08) rotate(3deg);
-      box-shadow: 0 6px 16px rgba(176, 122, 238, .3);
-    }
-
-    .mp-info {
-      flex: 1
-    }
-
-    .mp-t {
-      font-family: 'Syne', sans-serif;
-      font-size: .88rem;
-      font-weight: 700;
-      transition: color .3s;
-    }
-
-    .mp-tr.selected .mp-t {
-      color: var(--violet);
-    }
-
-    .mp-a {
-      font-size: .74rem;
-      color: var(--fg2)
-    }
-
-    .mp-dur {
-      font-family: 'DM Mono', monospace;
-      font-size: .68rem;
-      color: var(--fg2)
-    }
-
-    /* ── GUITAR SECTION ── */
-    .gtr-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      border: 1px solid var(--bd);
-      border-radius: 20px;
-      background: var(--sur);
-      padding: 2.2rem;
-    }
-
-    @media (max-width: 768px) {
-      .gtr-container {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .gtr-left {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .gtr-model {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: var(--violet);
-    }
-
-    .gtr-specs {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--lime);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .gtr-bio {
-      font-size: 0.9rem;
-      color: var(--fg2);
-      line-height: 1.6;
-    }
-
-    .gtr-tabs {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid var(--bd);
-      padding-bottom: 0.5rem;
-    }
-
-    .gtr-tab {
-      background: none;
-      border: none;
-      color: var(--fg2);
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: color 0.3s;
-      padding: 0 0.5rem 0.5rem;
-      position: relative;
-    }
-
-    .gtr-tab:hover {
-      color: var(--fg);
-    }
-
-    .gtr-tab.active {
-      color: var(--violet);
-    }
-
-    .gtr-tab.active::after {
-      content: '';
-      position: absolute;
-      bottom: -0.5rem;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--violet);
-    }
-
-    .gtr-content {
-      display: none;
-    }
-
-    .gtr-content.active {
-      display: block;
-      animation: fadeGtr 0.4s var(--ease);
-    }
-
-    .gtr-list {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .gtr-list li {
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      color: var(--fg);
-      background: rgba(255, 255, 255, 0.02);
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .gtr-list li:hover {
-      background: rgba(255, 255, 255, 0.05);
-      transform: translateX(4px);
-    }
-
-    .gtr-icon {
-      font-size: 1.1rem;
-    }
-
-    .gtr-images {
-      display: flex;
-      gap: 1rem;
-      margin-top: auto;
-      padding-top: 1.5rem;
-    }
-
-    .gtr-img {
-      flex: 1;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-      cursor: pointer;
-    }
-
-    .gtr-img:hover {
-      transform: scale(1.05) translateY(-5px);
-      box-shadow: 0 8px 24px rgba(176, 122, 238, 0.2);
-      border-color: var(--violet);
-    }
-
-    @keyframes fadeGtr {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ── GAMES ── */
-    .games-g {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.1rem
-    }
-
-    .gcard {
-      border-radius: 16px;
-      border: 1px solid var(--bd);
-      background: var(--sur);
-      overflow: hidden;
-      transition: all .3s var(--ease)
-    }
-
-    .gcard:hover {
-      border-color: var(--lime);
-      transform: translateY(-5px)
-    }
-
-    .gc-art {
-      width: 100%;
-      height: 120px;
-      background: var(--bg2);
-      border-bottom: 1px solid var(--bd);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .gc-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .4s var(--ease);
-    }
-
-    .gcard:hover .gc-img {
-      transform: scale(1.08);
-    }
-
-    .gc-b {
-      padding: 1rem
-    }
-
-    .gc-n {
-      font-family: 'Syne', sans-serif;
-      font-size: .88rem;
-      font-weight: 700;
-      margin-bottom: .15rem
-    }
-
-    .gc-g {
-      font-size: .72rem;
-      color: var(--fg2)
-    }
-
-    .gc-r {
-      font-size: .7rem;
-      color: var(--gold);
-      margin-top: .3rem
-    }
-
-    /* ── PERSONAL ACHIEVEMENTS ── */
-    .pa-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .9rem
-    }
-
-    .pa {
-      border: 1px solid var(--bd);
-      border-radius: 15px;
-      background: var(--sur);
-      padding: 1.5rem;
-      display: flex;
-      align-items: flex-start;
-      gap: .85rem;
-      transition: border-color .3s, transform .3s
-    }
-
-    .pa:hover {
-      border-color: var(--violet);
-      transform: translateY(-2px)
-    }
-
-    .pa-ic {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--bg2);
-      border: 1px solid var(--bd);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .95rem;
-      flex-shrink: 0
-    }
-
-    .pa-t {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: .9rem;
-      margin-bottom: .18rem
-    }
-
-    .pa-d {
-      font-size: .78rem;
-      color: var(--fg2);
-      line-height: 1.6
-    }
-
-    .pa-yr {
-      font-size: .66rem;
-      color: var(--violet);
-      margin-top: .28rem;
-      font-family: 'DM Mono', monospace
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 4rem 3rem;
-      border-top: 1px solid var(--bd)
-    }
-
-    .fi {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 2rem
-    }
-
-    .fb {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.8rem;
-      letter-spacing: -.04em
-    }
-
-    .fb em {
-      color: var(--violet);
-      font-style: normal
-    }
-
-    .fst {
-      font-size: .78rem;
-      color: var(--fg2);
-      margin-top: .2rem
-    }
-
-    .fls {
-      display: flex;
-      gap: .55rem;
-      flex-wrap: wrap
-    }
-
-    .fl {
-      display: flex;
-      align-items: center;
-      gap: .35rem;
-      text-decoration: none;
-      color: var(--fg2);
-      font-size: .77rem;
-      border-radius: 99px;
-      padding: .34rem .88rem;
-      border: 1px solid var(--bd);
-      transition: all .26s;
-      background: var(--sur)
-    }
-
-    .fl:hover {
-      color: var(--fg);
-      border-color: var(--violet);
-      transform: translateY(-2px)
-    }
-
-    .fl svg {
-      width: 12px;
-      height: 12px;
-      fill: currentColor
-    }
-
-    .fcp {
-      width: 100%;
-      text-align: center;
-      font-size: .68rem;
-      color: var(--fg2);
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--bd)
-    }
-
-    @media(max-width:900px) {
-      #nav {
-        padding: 1rem 1.5rem
-      }
-
-      .ph {
-        padding: 1.5rem;
-        padding-top: 90px;
-        padding-bottom: 5rem
-      }
-
-      .sec {
-        padding: 5rem 1.5rem
-      }
-
-      .photo-stack-sec {
-        padding: 5rem 1.5rem
-      }
-
-      .stack-layout {
-        grid-template-columns: 1fr;
-        gap: 3rem
-      }
-
-      .card-stack {
-        margin: 0 auto
-      }
-
-      .bento {
-        columns: 1
-      }
-
-      .hob-grid {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .pa-grid {
-        grid-template-columns: 1fr
-      }
-
-      footer {
-        padding: 3rem 1.5rem
-      }
-
-      .fi {
-        flex-direction: column
-      }
-    }
-
-    /* ── SLIDESHOW MODAL ── */
-    #photoModal {
-      position: fixed;
-      inset: 0;
-      background: rgba(8, 8, 13, .95);
-      backdrop-filter: blur(15px);
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity .4s var(--ease);
-    }
-
-    #photoModal.open {
-      display: flex;
-      opacity: 1;
-    }
-
-    .modal-content {
-      position: relative;
-      width: 90vw;
-      height: 85vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
-      transition: transform .4s var(--ease), opacity .4s var(--ease);
-    }
-
-    .modal-img.fading {
-      opacity: 0;
-      transform: scale(0.98);
-    }
-
-    .modal-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, .1);
-      border: 1px solid rgba(255, 255, 255, .2);
-      color: #fff;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: all .3s;
-      z-index: 10;
-    }
-
-    .modal-nav:hover {
-      background: var(--violet);
-      border-color: var(--violet);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .modal-prev {
-      left: 20px;
-    }
-
-    .modal-next {
-      right: 20px;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, .1);
-      border: 1px solid rgba(255, 255, 255, .2);
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: all .3s;
-      z-index: 10;
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem;
-    }
-
-    .modal-close:hover {
-      background: var(--coral);
-      border-color: var(--coral);
-      transform: scale(1.1) rotate(90deg);
-    }
-
-    .modal-counter {
-      position: absolute;
-      bottom: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--fg2);
-      font-family: 'DM Mono', monospace;
-      font-size: .8rem;
-      letter-spacing: .1em;
-    }
-  </style>
+  <meta name="description" content="Aranya's personal space: music, games, and guitar.">
+  <meta property="og:title" content="aranya :) - personal">
+  <meta property="og:description" content="Aranya's personal space: music, games, and guitar.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/07aranya/portfolio-website-v1/main/images/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="personal.css">
+  <link rel="icon" type="image/jpeg" href="images/icon.jpg">
 </head>
 
 <body>
@@ -1558,7 +25,7 @@
   <div id="pgOv"></div>
   <div id="cmdW">
     <div id="cmdB">
-      <div id="cmdRow"><span style="opacity:.35">⌘</span><input id="cmdIn" placeholder="Type to navigate…"
+      <div id="cmdRow"><span style="opacity:.35">âŒ˜</span><input id="cmdIn" placeholder="Type to navigateâ€¦"
           autocomplete="off"></div>
       <div id="cmdList"></div>
     </div>
@@ -1568,7 +35,7 @@
     <a href="index.html" class="nl" data-page="index.html">ara<em>.</em></a>
     <div class="nr">
       <span class="n-pg">personal</span>
-      <div class="n-cmd" id="cmdBtn">⌘K</div>
+      <div class="n-cmd" id="cmdBtn">âŒ˜K</div>
       <div class="rope-w" id="rope">
         <div class="rc"></div>
         <div class="rk"></div><span class="rl" id="rLbl">dark</span>
@@ -1585,12 +52,12 @@
     </h1>
     <p class="ph-sub"><span>beyond the code: games, guitar, goals, and everything that keeps me alive.</span></p>
     <div class="p-pills"><span>
-        <div class="pp" style="--d:4s;--dl:0s">🎮 gamer</div>
-        <div class="pp" style="--d:5s;--dl:.3s">🎸 guitarist</div>
-        <div class="pp" style="--d:4.6s;--dl:.15s">🏸 shuttler</div>
-        <div class="pp" style="--d:3.8s;--dl:.9s">📸 photographer</div>
-        <div class="pp" style="--d:4.2s;--dl:.6s">⚽ footballer</div>
-        <div class="pp" style="--d:5.2s;--dl:.5s">🌍 traveller</div>
+        <div class="pp" style="--d:4s;--dl:0s">ðŸŽ® gamer</div>
+        <div class="pp" style="--d:5s;--dl:.3s">ðŸŽ¸ guitarist</div>
+        <div class="pp" style="--d:4.6s;--dl:.15s">ðŸ¸ shuttler</div>
+        <div class="pp" style="--d:3.8s;--dl:.9s">ðŸ“¸ photographer</div>
+        <div class="pp" style="--d:4.2s;--dl:.6s">âš½ footballer</div>
+        <div class="pp" style="--d:5.2s;--dl:.5s">ðŸŒ traveller</div>
       </span></div>
   </div>
 
@@ -1608,8 +75,8 @@
           favorites. from sunsets in goa to city lights.
         </p>
         <div class="stack-links">
-          <span class="sl" id="photoSlideshowBtn" style="cursor:pointer">📸 view my photos</span>
-          <!-- <span class="sl">🌍 my travel timeline</span> -->
+          <span class="sl" id="photoSlideshowBtn" style="cursor:pointer">ðŸ“¸ view my photos</span>
+          <!-- <span class="sl">ðŸŒ my travel timeline</span> -->
         </div>
       </div>
       <div class="card-stack" id="cardStack" data-reveal style="transition-delay:.15s">
@@ -1640,7 +107,7 @@
     </div>
     <div class="bento">
       <div class="bc" data-reveal>
-        <span class="bc-em">👋</span>
+        <span class="bc-em">ðŸ‘‹</span>
         <div class="bc-t">the intro</div>
         <p class="bc-d">i'm aranya - second-year CSE student at VIT Pune. i code because i love it. Outside the coding
           circle I
@@ -1648,20 +115,20 @@
           badminton, shred guitar , shoot photos and argue about game lore at 2am.</p>
       </div>
       <div class="bc" data-reveal style="transition-delay:.08s">
-        <span class="bc-em">🌆</span>
+        <span class="bc-em">ðŸŒ†</span>
         <div class="bc-t">college life</div>
         <p class="bc-d">currently in pune, exploring the city and making memories. also trying to get used to the
           academic
           rigor. making new friends and memories with them.</p>
       </div>
       <div class="bc" data-reveal style="transition-delay:.16s">
-        <span class="bc-em">🧠</span>
+        <span class="bc-em">ðŸ§ </span>
         <div class="bc-t">how i think</div>
         <p class="bc-d">curious first, practical second. i get obsessed with ideas, build something out of them, break
           it, understand why, start over. takes me some time but hey there's the joy of doing it by yourself right??</p>
       </div>
       <div class="bc" data-reveal style="transition-delay:.24s">
-        <span class="bc-em">🎯</span>
+        <span class="bc-em">ðŸŽ¯</span>
         <div class="bc-t">right now</div>
         <p class="bc-d">learning unity for game development, building random projects, practicing guitar badly, taking
           photos that turn out
@@ -1689,7 +156,7 @@
     <div class="mp" data-reveal>
       <div class="mp-glow"></div>
       <div class="mp-lbl">
-        <span class="mp-lbl-t">🎵 aranya's rotation — my current favourites!</span>
+        <span class="mp-lbl-t">ðŸŽµ aranya's rotation â€” my current favourites!</span>
         <a href="https://open.spotify.com/user/31qomjj2yspgvf2c3jafmxmdpihq?si=2f6a0a5e31334487" target="_blank"
           class="spotify-btn">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
@@ -1713,7 +180,7 @@
     <div class="gtr-container" data-reveal>
       <div class="gtr-left">
         <div class="gtr-model">Fender Squier Sonic Stratocaster</div>
-        <div class="gtr-specs">Black • HSS Configuration</div>
+        <div class="gtr-specs">Black â€¢ HSS Configuration</div>
         <p class="gtr-bio">Playing guitar eases my mind by ten fold. Nothing beats the feeling of mastering a new riff
           or learning a song I've loved for years.</p>
 
@@ -1733,26 +200,26 @@
 
         <div class="gtr-content active" id="gtrPlay">
           <ul class="gtr-list">
-            <li><span class="gtr-icon">✓</span> Do I Wanna Know</li>
-            <li><span class="gtr-icon">✓</span> 505</li>
-            <li><span class="gtr-icon">✓</span> Tum Hi Ho</li>
-            <li><span class="gtr-icon">✓</span> Raabta</li>
-            <li><span class="gtr-icon">✓</span> Here With Me</li>
-            <li><span class="gtr-icon">✓</span> Freaks</li>
-            <li><span class="gtr-icon">✓</span> All of Me</li>
-            <li><span class="gtr-icon">✓</span> Perfect</li>
-            <li><span class="gtr-icon">✓</span> Khairiyat</li>
-            <li><span class="gtr-icon">✓</span> Wish You Were Here</li>
-            <li><span class="gtr-icon">✓</span> Choo Lo</li>
+            <li><span class="gtr-icon">âœ“</span> Do I Wanna Know</li>
+            <li><span class="gtr-icon">âœ“</span> 505</li>
+            <li><span class="gtr-icon">âœ“</span> Tum Hi Ho</li>
+            <li><span class="gtr-icon">âœ“</span> Raabta</li>
+            <li><span class="gtr-icon">âœ“</span> Here With Me</li>
+            <li><span class="gtr-icon">âœ“</span> Freaks</li>
+            <li><span class="gtr-icon">âœ“</span> All of Me</li>
+            <li><span class="gtr-icon">âœ“</span> Perfect</li>
+            <li><span class="gtr-icon">âœ“</span> Khairiyat</li>
+            <li><span class="gtr-icon">âœ“</span> Wish You Were Here</li>
+            <li><span class="gtr-icon">âœ“</span> Choo Lo</li>
             <li style="opacity: 0.6;"><span class="gtr-icon">...</span> and many more</li>
           </ul>
         </div>
 
         <div class="gtr-content" id="gtrLearn">
           <ul class="gtr-list">
-            <li><span class="gtr-icon">🔥</span> Hotel California</li>
-            <li><span class="gtr-icon">🔥</span> Free Bird</li>
-            <li><span class="gtr-icon">🔥</span> Sweater Weather</li>
+            <li><span class="gtr-icon">ðŸ”¥</span> Hotel California</li>
+            <li><span class="gtr-icon">ðŸ”¥</span> Free Bird</li>
+            <li><span class="gtr-icon">ðŸ”¥</span> Sweater Weather</li>
             <li style="opacity: 0.6;"><span class="gtr-icon">...</span> and more</li>
           </ul>
         </div>
@@ -1777,7 +244,7 @@
     </div>
     <div class="pa-grid">
       <div class="pa" data-reveal>
-        <div class="pa-ic">🏆</div>
+        <div class="pa-ic">ðŸ†</div>
         <div>
           <div class="pa-t">Runner up in Maharashtra State Level Football-Tennis</div>
           <p class="pa-d"> this was a major achievement for me as i love playing and competing in sports </p>
@@ -1785,7 +252,7 @@
         </div>
       </div>
       <div class="pa" data-reveal style="transition-delay:.08s">
-        <div class="pa-ic">🎸</div>
+        <div class="pa-ic">ðŸŽ¸</div>
         <div>
           <div class="pa-t">Guitar Milestone</div>
           <p class="pa-d">Tum Hi Ho was the first song i learnt to play on guitar. was a great feeling to play a
@@ -1794,16 +261,16 @@
         </div>
       </div>
       <div class="pa" data-reveal style="transition-delay:.16s">
-        <div class="pa-ic">📸</div>
+        <div class="pa-ic">ðŸ“¸</div>
         <div>
           <div class="pa-t">Trips</div>
           <p class="pa-d">Goa trip with friends and Nainital, Hampi trip with family are some of my favorite
             trips</p>
-          <div class="pa-yr">2023–26</div>
+          <div class="pa-yr">2023â€“26</div>
         </div>
       </div>
       <div class="pa" data-reveal style="transition-delay:.24s">
-        <div class="pa-ic">⭐</div>
+        <div class="pa-ic">â­</div>
         <div>
           <div class="pa-t">Personal Challenge</div>
           <p class="pa-d">Learnt to solve 3x3 Rubik's cube in under 30 seconds. my personal best is 12.06 seconds. </p>
@@ -1817,7 +284,7 @@
     <div class="fi">
       <div>
         <div class="fb">ara<em>.</em></div>
-        <div class="fst">CSE student · gamer · Pune, IN</div>
+        <div class="fst">CSE student Â· gamer Â· Pune, IN</div>
       </div>
       <div class="fls">
         <a href="https://github.com/07aranya" class="fl" target="_blank"><svg viewBox="0 0 24 24">
@@ -1840,7 +307,7 @@
           </svg>Email</a>
       </div>
     </div>
-    <div class="fcp">made with ♥ and caffeine by aranya · 2026</div>
+    <div class="fcp">made with â™¥ and caffeine by aranya Â· 2026</div>
   </footer>
 
   <nav id="pnav">
@@ -1850,11 +317,11 @@
   </nav>
 
   <div id="photoModal">
-    <div class="modal-close" id="pmClose">×</div>
+    <div class="modal-close" id="pmClose">Ã—</div>
     <div class="modal-content">
-      <div class="modal-nav modal-prev" id="pmPrev">←</div>
+      <div class="modal-nav modal-prev" id="pmPrev">â†</div>
       <img src="" class="modal-img" id="pmImg" alt="Slideshow Image">
-      <div class="modal-nav modal-next" id="pmNext">→</div>
+      <div class="modal-nav modal-next" id="pmNext">â†’</div>
       <div class="modal-counter" id="pmCount">1 / 59</div>
     </div>
   </div>
@@ -1906,15 +373,15 @@
 
     /* HOBBIES */
     const hobbies = [
-      { em: '🎮', n: 'gaming', d: 'love playing unique games, be it AAA or indie. exploring new games is something i love doing. guess this provides me my inspiration to create my own games too!', tlt: '-2deg', hc: '#c8f53d' },
-      { em: '🎵', n: 'music', d: 'music is an absolute integral part of my life. love listening to all genres of music.', tlt: '-2.5deg', hc: '#c8f53d' },
-      { em: '🎸', n: 'guitar', d: 'playing bollywood songs on guitar eases my mind by ten fold. wishing to get an electric guitar soon.', tlt: '2deg', hc: '#b07aee' },
-      { em: '🏸', n: 'badminton', d: 'my go-to stress reliever. court time fixes everything. ', tlt: '2.5deg', hc: '#5ddfd0' },
-      { em: '⚽', n: 'football', d: 'i absolutely love football. playing it in my free time whenever i get a chance is something i love doing.  ', tlt: '-1.5deg', hc: '#ff5f5f' },
-      { em: '📸', n: 'photography', d: 'capturing moments that could be lost in time forever, my camera is my way of preserving memories.', tlt: '-2deg', hc: '#f5c540' },
-      { em: '🌍', n: 'travel', d: 'new places, new perspectives. every trip changes something.', tlt: '1.5deg', hc: '#ff5f5f' },
+      { em: 'ðŸŽ®', n: 'gaming', d: 'love playing unique games, be it AAA or indie. exploring new games is something i love doing. guess this provides me my inspiration to create my own games too!', tlt: '-2deg', hc: '#c8f53d' },
+      { em: 'ðŸŽµ', n: 'music', d: 'music is an absolute integral part of my life. love listening to all genres of music.', tlt: '-2.5deg', hc: '#c8f53d' },
+      { em: 'ðŸŽ¸', n: 'guitar', d: 'playing bollywood songs on guitar eases my mind by ten fold. wishing to get an electric guitar soon.', tlt: '2deg', hc: '#b07aee' },
+      { em: 'ðŸ¸', n: 'badminton', d: 'my go-to stress reliever. court time fixes everything. ', tlt: '2.5deg', hc: '#5ddfd0' },
+      { em: 'âš½', n: 'football', d: 'i absolutely love football. playing it in my free time whenever i get a chance is something i love doing.  ', tlt: '-1.5deg', hc: '#ff5f5f' },
+      { em: 'ðŸ“¸', n: 'photography', d: 'capturing moments that could be lost in time forever, my camera is my way of preserving memories.', tlt: '-2deg', hc: '#f5c540' },
+      { em: 'ðŸŒ', n: 'travel', d: 'new places, new perspectives. every trip changes something.', tlt: '1.5deg', hc: '#ff5f5f' },
 
-      { em: '💻', n: 'Coding (for fun)', d: 'building random stuff nobody asked for but teaches everything. ', tlt: '2deg', hc: '#b07aee' },
+      { em: 'ðŸ’»', n: 'Coding (for fun)', d: 'building random stuff nobody asked for but teaches everything. ', tlt: '2deg', hc: '#b07aee' },
     ];
     const hg = document.getElementById('hobGrid');
     hobbies.forEach((h, i) => {
@@ -1922,7 +389,7 @@
       d.setAttribute('data-reveal', '');
       d.innerHTML = `<span class="h-em">${h.em}</span><div class="h-n">${h.n}</div><p class="h-d">${h.d}</p>`;
       d.addEventListener('click', e => {
-        const ems = ['✨', '🔥', '⭐', '💫', '🎉'];
+        const ems = ['âœ¨', 'ðŸ”¥', 'â­', 'ðŸ’«', 'ðŸŽ‰'];
         for (let j = 0; j < 8; j++) {
           const s = document.createElement('span'); const ang = Math.random() * Math.PI * 2, dist = 45 + Math.random() * 65;
           s.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:${12 + Math.random() * 13}px;pointer-events:none;z-index:9999`;
@@ -1992,12 +459,12 @@
 
     /* GAMES */
     const games = [
-      { img: 'images/games/rdr2.jpeg', n: 'Red Dead Redemption 2', g: 'Story/Open World', r: '★★★★★' },
-      { img: 'images/games/gow.jpeg', n: 'God of War', g: 'Gameplay/Story  ', r: '★★★★★' },
-      { img: 'images/games/got.jpeg', n: 'Ghost of Tsushima', g: 'Visuals/Combat', r: '★★★★☆' },
-      { img: 'images/games/gta4.jpeg', n: 'GTA IV', g: 'Story/Open World', r: '★★★★★' },
-      { img: 'images/games/spiderman2.jpeg', n: 'Spiderman 2', g: 'Web-slinging/Combat', r: '★★★★☆' },
-      { img: 'images/games/mw2.jpeg', n: 'COD MW Series', g: 'Action', r: '★★★★★' }
+      { img: 'images/games/rdr2.jpeg', n: 'Red Dead Redemption 2', g: 'Story/Open World', r: 'â˜…â˜…â˜…â˜…â˜…' },
+      { img: 'images/games/gow.jpeg', n: 'God of War', g: 'Gameplay/Story  ', r: 'â˜…â˜…â˜…â˜…â˜…' },
+      { img: 'images/games/got.jpeg', n: 'Ghost of Tsushima', g: 'Visuals/Combat', r: 'â˜…â˜…â˜…â˜…â˜†' },
+      { img: 'images/games/gta4.jpeg', n: 'GTA IV', g: 'Story/Open World', r: 'â˜…â˜…â˜…â˜…â˜…' },
+      { img: 'images/games/spiderman2.jpeg', n: 'Spiderman 2', g: 'Web-slinging/Combat', r: 'â˜…â˜…â˜…â˜…â˜†' },
+      { img: 'images/games/mw2.jpeg', n: 'COD MW Series', g: 'Action', r: 'â˜…â˜…â˜…â˜…â˜…' }
     ];
     const gg = document.getElementById('gamesG');
     games.forEach((g, i) => {
@@ -2014,7 +481,7 @@
     document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 
     /* CMD */
-    const cmds = [{ ic: '🏠', lb: 'Home', pg: 'index.html', kb: 'H' }, { ic: '👤', lb: 'Personal', pg: 'personal.html', kb: 'P' }, { ic: '💼', lb: 'Professional', pg: 'professional.html', kb: 'W' }, { ic: '💻', lb: 'GitHub', fn: () => window.open('https://github.com/'), kb: 'G' }, { ic: '📧', lb: 'Email', fn: () => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com'), kb: 'E' }];
+    const cmds = [{ ic: 'ðŸ ', lb: 'Home', pg: 'index.html', kb: 'H' }, { ic: 'ðŸ‘¤', lb: 'Personal', pg: 'personal.html', kb: 'P' }, { ic: 'ðŸ’¼', lb: 'Professional', pg: 'professional.html', kb: 'W' }, { ic: 'ðŸ’»', lb: 'GitHub', fn: () => window.open('https://github.com/'), kb: 'G' }, { ic: 'ðŸ“§', lb: 'Email', fn: () => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com'), kb: 'E' }];
     const cW = document.getElementById('cmdW'), cI = document.getElementById('cmdIn'), cL = document.getElementById('cmdList');
     function rC(f = '') { const fl = cmds.filter(c => c.lb.toLowerCase().includes(f.toLowerCase())); cL.innerHTML = ''; fl.forEach((c, i) => { const d = document.createElement('div'); d.className = 'ci' + (i === 0 ? ' s' : ''); d.innerHTML = `<div class="ci-ic">${c.ic}</div><span>${c.lb}</span><span class="ci-kb">${c.kb}</span>`; d.addEventListener('click', () => { closeC(); c.pg ? n2(c.pg) : c.fn && c.fn() }); cL.appendChild(d) }) }
     function oC() { cW.classList.add('open'); cI.value = ''; rC(); setTimeout(() => cI.focus(), 25) }
@@ -2119,3 +586,4 @@
 </body>
 
 </html>
+
