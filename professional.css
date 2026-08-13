@@ -22,7 +22,9 @@
       --fg3: #d0cbc2;
       --border: rgba(0, 0, 0, 0.06)
     }
-
+    body {
+      background-color: var(--bg);
+    }
     .pro-hero {
       min-height: 100vh;
       display: flex;

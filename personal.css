@@ -1,4 +1,4 @@
-﻿:root {
+:root {
       --bg: #08080d;
       --bg2: #0e0e18;
       --sur: #12121c;
@@ -22,6 +22,9 @@
       --fg2: #7a7460;
       --fg3: #cdc9b0;
       --bd: rgba(0, 0, 0, .06)
+    }
+    body {
+      background-color: var(--bg);
     }
     .ph {
       min-height: 100vh;
