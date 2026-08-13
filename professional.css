@@ -1394,32 +1394,31 @@
       left: 50%;
       transform: translateX(-50%);
       width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(200, 245, 61, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
+      .as-right {
+        padding: 3rem 1.5rem
+      }
+
+      .proj-section,
+      .ach-section {
+        padding: 5rem 1.5rem
+      }
+
+      .proj-grid {
+        grid-template-columns: 1fr
+      }
+
+      footer {
+        padding: 3rem 1.5rem
+      }
+
+      .fi {
+        flex-direction: column
+      }
     }
-    .connect-text h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.2rem;
-      color: var(--fg);
-      margin-bottom: 1rem;
-    }
-    .connect-text p {
-      color: var(--fg2);
-      max-width: 500px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.6;
-    }
-    .connect-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: var(--lime);
-      color: #020010;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      font-size: 1.1rem;
+
+    /* ΓöÇΓöÇ TOAST NOTIFICATION ΓöÇΓöÇ */
+    #resumeToast {
+      position: fixed;
       bottom: 2rem;
       left: 50%;
       transform: translate(-50%, 20px);
@@ -1636,6 +1635,149 @@
       .connect-cont { padding: 3rem 1.5rem; }
       .connect-text h3 { font-size: 1.8rem; }
     }
+
+    #resumeToast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: .8rem 1.4rem;
+      border-radius: 40px;
+      font-family: 'DM Mono', monospace;
+      font-size: .8rem;
+      color: var(--fg);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: all .4s var(--ease);
+      pointer-events: none;
+    }
+    #resumeToast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    /* ΓöÇΓöÇ SLIDESHOW MODAL ΓöÇΓöÇ */
+    #photoModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 8, 13, .95);
+      backdrop-filter: blur(15px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+    }
+
+    #photoModal.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: relative;
+      width: 90vw;
+      height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
+      transition: transform .4s var(--ease), opacity .4s var(--ease);
+    }
+
+    .modal-img.fading {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all .3s;
+      z-index: 10;
+    }
+
+    .modal-nav:hover {
+      background: var(--violet);
+      border-color: var(--violet);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .modal-prev {
+      left: 20px;
+    }
+
+    .modal-next {
+      right: 20px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all .3s;
+      z-index: 10;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .modal-close:hover {
+      background: var(--coral);
+      border-color: var(--coral);
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .modal-counter {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--fg2);
+      font-family: 'DM Mono', monospace;
+      font-size: .8rem;
+      letter-spacing: .1em;
+    }
+
+
 
     /* ── TECH STACK ── */
     .stack-sec {
