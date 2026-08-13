@@ -1,4 +1,4 @@
-:root {
+    :root {
       --bg: #08080d;
       --bg2: #0e0e18;
       --sur: #12121c;
@@ -23,9 +23,344 @@
       --fg3: #cdc9b0;
       --bd: rgba(0, 0, 0, .06)
     }
-    body {
-      background-color: var(--bg);
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
     }
+
+    html {
+      overflow-x: hidden
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      cursor: none;
+      overflow-x: hidden
+    }
+
+    #cur {
+      position: fixed;
+      width: 9px;
+      height: 9px;
+      background: var(--violet);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: width .2s, height .2s
+    }
+
+    #curR {
+      position: fixed;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(176, 122, 238, .35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2998;
+      transform: translate(-50%, -50%)
+    }
+
+    /* CMD */
+    #cmdW {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .72);
+      backdrop-filter: blur(18px)
+    }
+
+    #cmdW.open {
+      display: flex
+    }
+
+    #cmdB {
+      background: var(--bg2);
+      border: 1px solid var(--bd);
+      border-radius: 15px;
+      width: min(490px, 88vw);
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .6)
+    }
+
+    #cmdRow {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .88rem 1.1rem;
+      border-bottom: 1px solid var(--bd)
+    }
+
+    #cmdIn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      color: var(--fg)
+    }
+
+    #cmdIn::placeholder {
+      color: var(--fg2)
+    }
+
+    #cmdList {
+      padding: .35rem
+    }
+
+    .ci {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .58rem .82rem;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--fg2);
+      font-size: .85rem;
+      transition: background .1s, color .1s
+    }
+
+    .ci:hover,
+    .ci.s {
+      background: rgba(176, 122, 238, .09);
+      color: var(--fg)
+    }
+
+    .ci-ic {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--bd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      flex-shrink: 0
+    }
+
+    .ci-kb {
+      margin-left: auto;
+      font-size: .64rem;
+      color: var(--fg2);
+      background: var(--bd);
+      padding: .1rem .38rem;
+      border-radius: 4px;
+      font-family: 'DM Mono', monospace
+    }
+
+    /* NAV */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.3rem 3rem;
+      transition: background .5s, border-color .5s
+    }
+
+    #nav.sc {
+      background: rgba(8, 8, 13, .72);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--bd)
+    }
+
+    [data-theme="light"] #nav.sc {
+      background: rgba(239, 235, 216, .78)
+    }
+
+    .nl {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--fg);
+      text-decoration: none
+    }
+
+    .nl em {
+      color: var(--violet);
+      font-style: normal
+    }
+
+    .nr {
+      display: flex;
+      align-items: center;
+      gap: .8rem
+    }
+
+    .n-pg {
+      font-size: .7rem;
+      color: var(--fg2);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border: 1px solid var(--bd);
+      padding: .26rem .7rem;
+      border-radius: 99px;
+      font-family: 'DM Mono', monospace
+    }
+
+    .n-cmd {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .28rem .72rem;
+      border-radius: 7px;
+      border: 1px solid var(--bd);
+      background: var(--sur);
+      color: var(--fg2);
+      font-size: .7rem;
+      cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      transition: all .22s
+    }
+
+    .n-cmd:hover {
+      border-color: var(--violet);
+      color: var(--violet)
+    }
+
+    .rope-w {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .rc {
+      width: 1.5px;
+      height: 20px;
+      background: repeating-linear-gradient(to bottom, var(--fg2) 0, var(--fg2) 3px, transparent 3px, transparent 6px);
+      transform-origin: top
+    }
+
+    .rk {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--violet);
+      box-shadow: 0 0 8px rgba(176, 122, 238, .5)
+    }
+
+    .rope-w.pull .rc {
+      animation: rp .38s var(--ease)
+    }
+
+    .rope-w.pull .rk {
+      animation: kp .38s var(--ease)
+    }
+
+    @keyframes rp {
+      0% {
+        transform: scaleY(1)
+      }
+
+      45% {
+        transform: scaleY(1.35)
+      }
+
+      100% {
+        transform: scaleY(1)
+      }
+    }
+
+    @keyframes kp {
+      0% {
+        transform: translateY(0)
+      }
+
+      45% {
+        transform: translateY(6px)
+      }
+
+      100% {
+        transform: translateY(0)
+      }
+    }
+
+    .rl {
+      font-size: 9px;
+      color: var(--fg2);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      margin-top: 2px
+    }
+
+    #pnav {
+      position: fixed;
+      bottom: 1.7rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 600;
+      display: flex;
+      gap: 2px;
+      background: rgba(11, 11, 18, .88);
+      border: 1px solid var(--bd);
+      border-radius: 99px;
+      padding: 4px;
+      backdrop-filter: blur(22px);
+      box-shadow: 0 4px 28px rgba(0, 0, 0, .55)
+    }
+
+    [data-theme="light"] #pnav {
+      background: rgba(239, 235, 216, .88)
+    }
+
+    .pb {
+      padding: .42rem 1.05rem;
+      border-radius: 99px;
+      border: none;
+      background: transparent;
+      color: var(--fg2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .76rem;
+      cursor: pointer;
+      transition: all .35s var(--ease);
+      text-decoration: none;
+      display: block;
+      white-space: nowrap
+    }
+
+    .pb.active,
+    .pb:hover {
+      background: var(--violet);
+      color: #fff;
+      font-weight: 500
+    }
+
+    #pgOv {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: var(--violet);
+      transform: translateY(-100%);
+      pointer-events: none
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease)
+    }
+
+    [data-reveal].in {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    /* ΓöÇΓöÇ HERO ΓöÇΓöÇ */
     .ph {
       min-height: 100vh;
       display: flex;
@@ -200,7 +535,7 @@
       border-color: var(--violet)
     }
 
-    /* â”€â”€ ROTATING PHOTO STACK â”€â”€ */
+    /* ΓöÇΓöÇ ROTATING PHOTO STACK ΓöÇΓöÇ */
     .photo-stack-sec {
       padding: 8rem 3rem;
       border-top: 1px solid var(--bd);
@@ -337,7 +672,7 @@
       transition: transform .55s var(--ease)
     }
 
-    /* â”€â”€ TICKER â”€â”€ */
+    /* ΓöÇΓöÇ TICKER ΓöÇΓöÇ */
     .ticker {
       overflow: hidden;
       border-top: 1px solid var(--bd);
@@ -386,7 +721,7 @@
       }
     }
 
-    /* â”€â”€ SECTION â”€â”€ */
+    /* ΓöÇΓöÇ SECTION ΓöÇΓöÇ */
     .sec {
       padding: 7rem 3rem
     }
@@ -417,7 +752,7 @@
       color: var(--fg2)
     }
 
-    /* â”€â”€ ABOUT BENTO â”€â”€ */
+    /* ΓöÇΓöÇ ABOUT BENTO ΓöÇΓöÇ */
     .bento {
       columns: 2;
       gap: 1.1rem
@@ -457,7 +792,7 @@
       line-height: 1.7
     }
 
-    /* â”€â”€ HOBBIES â”€â”€ */
+    /* ΓöÇΓöÇ HOBBIES ΓöÇΓöÇ */
     .hob-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -519,7 +854,7 @@
       color: var(--fg2)
     }
 
-    /* â”€â”€ MUSIC PLAYER â”€â”€ */
+    /* ΓöÇΓöÇ MUSIC PLAYER ΓöÇΓöÇ */
     .mp {
       border: 1px solid var(--bd);
       border-radius: 20px;
@@ -693,7 +1028,7 @@
       color: var(--fg2)
     }
 
-    /* â”€â”€ GUITAR SECTION â”€â”€ */
+    /* ΓöÇΓöÇ GUITAR SECTION ΓöÇΓöÇ */
     .gtr-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -791,24 +1126,6 @@
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
-      max-height: 280px;
-      overflow-y: auto;
-      padding-right: 8px;
-    }
-    
-    .gtr-list::-webkit-scrollbar {
-      width: 6px;
-    }
-    .gtr-list::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 10px;
-    }
-    .gtr-list::-webkit-scrollbar-thumb {
-      background: var(--bd);
-      border-radius: 10px;
-    }
-    .gtr-list::-webkit-scrollbar-thumb:hover {
-      background: var(--violet);
     }
 
     .gtr-list li {
@@ -836,7 +1153,8 @@
     .gtr-images {
       display: flex;
       gap: 1rem;
-      margin-top: 1.5rem;
+      margin-top: auto;
+      padding-top: 1.5rem;
     }
 
     .gtr-img {
@@ -867,7 +1185,7 @@
       }
     }
 
-    /* â”€â”€ GAMES â”€â”€ */
+    /* ΓöÇΓöÇ GAMES ΓöÇΓöÇ */
     .games-g {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -929,7 +1247,7 @@
       margin-top: .3rem
     }
 
-    /* â”€â”€ PERSONAL ACHIEVEMENTS â”€â”€ */
+    /* ΓöÇΓöÇ PERSONAL ACHIEVEMENTS ΓöÇΓöÇ */
     .pa-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -985,7 +1303,7 @@
       font-family: 'DM Mono', monospace
     }
 
-    /* â”€â”€ FOOTER â”€â”€ */
+    /* ΓöÇΓöÇ FOOTER ΓöÇΓöÇ */
     footer {
       padding: 4rem 3rem;
       border-top: 1px solid var(--bd)
@@ -1108,7 +1426,7 @@
       }
     }
 
-    /* â”€â”€ SLIDESHOW MODAL â”€â”€ */
+    /* ΓöÇΓöÇ SLIDESHOW MODAL ΓöÇΓöÇ */
     #photoModal {
       position: fixed;
       inset: 0;
@@ -1220,4 +1538,3 @@
       font-size: .8rem;
       letter-spacing: .1em;
     }
-
