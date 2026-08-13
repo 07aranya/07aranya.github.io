@@ -1217,3 +1217,51 @@ if (scrollTopBtn) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+/* ── CONTACT FORM SUBMISSION ── */
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  const result = document.getElementById('formResult');
+
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(contactForm);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+    
+    result.innerHTML = "Sending...";
+    result.style.display = "block";
+    result.className = "form-result"; // reset classes
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json
+    })
+    .then(async (response) => {
+      let json = await response.json();
+      if (response.status == 200) {
+        result.innerHTML = "Message Sent! I'll get back to you soon.";
+        result.classList.add('success');
+        contactForm.reset();
+      } else {
+        console.log(response);
+        result.innerHTML = json.message;
+        result.classList.add('error');
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      result.innerHTML = "Something went wrong!";
+      result.classList.add('error');
+    })
+    .then(function() {
+      setTimeout(() => {
+        result.style.display = "none";
+      }, 5000);
+    });
+  });
+}

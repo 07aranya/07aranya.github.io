@@ -21,6 +21,16 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="professional.css">
   <link rel="icon" type="image/jpeg" href="images/icon.jpg">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VPVYT2XLS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9VPVYT2XLS');
+  </script>
 </head>
 
 <body>
@@ -388,9 +398,21 @@
         <h3>Have an exciting project?</h3>
         <p>I'm always open to discussing new opportunities, creative ideas, or collaborating on something awesome.</p>
       </div>
-      <a href="mailto:07aranya@gmail.com" class="connect-btn">
-        Say Hello <span class="cb-arrow">→</span>
-      </a>
+      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contactForm">
+        <input type="hidden" name="access_key" value="bedbffae-b1e2-49b7-b907-a158323d77a8">
+        <input type="checkbox" name="botcheck" style="display: none;">
+        
+        <div class="form-group">
+          <input type="text" name="name" id="name" placeholder="Your Name" required class="form-input">
+          <input type="email" name="email" id="email" placeholder="Your Email" required class="form-input">
+        </div>
+        <textarea name="message" id="message" rows="4" placeholder="Your Message" required class="form-input form-textarea"></textarea>
+        
+        <button type="submit" class="connect-btn">
+          Send Message <span class="cb-arrow"> </span>
+        </button>
+        <p class="form-result" id="formResult"></p>
+      </form>
     </div>
   </section>
 

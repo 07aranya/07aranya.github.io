@@ -1911,3 +1911,60 @@
     @media (max-width: 600px) {
       .notes-sec { padding: 4rem 1.5rem; }
     }
+    
+    /* ── CONTACT FORM ── */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .form-group {
+      display: flex;
+      gap: 1rem;
+    }
+    .form-input {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--fg);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.95rem;
+      transition: all 0.3s var(--ease);
+      outline: none;
+    }
+    .form-input::placeholder {
+      color: var(--fg2);
+    }
+    .form-input:focus {
+      border-color: var(--lime);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .form-result {
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      min-height: 1.5rem;
+    }
+    .form-result.success { color: var(--lime); }
+    .form-result.error { color: #ff6b6b; }
+    
+    .contact-form .connect-btn {
+      align-self: center;
+      cursor: pointer;
+      border: none;
+    }
+    
+    @media (max-width: 600px) {
+      .form-group { flex-direction: column; gap: 1.5rem; }
+    }
