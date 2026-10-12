@@ -28,7 +28,7 @@
     .h-lbl {
       font-size: .66rem;
       letter-spacing: .2em;
-      text-transform: uppercase;
+      text-transform: lowercase;
       color: var(--lime);
       margin-bottom: 1.8rem;
       overflow: hidden
@@ -79,49 +79,21 @@
       display: inline-block;
       color: var(--fg);
       cursor: default;
-      transition: letter-spacing .4s var(--ease), text-shadow .5s, filter .5s;
+      transition: color .3s var(--ease);
     }
 
     .name-hover:hover {
-      letter-spacing: .02em;
       color: var(--lime);
-      text-shadow: 0 0 80px rgba(0, 229, 255, .5), 0 0 30px rgba(0, 229, 255, .3);
-      filter: drop-shadow(0 0 18px rgba(0, 229, 255, .35));
     }
 
     .name-hover .letter {
       display: inline-block;
-      transition: color .3s, transform .3s;
+      transition: color .3s, transform .25s var(--ease);
     }
 
     .name-hover:hover .letter {
-      animation: nameWave 0.8s ease-in-out infinite, nameGlow 1.2s ease-in-out infinite;
-      animation-delay: calc(var(--index) * 0.06s);
       color: var(--lime);
-    }
-
-    @keyframes nameWave {
-
-      0%,
-      100% {
-        transform: translateY(0) rotate(0deg);
-      }
-
-      50% {
-        transform: translateY(-10px) rotate(2deg);
-      }
-    }
-
-    @keyframes nameGlow {
-
-      0%,
-      100% {
-        text-shadow: 0 0 8px rgba(0, 229, 255, .3);
-      }
-
-      50% {
-        text-shadow: 0 0 25px rgba(0, 229, 255, .7), 0 0 50px rgba(0, 229, 255, .2);
-      }
+      transform: translateY(-2px);
     }
 
     /* underline animation */
@@ -268,7 +240,7 @@
     .slbl {
       font-size: .58rem;
       letter-spacing: .15em;
-      text-transform: uppercase;
+      text-transform: lowercase;
       color: var(--fg2);
       writing-mode: vertical-rl
     }
@@ -442,11 +414,10 @@
     }
 
     .tg:hover {
-      border-color: var(--lime);
+      border-color: rgba(0, 229, 255, .35);
       color: var(--lime);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 4px 18px rgba(0, 229, 255, .15);
-      background: rgba(0, 229, 255, .06)
+      transform: translateY(-2px);
+      background: rgba(0, 229, 255, .05);
     }
 
     .sp-r {
@@ -466,10 +437,10 @@
     }
 
     .si:hover {
-      border-color: var(--lime);
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 8px 35px rgba(0, 229, 255, .1);
-      background: rgba(10, 25, 60, .7)
+      border-color: rgba(0, 229, 255, .3);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
+      background: var(--sur);
     }
 
     .si-n {
@@ -589,32 +560,33 @@
       color: var(--lime)
     }
 
-    /* Floating image that follows cursor */
+    /* Floating preview that follows cursor */
     #floatImg {
       position: fixed;
-      width: 220px;
-      height: 160px;
-      border-radius: 12px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
       overflow: hidden;
       pointer-events: none;
       z-index: 800;
       opacity: 0;
-      transform: translate(-50%, -50%) scale(.85) rotate(-3deg);
-      transition: opacity .35s var(--ease), transform .35s var(--ease);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+      transform: translate(-50%, -50%) scale(.85);
+      transition: opacity .25s var(--ease), transform .25s var(--ease);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
       background: var(--sur);
+      border: 1px solid var(--bd);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4rem;
+      font-size: 1.6rem;
     }
 
     #floatImg.show {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1) rotate(-2deg)
+      transform: translate(-50%, -50%) scale(1);
     }
 
-    /* â”€â”€ PROJECTS SHOWCASE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── PROJECTS SHOWCASE ────────────────────────── */
     .proj-showcase {
       display: flex;
       flex-direction: column;
@@ -634,9 +606,9 @@
     }
 
     .proj-feat:hover {
-      border-color: rgba(0, 229, 255, .25);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0, 229, 255, .08);
+      border-color: rgba(0, 229, 255, .35);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .5);
     }
 
     .proj-feat-img {
@@ -687,7 +659,7 @@
       font-size: .65rem;
       color: var(--lime);
       letter-spacing: .12em;
-      text-transform: uppercase;
+      text-transform: lowercase;
       margin-bottom: .6rem;
     }
 
@@ -793,9 +765,9 @@
     }
 
     .proj-card:hover {
-      border-color: rgba(0, 229, 255, .25);
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0, 229, 255, .08);
+      border-color: rgba(0, 229, 255, .35);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, .45);
     }
 
     .proj-card-img {
@@ -898,8 +870,8 @@
 
     .now-card:hover {
       border-color: var(--nc, var(--lime));
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 12px 40px rgba(0, 229, 255, .1);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, .4);
     }
 
     .now-card::before {
@@ -921,7 +893,7 @@
       gap: .4rem;
       font-size: .62rem;
       letter-spacing: .14em;
-      text-transform: uppercase;
+      text-transform: lowercase;
       color: var(--nc, var(--lime));
       margin-bottom: .8rem;
     }
@@ -953,7 +925,7 @@
       margin-bottom: .3rem;
       font-family: 'DM Mono', monospace;
       letter-spacing: .06em;
-      text-transform: uppercase
+      text-transform: lowercase;
     }
 
     .now-val {
@@ -969,7 +941,7 @@
       margin-top: .3rem
     }
 
-    /* â”€â”€ TIMELINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── TIMELINE ────────────────────────────────── */
     .sec,
     .now-sec,
     .photo-hover-sec,
@@ -981,24 +953,8 @@
       -webkit-backdrop-filter: blur(0px);
     }
 
-    /* â”€â”€ FLOATING SPACE OBJECTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .space-obj {
-      position: absolute;
-      z-index: 1;
-      pointer-events: none;
-      opacity: .25;
-      animation: spaceFloat var(--dur, 8s) var(--delay, 0s) ease-in-out infinite alternate;
-      will-change: transform;
-    }
-
-    @keyframes spaceFloat {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-
-      100% {
-        transform: translate(var(--dx, 15px), var(--dy, -20px)) rotate(var(--rot, 12deg));
-      }
+      display: none;
     }
 
     /* â”€â”€ RELUME-INSPIRED TIMELINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -1092,7 +1048,7 @@
     .tl-e.in .tl-dot {
       border-color: var(--lime);
       background: var(--lime);
-      box-shadow: 0 0 20px rgba(0, 229, 255, .5), 0 0 40px rgba(0, 229, 255, .15);
+      box-shadow: 0 0 10px rgba(0, 229, 255, .35);
     }
 
     .tl-dot::after {
@@ -1199,7 +1155,7 @@
     .tl-kind {
       font-size: .62rem;
       letter-spacing: .18em;
-      text-transform: uppercase;
+      text-transform: lowercase;
       color: var(--fg2);
       margin-bottom: .5rem;
       display: flex;
@@ -1414,30 +1370,26 @@
       -webkit-text-stroke: 0px transparent
     }
 
-    /* hover glow words */
+    /* hover words */
     .gw {
       cursor: default;
-      transition: color .22s, text-shadow .22s
+      transition: color .22s;
     }
 
     .gw:hover {
       color: var(--lime);
-      text-shadow: 0 0 30px rgba(200, 245, 61, .28)
     }
 
     .gw.c:hover {
       color: var(--coral);
-      text-shadow: 0 0 30px rgba(255, 95, 95, .25)
     }
 
     .gw.t:hover {
       color: var(--teal);
-      text-shadow: 0 0 30px rgba(93, 224, 208, .25)
     }
 
     .gw.v:hover {
       color: var(--violet);
-      text-shadow: 0 0 30px rgba(176, 122, 238, .25)
     }
 
     /* ── MOCK TERMINAL ── */
@@ -1479,7 +1431,7 @@
     .mt-dots span:nth-child(1) { background: #ff5f56; }
     .mt-dots span:nth-child(2) { background: #ffbd2e; }
     .mt-dots span:nth-child(3) { background: #27c93f; }
-    
+
     .mt-title {
       flex: 1;
       text-align: center;

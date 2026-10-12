@@ -84,7 +84,7 @@ function initCosmicTour() {
     side: THREE.BackSide,
     fog: false,
     transparent: true,
-    opacity: 0.8 // High opacity for a vivid space background
+    opacity: 0.22 // Subtle, refined ambient background
   });
   const bgSphere = new THREE.Mesh(bgGeo, bgMat);
   bgSphere.position.set(0, 0, -3000); // Encompasses the entire 6000-unit journey
@@ -745,27 +745,12 @@ setInterval(() => { swEl.classList.add('h'); setTimeout(() => { swi = (swi + 1) 
 
 /* ══ NAME HOVER LETTERS ════════════════════════ */
 const nh = document.getElementById('nameHover');
-const nameStr = 'aranya :)';
-nh.innerHTML = nameStr.split('').map((c, i) =>
-  `<span class="letter" style="--index:${i}">${c === ' ' ? '&nbsp;' : c}</span>`
-).join('');
-/* Particle burst on hover */
-nh.addEventListener('mouseenter', () => {
-  const r = nh.getBoundingClientRect();
-  const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-  const ems = ['✨', '⚡', '🌟', '💥', '🔥', '💫'];
-  for (let i = 0; i < 12; i++) {
-    const s = document.createElement('span');
-    const ang = Math.random() * Math.PI * 2, dist = 40 + Math.random() * 80;
-    s.style.cssText = `position:fixed;left:${cx}px;top:${cy}px;font-size:${12 + Math.random() * 14}px;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)`;
-    s.textContent = ems[Math.floor(Math.random() * ems.length)];
-    document.body.appendChild(s);
-    s.animate([
-      { transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
-      { transform: `translate(calc(-50% + ${Math.cos(ang) * dist}px),calc(-50% + ${Math.sin(ang) * dist}px)) scale(.2)`, opacity: 0 }
-    ], { duration: 700 + Math.random() * 300, easing: 'cubic-bezier(.2,.8,.4,1)' }).onfinish = () => s.remove();
-  }
-});
+if (nh) {
+  const nameStr = 'aranya';
+  nh.innerHTML = nameStr.split('').map((c, i) =>
+    `<span class="letter" style="--index:${i}">${c === ' ' ? '&nbsp;' : c}</span>`
+  ).join('');
+}
 
 /* ══ HOVER PHOTO LIST ══════════════════════════ */
 const interests = [
@@ -990,74 +975,20 @@ function closeC() { cW.classList.remove('open') }
 document.getElementById('cmdBtn').addEventListener('click', openC);
 cW.addEventListener('click', e => { if (e.target === cW) closeC() });
 cI.addEventListener('input', () => rCmds(cI.value));
-document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); cW.classList.contains('open') ? closeC() : openC() } if (e.key === 'Escape') { closeC(); closeKonami() } });
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    cW.classList.contains('open') ? closeC() : openC();
+  }
+  if (e.key === 'Escape') {
+    closeC();
+  }
+});
 
 /* ══ PAGE TRANSITIONS ════════════════════════════ */
 function nav2(url) { const o = document.getElementById('pgOv'); o.style.transition = 'transform .85s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(0)'; setTimeout(() => location.href = url, 830) }
 document.querySelectorAll('[data-page]').forEach(el => el.addEventListener('click', e => { const p = el.getAttribute('data-page'); const c2 = location.pathname.split('/').pop() || 'index.html'; if (!p || p === c2) return; e.preventDefault(); nav2(p) }));
 window.addEventListener('pageshow', () => { const o = document.getElementById('pgOv'); o.style.transition = 'none'; o.style.transform = 'translateY(0)'; requestAnimationFrame(() => requestAnimationFrame(() => { o.style.transition = 'transform 1.1s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(100%)' })) });
-
-/* ══ KONAMI CODE + PONG ═════════════════════════ */
-const konamiSeq = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-let ki = 0;
-document.addEventListener('keydown', e => {
-  if (e.key === konamiSeq[ki]) ki++; else ki = 0;
-  if (ki === konamiSeq.length) { ki = 0; openKonami() }
-});
-const kO = document.getElementById('konamiOverlay');
-const kC = document.getElementById('kCanvas'), kCtx = kC.getContext('2d');
-let kRunning = false, kPaused = false, kAF = null;
-let paddleX = 200, paddleW = 80, paddleH = 10, paddleSpd = 0;
-let bx = 240, by = 200, bvx = 3.5, bvy = -3.5, bsize = 8;
-let score = 0, lives = 3;
-function openKonami() {
-  kO.classList.add('open'); document.body.classList.add('konami-mode');
-  document.body.style.overflow = 'hidden';
-  resetKonami(); kRunning = true; kAF = requestAnimationFrame(kLoop);
-}
-function closeKonami() {
-  kO.classList.remove('open'); document.body.classList.remove('konami-mode');
-  document.body.style.overflow = 'auto';
-  kRunning = false; if (kAF) cancelAnimationFrame(kAF);
-}
-document.getElementById('konamiClose').addEventListener('click', closeKonami);
-function resetKonami() { paddleX = 200; bx = 240; by = 200; bvx = 3.5; bvy = -3.5; score = 0; lives = 3; kPaused = false }
-document.addEventListener('keydown', e => {
-  if (!kRunning) return;
-  if (e.key === 'ArrowLeft' || e.key === 'a') paddleSpd = -6;
-  if (e.key === 'ArrowRight' || e.key === 'd') paddleSpd = 6;
-  if (e.key === ' ') { e.preventDefault(); kPaused = !kPaused; if (!kPaused) kAF = requestAnimationFrame(kLoop) }
-});
-document.addEventListener('keyup', e => { if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'ArrowRight' || e.key === 'd') paddleSpd = 0 });
-const BROWS = 5, BCOLS = 9, bricks = [];
-function initBricks() { bricks.length = 0; for (let r = 0; r < BROWS; r++)for (let c = 0; c < BCOLS; c++)bricks.push({ x: c * (50 + 4) + 6, y: r * (16 + 4) + 24, w: 50, h: 16, alive: true, col: ['#0ff', '#f0f', '#0f0', '#ff0', '#f50'][r] }) }
-initBricks();
-function kLoop() {
-  if (!kRunning || kPaused) return;
-  paddleX = Math.max(0, Math.min(kC.width - paddleW, paddleX + paddleSpd));
-  bx += bvx; by += bvy;
-  if (bx - bsize <= 0 || bx + bsize >= kC.width) bvx *= -1;
-  if (by - bsize <= 0) bvy *= -1;
-  if (by + bsize >= kC.height - 14 && bx >= paddleX && bx <= paddleX + paddleW) { bvy = -Math.abs(bvy); bvx += (bx - (paddleX + paddleW / 2)) * .08 }
-  else if (by + bsize >= kC.height) { lives--; by = 200; bx = 240; bvx = 3.5; bvy = -3.5; if (lives <= 0) { kRunning = false; drawKEnd(); return } }
-  bricks.forEach(b => { if (!b.alive) return; if (bx + bsize > b.x && bx - bsize < b.x + b.w && by + bsize > b.y && by - bsize < b.y + b.h) { b.alive = false; bvy *= -1; score += 10; if (Math.abs(bvx) < 7) bvx *= 1.04; if (Math.abs(bvy) < 7) bvy *= 1.04 } });
-  if (bricks.every(b => !b.alive)) { initBricks(); score += 50 }
-  kDraw(); kAF = requestAnimationFrame(kLoop);
-}
-function kDraw() {
-  kCtx.fillStyle = '#000'; kCtx.fillRect(0, 0, kC.width, kC.height);
-  /* Grid */
-  kCtx.strokeStyle = 'rgba(0,255,255,.04)'; kCtx.lineWidth = 1;
-  for (let x = 0; x < kC.width; x += 30) { kCtx.beginPath(); kCtx.moveTo(x, 0); kCtx.lineTo(x, kC.height); kCtx.stroke() }
-  for (let y = 0; y < kC.height; y += 30) { kCtx.beginPath(); kCtx.moveTo(0, y); kCtx.lineTo(kC.width, y); kCtx.stroke() }
-  bricks.forEach(b => { if (!b.alive) return; kCtx.fillStyle = b.col; kCtx.shadowColor = b.col; kCtx.shadowBlur = 8; kCtx.fillRect(b.x, b.y, b.w, b.h); kCtx.shadowBlur = 0 });
-  kCtx.fillStyle = '#0ff'; kCtx.shadowColor = '#0ff'; kCtx.shadowBlur = 10; kCtx.fillRect(paddleX, kC.height - 14, paddleW, paddleH); kCtx.shadowBlur = 0;
-  kCtx.beginPath(); kCtx.arc(bx, by, bsize, 0, Math.PI * 2); kCtx.fillStyle = '#fff'; kCtx.shadowColor = '#fff'; kCtx.shadowBlur = 15; kCtx.fill(); kCtx.shadowBlur = 0;
-  kCtx.font = "14px 'DM Mono',monospace"; kCtx.fillStyle = '#0ff'; kCtx.fillText('SCORE:' + score, 8, kC.height - 3);
-  kCtx.fillText('LIVES:' + '♥'.repeat(lives), kC.width - 90, kC.height - 3);
-}
-function drawKEnd() { kCtx.fillStyle = 'rgba(0,0,0,.7)'; kCtx.fillRect(0, 0, kC.width, kC.height); kCtx.font = "bold 28px 'DM Mono',monospace"; kCtx.fillStyle = '#0ff'; kCtx.textAlign = 'center'; kCtx.fillText('GAME OVER', kC.width / 2, kC.height / 2 - 20); kCtx.font = "14px 'DM Mono',monospace"; kCtx.fillText('score: ' + score, kC.width / 2, kC.height / 2 + 14); kCtx.textAlign = 'left'; kCtx.fillText('press R to restart', kC.width / 2 - 60, kC.height / 2 + 40) }
-document.addEventListener('keydown', e => { if (e.key === 'r' && kO.classList.contains('open')) { initBricks(); resetKonami(); kRunning = true; kAF = requestAnimationFrame(kLoop) } });
 
 /* ══ MEDIA MODAL ════════════════════════════════ */
 const mModal = document.getElementById('mediaModal');
