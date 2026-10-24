@@ -43,26 +43,25 @@
 
     #cur {
       position: fixed;
-      width: 8px;
-      height: 8px;
-      background: var(--lime);
+      width: 7px;
+      height: 7px;
+      background: #ffffff;
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
-      mix-blend-mode: difference;
-      transition: width .2s var(--ease), height .2s var(--ease)
+      transition: transform .15s ease, opacity .2s ease;
+      opacity: 0.85;
     }
 
     #cur-r {
-      position: fixed;
-      width: 32px;
-      height: 32px;
-      border: 1px solid rgba(200, 245, 61, .35);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%)
+      display: none;
+    }
+
+    body:has(a:hover, button:hover, [role="button"]:hover, .proj-card:hover, .fl:hover, .dl-btn:hover) #cur {
+      transform: translate(-50%, -50%) scale(1.8);
+      background: var(--lime);
+      opacity: 0.95;
     }
 
     /* CMD */
@@ -1134,22 +1133,18 @@
 
     .gw:hover {
       color: var(--lime);
-      text-shadow: 0 0 25px rgba(200, 245, 61, .3)
     }
 
     .gw.c:hover {
       color: var(--coral);
-      text-shadow: 0 0 25px rgba(255, 96, 96, .25)
     }
 
     .gw.t:hover {
       color: var(--teal);
-      text-shadow: 0 0 25px rgba(93, 224, 208, .25)
     }
 
     .gw.v:hover {
       color: var(--violet);
-      text-shadow: 0 0 25px rgba(176, 122, 238, .25)
     }
 
     /* ΓöÇΓöÇ BLUR BACKGROUNDS ΓöÇΓöÇ */

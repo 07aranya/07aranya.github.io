@@ -22,10 +22,13 @@ const iv = setInterval(() => {
 }, 85);
 
 /* ══ CURSOR ══════════════════════════════════════ */
-const cur = document.getElementById('cur'), curR = document.getElementById('curR');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
-(function loop() { rx += (mx - rx) * .09; ry += (my - ry) * .09; curR.style.left = rx + 'px'; curR.style.top = ry + 'px'; requestAnimationFrame(loop) })();
+const cur = document.getElementById('cur');
+if (cur) {
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+}
 
 /* ══ NAV SCROLL ══════════════════════════════════ */
 window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 50), { passive: true });
@@ -966,24 +969,7 @@ document.querySelectorAll('.mag').forEach(b => {
   });
 });
 
-/* ══ CMD PALETTE ════════════════════════════════ */
-const cmds = [{ ic: '🏠', lb: 'Home', pg: 'index.html', kb: 'H' }, { ic: '👤', lb: 'Personal', pg: 'personal.html', kb: 'P' }, { ic: '💼', lb: 'Professional', pg: 'professional.html', kb: 'W' }, { ic: '💻', lb: 'GitHub', fn: () => window.open('https://github.com/07aranya'), kb: 'G' }, { ic: '🔗', lb: 'LinkedIn', fn: () => window.open('https://www.linkedin.com/in/aranya-ghargade-207821385/'), kb: 'L' }, { ic: '📧', lb: 'Email', fn: () => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com'), kb: 'E' }];
-const cW = document.getElementById('cmdW'), cI = document.getElementById('cmdIn'), cL = document.getElementById('cmdList');
-function rCmds(f = '') { const fl = cmds.filter(c => c.lb.toLowerCase().includes(f.toLowerCase())); cL.innerHTML = ''; fl.forEach((c, i) => { const d = document.createElement('div'); d.className = 'ci' + (i === 0 ? ' s' : ''); d.innerHTML = `<div class="ci-ic">${c.ic}</div><span>${c.lb}</span><span class="ci-kb">${c.kb}</span>`; d.addEventListener('click', () => { closeC(); c.pg ? nav2(c.pg) : c.fn && c.fn() }); cL.appendChild(d) }) }
-function openC() { cW.classList.add('open'); cI.value = ''; rCmds(); setTimeout(() => cI.focus(), 25) }
-function closeC() { cW.classList.remove('open') }
-document.getElementById('cmdBtn').addEventListener('click', openC);
-cW.addEventListener('click', e => { if (e.target === cW) closeC() });
-cI.addEventListener('input', () => rCmds(cI.value));
-document.addEventListener('keydown', e => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-    e.preventDefault();
-    cW.classList.contains('open') ? closeC() : openC();
-  }
-  if (e.key === 'Escape') {
-    closeC();
-  }
-});
+
 
 /* ══ PAGE TRANSITIONS ════════════════════════════ */
 function nav2(url) { const o = document.getElementById('pgOv'); o.style.transition = 'transform .85s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(0)'; setTimeout(() => location.href = url, 830) }

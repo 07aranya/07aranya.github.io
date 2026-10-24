@@ -229,29 +229,28 @@
       }
     }
 
-    /* â”€â”€ CURSOR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── CURSOR (MINIMAL & CLEAN) ── */
     #cur {
       position: fixed;
-      width: 9px;
-      height: 9px;
-      background: var(--lime);
+      width: 7px;
+      height: 7px;
+      background: #ffffff;
       border-radius: 50%;
       pointer-events: none;
       z-index: 2999;
       transform: translate(-50%, -50%);
-      mix-blend-mode: difference;
-      transition: width .2s var(--ease), height .2s var(--ease)
+      transition: transform .15s ease, opacity .2s ease;
+      opacity: 0.85;
     }
 
     #curR {
-      position: fixed;
-      width: 36px;
-      height: 36px;
-      border: 1px solid rgba(200, 245, 61, .35);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 2998;
-      transform: translate(-50%, -50%)
+      display: none;
+    }
+
+    body:has(a:hover, button:hover, [role="button"]:hover, .proj-card:hover, .fl:hover) #cur {
+      transform: translate(-50%, -50%) scale(1.8);
+      background: var(--lime);
+      opacity: 0.95;
     }
 
     /* â”€â”€ NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */

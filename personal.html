@@ -35,20 +35,10 @@
 <body>
   <div id="cur"></div>
   <div id="curR"></div>
-  <div id="pgOv"></div>
-  <div id="cmdW">
-    <div id="cmdB">
-      <div id="cmdRow"><span style="opacity:.35">⌘</span><input id="cmdIn" placeholder="Type to navigate…"
-          autocomplete="off"></div>
-      <div id="cmdList"></div>
-    </div>
-  </div>
-
   <nav id="nav">
     <a href="index.html" class="nl" data-page="index.html">ara<em>.</em></a>
     <div class="nr">
       <span class="n-pg">personal</span>
-      <div class="n-cmd" id="cmdBtn">⌘K</div>
       <div class="rope-w" id="rope">
         <div class="rc"></div>
         <div class="rk"></div><span class="rl" id="rLbl">dark</span>
@@ -493,19 +483,9 @@
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }), { threshold: .08 });
     document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 
-    /* CMD */
-    const cmds = [{ ic: '🏠', lb: 'Home', pg: 'index.html', kb: 'H' }, { ic: '👤', lb: 'Personal', pg: 'personal.html', kb: 'P' }, { ic: '💼', lb: 'Professional', pg: 'professional.html', kb: 'W' }, { ic: '💻', lb: 'GitHub', fn: () => window.open('https://github.com/'), kb: 'G' }, { ic: '📧', lb: 'Email', fn: () => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com'), kb: 'E' }];
-    const cW = document.getElementById('cmdW'), cI = document.getElementById('cmdIn'), cL = document.getElementById('cmdList');
-    function rC(f = '') { const fl = cmds.filter(c => c.lb.toLowerCase().includes(f.toLowerCase())); cL.innerHTML = ''; fl.forEach((c, i) => { const d = document.createElement('div'); d.className = 'ci' + (i === 0 ? ' s' : ''); d.innerHTML = `<div class="ci-ic">${c.ic}</div><span>${c.lb}</span><span class="ci-kb">${c.kb}</span>`; d.addEventListener('click', () => { closeC(); c.pg ? n2(c.pg) : c.fn && c.fn() }); cL.appendChild(d) }) }
-    function oC() { cW.classList.add('open'); cI.value = ''; rC(); setTimeout(() => cI.focus(), 25) }
-    function closeC() { cW.classList.remove('open') }
-    document.getElementById('cmdBtn').addEventListener('click', oC);
-    cW.addEventListener('click', e => { if (e.target === cW) closeC() });
-    cI.addEventListener('input', () => rC(cI.value));
-    document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); cW.classList.contains('open') ? closeC() : oC() } if (e.key === 'Escape') closeC() });
-    function n2(url) { const o = document.getElementById('pgOv'); o.style.transition = 'transform .44s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(0)'; setTimeout(() => location.href = url, 420) }
+    function n2(url) { const o = document.getElementById('pgOv'); if (o) { o.style.transition = 'transform .44s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(0)'; setTimeout(() => location.href = url, 420); } else { location.href = url; } }
     document.querySelectorAll('[data-page]').forEach(el => el.addEventListener('click', e => { const p = el.getAttribute('data-page'); const c2 = location.pathname.split('/').pop() || 'personal.html'; if (!p || p === c2) return; e.preventDefault(); n2(p) }));
-    window.addEventListener('pageshow', () => { const o = document.getElementById('pgOv'); o.style.transition = 'none'; o.style.transform = 'translateY(0)'; requestAnimationFrame(() => requestAnimationFrame(() => { o.style.transition = 'transform .6s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(100%)' })) });
+    window.addEventListener('pageshow', () => { const o = document.getElementById('pgOv'); if (o) { o.style.transition = 'none'; o.style.transform = 'translateY(0)'; requestAnimationFrame(() => requestAnimationFrame(() => { o.style.transition = 'transform .6s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(100%)' })); } });
     /* PHOTO SLIDESHOW */
     const photoFiles = [
       "images/photography/WhatsApp Image 2026-05-02 at 11.18.54 (2).jpeg",

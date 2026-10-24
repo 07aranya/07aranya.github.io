@@ -36,19 +36,10 @@
 <body>
   <div id="cur"></div>
   <div id="cur-r"></div>
-  <div id="pg-ov"></div>
-  <div id="cmd-w">
-    <div id="cmd-b">
-      <div id="cmd-ri"><span style="opacity:.4;font-size:1rem">⌘</span><input id="cmd-in"
-          placeholder="Type to navigate…" autocomplete="off"></div>
-      <div id="cmd-li"></div>
-    </div>
-  </div>
   <nav id="nav">
     <a href="index.html" class="nl" data-page="index.html">ara<em>.</em></a>
     <div class="nr">
       <span class="n-pg">professional</span>
-      <div class="n-cmd" id="cmd-btn">⌘K</div>
       <div class="rope-wrap" id="thRope">
         <div class="rope-cord"></div>
         <div class="rope-knob"></div>
@@ -492,19 +483,9 @@ target="_blank"><svg
         c.style.setProperty('--ang', (Math.atan2(y, x) * 180 / Math.PI) + 'deg');
       });
     });
-    // CMD
-    const cmds = [{ ic: '🏠', lb: 'Home', pg: 'index.html', kb: 'H' }, { ic: '👤', lb: 'Personal', pg: 'personal.html', kb: 'P' }, { ic: '💼', lb: 'Professional', pg: 'professional.html', kb: 'W' }, { ic: '💻', lb: 'GitHub', fn: () => window.open('https://github.com/'), kb: 'G' }, { ic: '📧', lb: 'Email', fn: () => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com'), kb: 'E' }];
-    const cw = document.getElementById('cmd-w'), ci = document.getElementById('cmd-in'), cl = document.getElementById('cmd-li');
-    function rCmds(f = '') { const fl = cmds.filter(c => c.lb.toLowerCase().includes(f.toLowerCase())); cl.innerHTML = ''; fl.forEach((c, i) => { const d = document.createElement('div'); d.className = 'ci' + (i === 0 ? ' sel' : ''); d.innerHTML = `<div class="ci-ic">${c.ic}</div><span>${c.lb}</span><span class="ci-kb">${c.kb}</span>`; d.addEventListener('click', () => { closeC(); c.pg ? nav2(c.pg) : c.fn && c.fn() }); cl.appendChild(d) }) }
-    function openC() { cw.classList.add('open'); ci.value = ''; rCmds(); setTimeout(() => ci.focus(), 30) }
-    function closeC() { cw.classList.remove('open') }
-    document.getElementById('cmd-btn').addEventListener('click', openC);
-    cw.addEventListener('click', e => { if (e.target === cw) closeC() });
-    ci.addEventListener('input', () => rCmds(ci.value));
-    document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); cw.classList.contains('open') ? closeC() : openC() } if (e.key === 'Escape') closeC() });
-    function nav2(url) { const o = document.getElementById('pg-ov'); o.style.transition = 'transform .45s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(0)'; setTimeout(() => location.href = url, 440) }
+    function nav2(url) { const o = document.getElementById('pg-ov'); if (o) { o.style.transition = 'transform .45s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(0)'; setTimeout(() => location.href = url, 440); } else { location.href = url; } }
     document.querySelectorAll('[data-page]').forEach(el => el.addEventListener('click', e => { const p = el.getAttribute('data-page'); const c2 = location.pathname.split('/').pop() || 'professional.html'; if (!p || p === c2) return; e.preventDefault(); nav2(p) }));
-    window.addEventListener('pageshow', () => { const o = document.getElementById('pg-ov'); o.style.transition = 'none'; o.style.transform = 'translateY(0)'; requestAnimationFrame(() => requestAnimationFrame(() => { o.style.transition = 'transform .6s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(100%)' })) });
+    window.addEventListener('pageshow', () => { const o = document.getElementById('pg-ov'); if (o) { o.style.transition = 'none'; o.style.transform = 'translateY(0)'; requestAnimationFrame(() => requestAnimationFrame(() => { o.style.transition = 'transform .6s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(100%)' })); } });
 
     /* RESUME TOAST */
     const resumeBtn = document.getElementById('resumeBtn');

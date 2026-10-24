@@ -734,7 +734,7 @@
     .proj-link.primary:hover {
       background: #33eeff;
       transform: translateY(-2px);
-      box-shadow: 0 4px 18px rgba(0, 229, 255, .25);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
     }
 
     .proj-link.secondary {
@@ -1004,7 +1004,7 @@
       background: linear-gradient(to bottom, var(--lime), var(--violet));
       border-radius: 99px;
       transition: height .1s linear;
-      box-shadow: 0 0 12px rgba(0, 229, 255, .4);
+      box-shadow: none;
     }
 
     /* Timeline entry â€” alternating */
@@ -1269,40 +1269,15 @@
     }
 
     .tbn {
-      background: rgba(0, 229, 255, .12);
+      background: rgba(0, 229, 255, .08);
       color: var(--lime);
-      border: 1px solid rgba(0, 229, 255, .2);
-      animation: nowBadgePulse 2s ease-in-out infinite;
-    }
-
-    @keyframes nowBadgePulse {
-
-      0%,
-      100% {
-        box-shadow: 0 0 4px rgba(0, 229, 255, .2);
-      }
-
-      50% {
-        box-shadow: 0 0 16px rgba(0, 229, 255, .4);
-      }
+      border: 1px solid rgba(0, 229, 255, .15);
     }
 
     .tl-e.now-e .tl-dot {
       background: var(--lime);
       border-color: var(--lime);
-      animation: nowDotPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes nowDotPulse {
-
-      0%,
-      100% {
-        box-shadow: 0 0 8px rgba(0, 229, 255, .4);
-      }
-
-      50% {
-        box-shadow: 0 0 25px rgba(0, 229, 255, .7), 0 0 50px rgba(0, 229, 255, .2);
-      }
+      box-shadow: 0 0 6px rgba(0, 229, 255, .25);
     }
 
     /* Responsive: stack on mobile */

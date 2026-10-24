@@ -44,26 +44,25 @@
 
     #cur {
       position: fixed;
-      width: 9px;
-      height: 9px;
-      background: var(--violet);
+      width: 7px;
+      height: 7px;
+      background: #ffffff;
       border-radius: 50%;
       pointer-events: none;
       z-index: 2999;
       transform: translate(-50%, -50%);
-      mix-blend-mode: difference;
-      transition: width .2s, height .2s
+      transition: transform .15s ease, opacity .2s ease;
+      opacity: 0.85;
     }
 
     #curR {
-      position: fixed;
-      width: 34px;
-      height: 34px;
-      border: 1px solid rgba(176, 122, 238, .35);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 2998;
-      transform: translate(-50%, -50%)
+      display: none;
+    }
+
+    body:has(a:hover, button:hover, [role="button"]:hover, .bc:hover, .ph-card:hover) #cur {
+      transform: translate(-50%, -50%) scale(1.8);
+      background: var(--violet);
+      opacity: 0.95;
     }
 
     /* CMD */
