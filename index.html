@@ -75,6 +75,7 @@
         <span class="row r1"><span class="inner"><span class="mt">hi i'm</span></span></span>
         <span class="row r2"><span class="inner"><span class="name-hover" id="nameHover">aranya</span></span></span>
       </h1>
+      <p class="h-sub"><span>second-year cse student building games, interactive experiments, and software from scratch.</span></p>
     </div>
     <div class="h-scroll">
       <div class="pipe">
@@ -106,7 +107,7 @@
   <div class="split" style="border-top: none;">
     <div class="sp-l">
       <div class="sp-title">a <span class="gw">builder</span><br>at <span class="gw t">heart</span>.</div>
-      <p class="sp-bio">second-year <strong>cse student</strong> at vit pune. focused on <strong>game development</strong>, algorithms, and practical software design. i learn best by engineering projects from scratch.</p>
+      <p class="sp-bio">second-year cse student at vit pune. mostly into game dev, algorithms, and writing clean code. i learn fastest by actually building things from scratch.</p>
       <div class="tags">
         <span class="tg">c#</span><span class="tg">python</span><span class="tg">javascript</span>
         <span class="tg">dsa</span><span class="tg">game dev</span><span class="tg">github</span>
@@ -117,22 +118,22 @@
       <div class="si" data-reveal>
         <div class="si-n">01 / CREATE</div>
         <div class="si-t">game development</div>
-        <p class="si-d">developing real-time gameplay mechanics, interactive camera controllers, and physics systems in unity and c#.</p>
+        <p class="si-d">messing around with player controls, custom camera feel, and 2d/3d physics in unity and c#.</p>
       </div>
       <div class="si" data-reveal style="transition-delay:.1s">
         <div class="si-n">02 / CODE</div>
         <div class="si-t">dsa &amp; problem solving</div>
-        <p class="si-d">consistently practicing data structures and algorithms, focusing on recursion, graphs, dynamic programming, and optimization.</p>
+        <p class="si-d">practicing core data structures and algorithms — recursion, trees, graphs, and dynamic programming.</p>
       </div>
       <div class="si" data-reveal style="transition-delay:.2s">
         <div class="si-n">03 / LEARN</div>
         <div class="si-t">academic foundation</div>
-        <p class="si-d">building strong computer science foundations at vit pune across object-oriented design, computer networks, and os concepts.</p>
+        <p class="si-d">learning core computer science at vit pune: oop, operating systems, and computer networks.</p>
       </div>
       <div class="si" data-reveal style="transition-delay:.3s">
         <div class="si-n">04 / BUILD</div>
         <div class="si-t">systems &amp; web engineering</div>
-        <p class="si-d">creating responsive web applications and embedded hardware prototypes, connecting sensor inputs to real-time interfaces.</p>
+        <p class="si-d">making responsive web apps and tinkering with microcontrollers and sensor hardware.</p>
       </div>
     </div>
   </div>
@@ -154,111 +155,178 @@
       <h2>featured <span class="gw c">projects</span></h2>
       <div class="shl"></div>
     </div>
-    <div class="proj-showcase">
-      <!-- Featured Project -->
-      <div class="proj-feat" data-reveal>
-        <div class="proj-feat-img">
-          <img src="images/projects/chatbot.png" alt="Chatbot Screenshot">
-        </div>
-        <div class="proj-feat-info">
-          <div class="proj-num">01 / FEATURED</div>
-          <div class="proj-name">AI Educational Vernacular Chatbot</div>
-          <p class="proj-desc">an ai-powered learning companion breaking regional language barriers across 9+ indian vernacular languages. features dual-persona tutoring, syllabus personalization, and contextual q&amp;a integrated with google's gemini api.</p>
-          <div class="proj-tech">
-            <span>typescript</span><span>react</span><span>gemini api</span><span>9+ languages</span>
+    
+    <div class="cs-list">
+      <!-- Case Study 1: Gesture Fruit Ninja -->
+      <article class="cs-card" data-reveal>
+        <div class="cs-hero">
+          <div class="cs-media">
+            <img src="images/projects/fruitninja.jpg" alt="Gesture Fruit Ninja gameplay preview">
           </div>
+          <div class="cs-meta">
+            <div class="cs-tagline">01 / CASE STUDY · COMPUTER VISION</div>
+            <h3 class="cs-title">Gesture Fruit Ninja</h3>
+            <p class="cs-lead">a real-time fruit ninja remake in python where your hands act as blades in front of your webcam — no keyboard, mouse, or controller.</p>
+            <div class="proj-tech">
+              <span>python</span><span>opencv</span><span>mediapipe</span><span>pygame</span><span>real-time tracking</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/07aranya/python-fruit-ninja" target="_blank" rel="noopener noreferrer" class="proj-link primary">view source code ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-breakdown">
+          <div class="cs-col">
+            <h4 class="cs-label">the idea</h4>
+            <p>recreating fruit ninja's tactile slicing mechanic using computer vision. rather than clicking and dragging with a mouse, the player slices through oncoming fruits purely with natural hand slashes captured by a standard 30fps webcam.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">how i built it</h4>
+            <p>the pipeline runs frame-by-frame: opencv pulls the video feed, mediapipe hands extracts 21 3D landmark coordinates, and the index fingertip position is translated into in-game slicing vectors inside a pygame loop with custom gravity and fruit physics.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">the tricky part</h4>
+            <p>fast hand slashes caused tracking skips between frames, making the blade "jump" past fruits without registering hits. i resolved this by keeping a rolling trail of coordinates and performing continuous line-segment intersection checks against fruit hitboxes instead of static point checks.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">what i learned</h4>
+            <p>game feel in gesture input is entirely about forgiveness and latency. small mathematical dampening on landmark jitter and extending the blade hit-window by just 2 frames turned a frustrating experience into something that felt instant and satisfying.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Case Study 2: AI Educational Vernacular Chatbot -->
+      <article class="cs-card" data-reveal>
+        <div class="cs-hero">
+          <div class="cs-media">
+            <img src="images/projects/chatbot.png" alt="AI Educational Vernacular Chatbot interface">
+          </div>
+          <div class="cs-meta">
+            <div class="cs-tagline">02 / CASE STUDY · FULL-STACK &amp; AI</div>
+            <h3 class="cs-title">AI Educational Vernacular Chatbot</h3>
+            <p class="cs-lead">an interactive multilingual learning companion breaking regional language barriers for students across 9+ indian vernacular languages.</p>
+            <div class="proj-tech">
+              <span>typescript</span><span>react</span><span>gemini api</span><span>9+ languages</span><span>cbse / state board</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://ai-vernacular-chatbot.vercel.app/" target="_blank" rel="noopener noreferrer" class="proj-link primary">live demo ↗</a>
+              <a href="https://github.com/07aranya/VernacularChatbot" target="_blank" rel="noopener noreferrer" class="proj-link secondary">source code ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-breakdown">
+          <div class="cs-col">
+            <h4 class="cs-label">the idea</h4>
+            <p>many students in regional schools struggle when technical and scientific concepts are taught strictly in english. the goal was to build a localized tutor that explains complex curriculum topics naturally in their mother tongue.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">how i built it</h4>
+            <p>built with react and typescript, featuring dual-persona switching (friendly peer vs. structured tutor). queries are bound to specific grade-level syllabi and routed to google's gemini api with customized system instructions for vernacular terminology.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">the tricky part</h4>
+            <p>direct literal machine translations often corrupted mathematical symbols and scientific terminology (e.g., hindi or marathi explanations losing formulas). i engineered prompt guards to enforce code-mixed explanations (Hinglish/Marathi-English) so formulas remain pristine while explanations stay conversational.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">what i learned</h4>
+            <p>evaluating llm outputs for non-english languages requires contextual cultural grounding, not just translation accuracy. latency also heavily impacts trust in educational tools, so streaming responses was essential.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Case Study 3: VR Horror Experience -->
+      <article class="cs-card" data-reveal>
+        <div class="cs-hero">
+          <div class="cs-media">
+            <img src="images/projects/vrgame.jpeg" alt="VR Horror Experience gameplay screenshot">
+          </div>
+          <div class="cs-meta">
+            <div class="cs-tagline">03 / CASE STUDY · GAME ENGINE &amp; SPATIAL VR</div>
+            <h3 class="cs-title">VR Horror Experience</h3>
+            <p class="cs-lead">a tension-driven virtual reality escape sequence engineered in unity and c# for vit pune's annual college tech fest.</p>
+            <div class="proj-tech">
+              <span>unity</span><span>c#</span><span>meta quest</span><span>spatial 3d audio</span><span>lighting physics</span>
+            </div>
+            <div class="proj-links">
+              <a href="javascript:void(0)" onclick="openMediaModal('video')" class="proj-link primary">watch gameplay clip 🎬</a>
+              <a href="javascript:void(0)" onclick="openMediaModal('photo')" class="proj-link secondary">view gallery 📸</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-breakdown">
+          <div class="cs-col">
+            <h4 class="cs-label">the idea</h4>
+            <p>designing a compact, sensory-rich horror game capable of running seamlessly on stand-alone vr headsets with an emphasis on spatial immersion rather than cheap visual jumpscares.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">how i built it</h4>
+            <p>developed in unity using c# scripting. implemented binaural audio raycasts that calculate distance falloff and wall occlusions, realistic flashlight cone physics, and trigger-based entity state machines.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">the tricky part</h4>
+            <p>preventing motion sickness in a claustrophobic indoor map without sacrificing tension. continuous smooth locomotion caused disorientation for casual festival attendees, so we engineered smooth snap-turning, vignette FOV tunneling during bursts of movement, and calibrated physical hand interactions.</p>
+          </div>
+          <div class="cs-col">
+            <h4 class="cs-label">what i learned</h4>
+            <p>in vr, audio does 70% of the world-building work. players reacted far more intensely to subtle footstep delays and directional creaks behind them than to high-poly models in plain sight.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- More Explorations & Prototypes Grid -->
+    <div class="more-proj-head" data-reveal>
+      <h3>more experiments &amp; prototypes</h3>
+      <p>other projects built across web redesigns, embedded iot hardware, and game physics.</p>
+    </div>
+
+    <div class="proj-grid">
+      <div class="proj-card" data-reveal>
+        <div class="proj-card-img">
+          <img src="images/projects/cbse_new.png" alt="cbse website">
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-num">04 / WEB</div>
+          <div class="proj-name">CBSE Portal Redesign</div>
+          <p class="proj-desc">a clean redesign of the cbse website to make notifications, syllabus links, and results much easier to navigate.</p>
+          <div class="proj-tech"><span>javascript</span><span>html5</span><span>css3</span><span>ui/ux</span></div>
           <div class="proj-links">
-            <a href="https://ai-vernacular-chatbot.vercel.app/" target="_blank" rel="noopener noreferrer"
-              class="proj-link primary">live demo</a>
-            <a href="https://github.com/07aranya/VernacularChatbot" target="_blank" rel="noopener noreferrer"
-              class="proj-link secondary">source code</a>
+            <a href="https://cbse-website-new.vercel.app/" target="_blank" rel="noopener noreferrer" class="proj-link primary">visit site ↗</a>
+            <a href="https://github.com/07aranya/CBSE-Website" target="_blank" rel="noopener noreferrer" class="proj-link secondary">source code ↗</a>
           </div>
         </div>
       </div>
 
-      <!-- Project Grid -->
-      <div class="proj-grid">
-        <div class="proj-card" data-reveal>
-          <div class="proj-card-img">
-            <img src="images/projects/vrgame.jpeg" alt="vr game">
-          </div>
-          <div class="proj-card-body">
-            <div class="proj-num">02 / GAME</div>
-            <div class="proj-name">VR Horror Experience</div>
-            <p class="proj-desc">an immersive spatial virtual reality horror game engineered in unity for vit pune's annual tech fest. implements spatial 3d audio cues, interactive physics, and dynamic lighting.</p>
-            <div class="proj-tech"><span>unity</span><span>c#</span><span>vr</span><span>oculus</span></div>
-            <div class="proj-links">
-              <a href="javascript:void(0)" onclick="openMediaModal('video')" class="proj-link primary">gameplay video</a>
-              <a href="javascript:void(0)" onclick="openMediaModal('photo')" class="proj-link secondary">gallery</a>
-            </div>
+      <div class="proj-card" data-reveal style="transition-delay:.1s">
+        <div class="proj-card-img">
+          <img src="images/projects/asep.png" alt="ASeP2 Haptic Navigation">
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-num">05 / HARDWARE &amp; IOT</div>
+          <div class="proj-name">ASeP2: Haptic Navigation</div>
+          <p class="proj-desc">an assistive navigation prototype that alerts visually impaired users to nearby obstacles using ultrasonic sensors and vibration motors.</p>
+          <div class="proj-tech"><span>python</span><span>sensors</span><span>haptics</span><span>embedded</span></div>
+          <div class="proj-links">
+            <a href="https://haptic-helmet-nav.onrender.com" target="_blank" rel="noopener noreferrer" class="proj-link primary">project demo ↗</a>
+            <a href="https://github.com/07aranya/haptic-helmet-nav" target="_blank" rel="noopener noreferrer" class="proj-link secondary">source code ↗</a>
           </div>
         </div>
+      </div>
 
-        <div class="proj-card" data-reveal style="transition-delay:.1s">
-          <div class="proj-card-img">
-            <img src="images/projects/cbse_new.png" alt="cbse website">
-          </div>
-          <div class="proj-card-body">
-            <div class="proj-num">03 / WEB</div>
-            <div class="proj-name">CBSE Portal Redesign</div>
-            <p class="proj-desc">a modern, accessible redesign of the official cbse educational portal, focusing on streamlined navigation, responsive layout architecture, and intuitive student resources.</p>
-            <div class="proj-tech"><span>javascript</span><span>html5</span><span>css3</span><span>ui/ux</span></div>
-            <div class="proj-links">
-              <a href="https://cbse-website-new.vercel.app/" target="_blank" rel="noopener noreferrer"
-                class="proj-link primary">visit site</a>
-              <a href="https://github.com/07aranya/CBSE-Website" target="_blank" rel="noopener noreferrer"
-                class="proj-link secondary">source code</a>
-            </div>
-          </div>
+      <div class="proj-card" data-reveal style="transition-delay:.2s">
+        <div class="proj-card-img">
+          <img src="images/projects/aem.jpg" alt="AEM Ball Balancing Game">
         </div>
-
-        <div class="proj-card" data-reveal style="transition-delay:.2s">
-          <div class="proj-card-img">
-            <img src="images/projects/fruitninja.jpg" alt="Fruit Ninja Game">
-          </div>
-          <div class="proj-card-body">
-            <div class="proj-num">04 / COMPUTER VISION</div>
-            <div class="proj-name">Gesture Fruit Ninja</div>
-            <p class="proj-desc">a computer vision game recreation where players slice oncoming fruit using real-time hand movements tracked via opencv and mediapipe without physical peripherals.</p>
-            <div class="proj-tech"><span>python</span><span>opencv</span><span>mediapipe</span><span>pygame</span></div>
-            <div class="proj-links">
-              <a href="https://github.com/07aranya/python-fruit-ninja" target="_blank" rel="noopener noreferrer"
-                class="proj-link primary">source code</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-card" data-reveal style="transition-delay:.3s">
-          <div class="proj-card-img">
-            <img src="images/projects/asep.png" alt="ASeP2 Haptic Navigation">
-          </div>
-          <div class="proj-card-body">
-            <div class="proj-num">05 / HARDWARE &amp; IOT</div>
-            <div class="proj-name">ASeP2: Haptic Navigation</div>
-            <p class="proj-desc">an assistive navigation prototype designed for visually impaired mobility, translating ultrasonic proximity detection into directional haptic vibration feedback.</p>
-            <div class="proj-tech"><span>python</span><span>sensors</span><span>haptics</span><span>embedded</span></div>
-            <div class="proj-links">
-              <a href="https://haptic-helmet-nav.onrender.com" target="_blank" rel="noopener noreferrer"
-                class="proj-link primary">project demo</a>
-              <a href="https://github.com/07aranya/haptic-helmet-nav" target="_blank" rel="noopener noreferrer"
-                class="proj-link secondary">source code</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-card" data-reveal style="transition-delay:.4s">
-          <div class="proj-card-img">
-            <img src="images/projects/aem.jpg" alt="AEM Ball Balancing Game">
-          </div>
-          <div class="proj-card-body">
-            <div class="proj-num">06 / EMBEDDED SYSTEMS</div>
-            <div class="proj-name">Gyro Ball Controller</div>
-            <p class="proj-desc">an interactive balance simulation linking an esp32 microcontroller with an mpu6050 gyroscope to control in-game physics with physical tilt gestures.</p>
-            <div class="proj-tech"><span>esp32</span><span>mpu6050</span><span>c++</span><span>physics</span></div>
-            <div class="proj-links">
-              <a href="https://github.com/07aranya/gyro-ball-controller" target="_blank" rel="noopener noreferrer"
-                class="proj-link primary">source code</a>
-            </div>
+        <div class="proj-card-body">
+          <div class="proj-num">06 / EMBEDDED SYSTEMS</div>
+          <div class="proj-name">Gyro Ball Controller</div>
+          <p class="proj-desc">a real-time balance game controlled by tilting a physical esp32 microcontroller wired to an mpu6050 gyroscope.</p>
+          <div class="proj-tech"><span>esp32</span><span>mpu6050</span><span>c++</span><span>physics</span></div>
+          <div class="proj-links">
+            <a href="https://github.com/07aranya/gyro-ball-controller" target="_blank" rel="noopener noreferrer" class="proj-link primary">source code ↗</a>
           </div>
         </div>
       </div>
@@ -276,19 +344,19 @@
         <div class="now-pulse">current</div>
         <div class="now-label">gaming</div>
         <div class="now-val" id="nowPlaying">sekiro &amp; spider-man 2</div>
-        <div class="now-sub">studying fluid combat flow, responsive controls, and camera mechanics</div>
+        <div class="now-sub">enjoying the combat flow, camera work, and responsive controls</div>
       </div>
       <div class="now-card" style="--nc:var(--teal)" data-reveal style="transition-delay:.1s">
         <div class="now-pulse" style="--nc:var(--teal)">building</div>
         <div class="now-label">engineering</div>
         <div class="now-val">interactive prototypes</div>
-        <div class="now-sub">developing computer vision tracking games and embedded microcontroller systems</div>
+        <div class="now-sub">building small vision games and microcontroller experiments</div>
       </div>
       <div class="now-card" style="--nc:var(--violet)" data-reveal style="transition-delay:.2s">
         <div class="now-pulse" style="--nc:var(--violet)">learning</div>
         <div class="now-label">studying</div>
         <div class="now-val">unity 2d &amp; algorithms</div>
-        <div class="now-sub">mastering 2d game loops, state machines, and advanced tree / graph structures</div>
+        <div class="now-sub">getting comfortable with game loops, state machines, and trees & graphs</div>
       </div>
     </div>
   </section>
@@ -317,7 +385,7 @@
               <img src="images/born in 2007/ara1.jpeg" alt="my childhood photo"
                 data-images='["images/born in 2007/ara1.jpeg", "images/born in 2007/ara2.jpeg", "images/born in 2007/WhatsApp Image 2026-05-01 at 15.13.33.jpeg", "images/born in 2007/WhatsApp Image 2026-05-01 at 15.13.34.jpeg"]'>
             </div>
-            <p class="tl-d">born in nagpur, india and grew up across 7 different cities. moving frequently nurtured my adaptability, curiosity, and comfort with stepping into unfamiliar environments.</p>
+            <p class="tl-d">born in nagpur and grew up across 7 different cities. moving around so much made me curious, adaptable, and quick to settle into new places.</p>
             <div class="tl-foot"><span class="ty">2007</span></div>
           </div>
         </div>
@@ -333,7 +401,7 @@
               <img src="images/my years in school/school1.jpeg" alt="School picture"
                 data-images='["images/my years in school/school1.jpeg", "images/my years in school/12th.jpeg", "images/my years in school/WhatsApp Image 2026-05-01 at 15.15.27.jpeg", "images/my years in school/compteam.jpeg", "images/my years in school/cricteam.jpeg"]'>
             </div>
-            <p class="tl-d">a dynamic chapter marked by adapting across different school systems, forming enduring friendships, and uncovering an early fascination with computer systems and problem-solving.</p>
+            <p class="tl-d">moved across different schools, made lifelong friends, and first got hooked on computers and problem-solving.</p>
             <div class="tl-foot"><span class="ty">2010-2022</span><span class="tb tbp">schooling</span></div>
           </div>
         </div>
@@ -349,7 +417,7 @@
               <img src="images/state level/football medal.jpeg" alt="Football medal"
                 data-images='["images/state level/football medal.jpeg", "images/state level/footballteam.jpeg"]'>
             </div>
-            <p class="tl-d">secured runner-up position in the maharashtra state level football-tennis tournament (u-14 category) and represented the school team in competitive inter-school badminton tournaments.</p>
+            <p class="tl-d">runner-up at the maharashtra state level football-tennis tournament (u-14) and played inter-school badminton for the school team.</p>
             <div class="tl-foot"><span class="ty">2019-2020</span><span class="tb tbm">milestone</span></div>
           </div>
         </div>
@@ -365,7 +433,7 @@
               <img src="images/art dance and olympiads/allmedals.jpeg" alt="all medals"
                 data-images='["images/art dance and olympiads/allmedals.jpeg"]'>
             </div>
-            <p class="tl-d">achieved state rank 23 in the spell bee state level competition. competed actively in national science and cyber olympiads (sof, silverzone), earning 20+ medals and 70+ certificates that sharpened my competitive discipline.</p>
+            <p class="tl-d">state rank 23 in spell bee and competed in national science and cyber olympiads (sof, silverzone), picking up 20+ medals along the way.</p>
             <div class="tl-foot"><span class="ty">2016-2022</span><span class="tb tbm">milestone</span></div>
           </div>
         </div>
@@ -381,7 +449,7 @@
               <img src="images/10th, 12th/farewell.jpeg" alt="class 12 picture"
                 data-images='["images/10th, 12th/farewell.jpeg", "images/10th, 12th/12th(1).jpeg", "images/10th, 12th/highschool.jpeg"]'>
             </div>
-            <p class="tl-d">graduated as school topper with 95.6% (class 10) and 96.4% (class 12). served as school head boy, coordinating student council initiatives, public events, and inter-house competitions.</p>
+            <p class="tl-d">topped school with 95.6% in 10th and 96.4% in 12th. served as school head boy, organizing student events and leading the council.</p>
             <div class="tl-foot"><span class="ty">2023–2025</span><span class="tb tbl">high school</span></div>
           </div>
         </div>
@@ -397,7 +465,7 @@
               <img src="images/places/goa1.jpeg" alt="places I've lived in and travelled to"
                 data-images='["images/places/goa1.jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.27 (1).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.27 (2).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.27.jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.28 (1).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.55.28.jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.42 (1).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.42 (2).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.42 (3).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.42.jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.43 (1).jpeg", "images/places/WhatsApp Image 2026-05-01 at 14.59.43.jpeg"]'>
             </div>
-            <p class="tl-d">lived across pune, mumbai, nagpur, goa, hyderabad, baramati, kolhapur, and solapur. exploring regions like hampi, agra, dandeli, and nainital continues to expand my appreciation for varied cultures and architectures.</p>
+            <p class="tl-d">lived in pune, mumbai, nagpur, goa, hyderabad, baramati, kolhapur, and solapur. love traveling to places like hampi, agra, and nainital.</p>
             <div class="tl-foot"><span class="ty">2010-2026</span><span class="tb tbp">places</span></div>
           </div>
         </div>
@@ -413,7 +481,7 @@
               <img src="images/college/vitp.jpeg" alt="VIT"
                 data-images='["images/college/vitp.jpeg", "images/college/WhatsApp Image 2026-05-01 at 15.11.34.jpeg", "images/college/WhatsApp Image 2026-05-01 at 15.12.17 (1).jpeg", "images/college/WhatsApp Image 2026-05-01 at 15.12.17 (2).jpeg", "images/college/WhatsApp Image 2026-05-01 at 15.12.17.jpeg"]'>
             </div>
-            <p class="tl-d">pursuing computer science &amp; engineering at vit pune (9.3 sgpa in semester 1). actively collaborating with technical student clubs, participating in hackathons, and exploring computer science specializations.</p>
+            <p class="tl-d">studying cse at vit pune (9.3 sgpa in sem 1). spending time with tech clubs, hackathons, and figuring out what to build next.</p>
             <div class="tl-foot"><span class="ty">2026</span><span class="tb tbp">college</span></div>
           </div>
         </div>
@@ -429,7 +497,7 @@
               <img src="images/projects/chatbot.png" alt="Projects"
                 data-images='["images/projects/chatbot.png", "images/projects/cbse.png", "images/projects/fruitninja.jpg", "images/projects/vrgame.jpeg"]'>
             </div>
-            <p class="tl-d">built diverse projects spanning ai vernacular conversational agents, spatial vr gameplay, computer vision gesture interaction, and embedded microcontroller hardware prototypes.</p>
+            <p class="tl-d">built projects across ai chatbots, a vr horror game, gesture tracking with opencv, and hardware with microcontrollers.</p>
             <div class="tl-foot"><span class="ty">2026</span><span class="tb tbp">project</span></div>
           </div>
         </div>
@@ -441,7 +509,7 @@
           <div class="tl-body">
             <div class="tl-kind"><span class="tl-kind-icon">✨</span> present</div>
             <div class="tl-t">Engineering Portfolio</div>
-            <p class="tl-d">a curated personal engineering hub documenting projects, growth, technical experiments, and milestones.</p>
+            <p class="tl-d">a personal space to document what i build, what i learn, and my progress over time.</p>
             <div class="tl-foot"><span class="ty">2026</span><span class="tb tbn">present</span></div>
           </div>
         </div>
