@@ -103,40 +103,40 @@
     </div>
   </section>
 
-  <!-- SPLIT -->
-  <div class="split" style="border-top: none;">
-    <div class="sp-l">
-      <div class="sp-title">a <span class="gw">builder</span><br>at <span class="gw t">heart</span>.</div>
-      <p class="sp-bio">second-year cse student at vit pune. mostly into game dev, algorithms, and writing clean code. i learn fastest by actually building things from scratch.</p>
-      <div class="tags">
-        <span class="tg">c#</span><span class="tg">python</span><span class="tg">javascript</span>
-        <span class="tg">dsa</span><span class="tg">game dev</span><span class="tg">github</span>
-        <span class="tg">unity</span><span class="tg">pune</span>
-      </div>
-    </div>
-    <div class="sp-r">
-      <div class="si" data-reveal>
-        <div class="si-n">01 / CREATE</div>
-        <div class="si-t">game development</div>
-        <p class="si-d">messing around with player controls, custom camera feel, and 2d/3d physics in unity and c#.</p>
-      </div>
-      <div class="si" data-reveal style="transition-delay:.1s">
-        <div class="si-n">02 / CODE</div>
-        <div class="si-t">dsa &amp; problem solving</div>
-        <p class="si-d">practicing core data structures and algorithms — recursion, trees, graphs, and dynamic programming.</p>
-      </div>
-      <div class="si" data-reveal style="transition-delay:.2s">
-        <div class="si-n">03 / LEARN</div>
-        <div class="si-t">academic foundation</div>
-        <p class="si-d">learning core computer science at vit pune: oop, operating systems, and computer networks.</p>
-      </div>
-      <div class="si" data-reveal style="transition-delay:.3s">
-        <div class="si-n">04 / BUILD</div>
-        <div class="si-t">systems &amp; web engineering</div>
-        <p class="si-d">making responsive web apps and tinkering with microcontrollers and sensor hardware.</p>
-      </div>
-    </div>
-  </div>
+  <!-- ABOUT BENTO -->
+  <section class="about-grid split" aria-label="About Aranya">
+    <article class="about-card about-intro" data-reveal>
+      <div class="about-kicker">01 / THE BUILDER</div>
+      <h3>I like making software you can <span class="gw">reach out and touch.</span></h3>
+      <p>I’m Aranya, a second-year CSE student at VIT Pune. I’m drawn to the little details that make an experience feel real: a camera that moves just right, a gesture that registers instantly, or a sensor that turns a physical motion into play. I often rebuild a small version from scratch to understand what’s happening under the hood.</p>
+      <div class="about-location"><span class="status-dot"></span> currently based in Pune, India</div>
+    </article>
+
+    <article class="about-card about-tools" data-reveal>
+      <div class="about-kicker">02 / MY TOOLBELT</div>
+      <h3>Tools I reach for</h3>
+      <div class="tool-group"><span class="tool-label">LANGUAGES</span><div class="tags"><span class="tg">C#</span><span class="tg">C++</span><span class="tg">Python</span><span class="tg">TypeScript</span></div></div>
+      <div class="tool-group"><span class="tool-label">ENGINES &amp; TOOLS</span><div class="tags"><span class="tg">Unity</span><span class="tg">Pygame</span><span class="tg">OpenCV</span><span class="tg">Git</span></div></div>
+      <div class="tool-group"><span class="tool-label">HARDWARE</span><div class="tags"><span class="tg">ESP32</span><span class="tg">Arduino</span><span class="tg">sensor I/O</span></div></div>
+    </article>
+
+    <article class="about-card about-principles" data-reveal>
+      <div class="about-kicker">03 / HOW I THINK</div>
+      <h3>Things building has taught me</h3>
+      <div class="principle"><span class="principle-mark">↳</span><p><strong>Understand the black box.</strong> I like rebuilding a small version of a system once, just to see how the pieces work.</p></div>
+      <div class="principle"><span class="principle-mark">↳</span><p><strong>Feel matters.</strong> My gesture game taught me that smoothing noisy input can matter more than tracking every raw movement.</p></div>
+      <div class="principle"><span class="principle-mark">↳</span><p><strong>Make it tangible.</strong> A quick playable prototype or sensor demo teaches me more than an idea left on paper.</p></div>
+    </article>
+
+    <article class="about-card about-lab" data-reveal>
+      <div class="about-kicker">04 / IN THE LAB</div>
+      <h3>A snapshot of what’s on my mind</h3>
+      <div class="lab-row"><span class="lab-label">BUILDING</span><p>Small vision games and microcontroller experiments</p></div>
+      <div class="lab-row"><span class="lab-label">LEARNING</span><p>Unity 2D, game loops, state machines, trees &amp; graphs</p></div>
+      <div class="lab-row"><span class="lab-label">OFF-SCREEN</span><p>Guitar, badminton, and getting out with my camera</p></div>
+      <div class="lab-note"><span class="status-dot"></span> always tinkering with the next idea</div>
+    </article>
+  </section>
 
   <!-- HOVER PHOTO SECTION -->
   <section class="photo-hover-sec" id="interests">
@@ -155,7 +155,7 @@
       <h2>featured <span class="gw c">projects</span></h2>
       <div class="shl"></div>
     </div>
-    
+
     <div class="cs-list">
       <!-- Case Study 1: Gesture Fruit Ninja -->
       <article class="cs-card" data-reveal>
@@ -333,38 +333,10 @@
     </div>
   </section>
 
-  <!-- NOW WIDGET -->
-  <section class="now-sec">
-    <div class="sh" data-reveal><span class="shn">004</span>
-      <h2>right <span class="gw v">now</span></h2>
-      <div class="shl"></div>
-    </div>
-    <div class="now-grid">
-      <div class="now-card" style="--nc:var(--lime)" data-reveal>
-        <div class="now-pulse">current</div>
-        <div class="now-label">gaming</div>
-        <div class="now-val" id="nowPlaying">sekiro &amp; spider-man 2</div>
-        <div class="now-sub">enjoying the combat flow, camera work, and responsive controls</div>
-      </div>
-      <div class="now-card" style="--nc:var(--teal)" data-reveal style="transition-delay:.1s">
-        <div class="now-pulse" style="--nc:var(--teal)">building</div>
-        <div class="now-label">engineering</div>
-        <div class="now-val">interactive prototypes</div>
-        <div class="now-sub">building small vision games and microcontroller experiments</div>
-      </div>
-      <div class="now-card" style="--nc:var(--violet)" data-reveal style="transition-delay:.2s">
-        <div class="now-pulse" style="--nc:var(--violet)">learning</div>
-        <div class="now-label">studying</div>
-        <div class="now-val">unity 2d &amp; algorithms</div>
-        <div class="now-sub">getting comfortable with game loops, state machines, and trees & graphs</div>
-      </div>
-    </div>
-  </section>
-
   <!-- TIMELINE -->
   <section class="sec" id="timeline" style="border-top:1px solid var(--bd)">
     <div class="tl-outer">
-      <div class="sh" data-reveal><span class="shn">005</span>
+      <div class="sh" data-reveal><span class="shn">004</span>
         <h2>the <span class="gw v">journey</span></h2>
         <div class="shl"></div>
       </div>
