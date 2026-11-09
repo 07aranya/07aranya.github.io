@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Aranya Portfolio</title>
+  <link rel="icon" type="image/jpeg" href="images/icon.jpg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="default-data.js"></script>
+  <script src="supabase-client.js"></script>
+  
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+  <!-- ── AUTH LOGIN MODAL ────────────────────────────────────── -->
+  <div id="authOverlay" class="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-header">
+        <span class="auth-logo">ara<em>.</em></span>
+        <h2>Admin Access</h2>
+        <p>Sign in to manage your portfolio content, projects, and media.</p>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="you@domain.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" id="loginBtn" class="btn btn-primary btn-block">
+          <span>Sign In</span>
+          <div class="spinner" id="loginSpinner" style="display:none"></div>
+        </button>
+
+        <div id="authError" class="auth-error" style="display:none"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── MAIN DASHBOARD VIEW ─────────────────────────────────── -->
+  <div id="dashboardApp" class="dashboard-layout" style="display:none">
+    
+    <!-- Top Bar -->
+    <header class="dash-topbar">
+      <div class="topbar-brand">
+        <a href="index.html" target="_blank" class="brand-link">ara<em>.</em></a>
+        <span class="badge badge-admin">CMS</span>
+      </div>
+
+      <nav class="dash-tabs" id="dashTabs">
+        <button class="tab-btn active" data-tab="tab-home">🏠 Home Page</button>
+        <button class="tab-btn" data-tab="tab-projects">💼 Projects</button>
+        <button class="tab-btn" data-tab="tab-interests">✨ Interests</button>
+        <button class="tab-btn" data-tab="tab-personal">🎮 Personal Page</button>
+        <button class="tab-btn" data-tab="tab-professional">🚀 Professional</button>
+        <button class="tab-btn" data-tab="tab-media">📸 Media & Photos</button>
+        <button class="tab-btn" data-tab="tab-footer">🔗 Footer & Socials</button>
+      </nav>
+
+      <div class="topbar-actions">
+        <button id="syncDefaultsBtn" class="btn btn-accent-ghost" title="Imports all your existing projects, games, songs, interests, and text into Supabase in 1 click!">
+          ✨ Sync Site Data
+        </button>
+        <a href="index.html" target="_blank" class="btn btn-ghost">View Site ↗</a>
+        <button id="logoutBtn" class="btn btn-danger-ghost">Sign Out</button>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="dash-main">
+      
+      <!-- ── TAB 1: HOME PAGE ────────────────────────────────── -->
+      <section id="tab-home" class="tab-content active">
+        <div class="section-title-row">
+          <div>
+            <h2>Home Page Content</h2>
+            <p class="section-desc">Edit hero text, scrub animation, and all 4 About Me bento cards.</p>
+          </div>
+          <button id="saveHomeBtn" class="btn btn-primary">Save Home Content</button>
+        </div>
+
+        <div class="cards-grid">
+          
+          <!-- Card: Hero & Scrub -->
+          <div class="admin-card">
+            <h3>Hero & Scroll Intro</h3>
+            
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="txtHeroGreeting">Greeting</label>
+                <input type="text" id="txtHeroGreeting" placeholder="hi i'm">
+              </div>
+              <div class="form-group col">
+                <label for="txtHeroName">Name</label>
+                <input type="text" id="txtHeroName" placeholder="aranya">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="txtHeroSub">Hero Subtitle</label>
+              <textarea id="txtHeroSub" rows="2" placeholder="second-year cse student building games..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="txtSwapWords">
+                Rotating Swap Words <small>(Comma separated)</small>
+              </label>
+              <input type="text" id="txtSwapWords" placeholder="building things 🔨, making games 🎮, grinding DSA 📊, shipping code 🚀">
+            </div>
+
+            <div class="form-group">
+              <label for="txtScrub">
+                Welcome Scrub Text <small>(Scroll lighting sentence)</small>
+              </label>
+              <textarea id="txtScrub" rows="2" placeholder="welcome to my profile, <br> a journey awaits you to explore!"></textarea>
+            </div>
+          </div>
+
+          <!-- Card: About Card 1 (The Builder) -->
+          <div class="admin-card">
+            <h3>About Bento: 01 / The Builder</h3>
+
+            <div class="form-group">
+              <label for="txtAboutKicker1">Kicker</label>
+              <input type="text" id="txtAboutKicker1" placeholder="01 / THE BUILDER">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutHeadline1">Headline</label>
+              <input type="text" id="txtAboutHeadline1" placeholder="I like making software you can reach out and touch.">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutBio1">Bio Paragraph</label>
+              <textarea id="txtAboutBio1" rows="5" placeholder="I’m Aranya, a second-year CSE student at VIT Pune..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutLocation1">Current Location</label>
+              <input type="text" id="txtAboutLocation1" placeholder="currently based in Pune, India">
+            </div>
+          </div>
+
+          <!-- Card: About Card 2 (My Toolbelt) -->
+          <div class="admin-card">
+            <h3>About Bento: 02 / My Toolbelt</h3>
+
+            <div class="form-group">
+              <label for="txtAboutKicker2">Kicker</label>
+              <input type="text" id="txtAboutKicker2" placeholder="02 / MY TOOLBELT">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutHeading2">Heading</label>
+              <input type="text" id="txtAboutHeading2" placeholder="Tools I reach for">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutLangs2">Languages <small>(Comma separated)</small></label>
+              <input type="text" id="txtAboutLangs2" placeholder="C#, C++, Python, TypeScript">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutTools2">Engines & Tools <small>(Comma separated)</small></label>
+              <input type="text" id="txtAboutTools2" placeholder="Unity, Pygame, OpenCV, Git">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutHard2">Hardware <small>(Comma separated)</small></label>
+              <input type="text" id="txtAboutHard2" placeholder="ESP32, Arduino, sensor I/O">
+            </div>
+          </div>
+
+          <!-- Card: About Card 3 (How I Think) -->
+          <div class="admin-card">
+            <h3>About Bento: 03 / How I Think</h3>
+
+            <div class="form-group">
+              <label for="txtAboutHeading3">Heading</label>
+              <input type="text" id="txtAboutHeading3" placeholder="Things building has taught me">
+            </div>
+
+            <div class="form-group">
+              <label>Principle 1</label>
+              <input type="text" id="txtAboutP1Title" placeholder="Understand the black box." style="margin-bottom:0.4rem">
+              <textarea id="txtAboutP1Desc" rows="2" placeholder="I like rebuilding a small version of a system once..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Principle 2</label>
+              <input type="text" id="txtAboutP2Title" placeholder="Feel matters." style="margin-bottom:0.4rem">
+              <textarea id="txtAboutP2Desc" rows="2" placeholder="My gesture game taught me that smoothing noisy input..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Principle 3</label>
+              <input type="text" id="txtAboutP3Title" placeholder="Make it tangible." style="margin-bottom:0.4rem">
+              <textarea id="txtAboutP3Desc" rows="2" placeholder="A quick playable prototype or sensor demo teaches me more..."></textarea>
+            </div>
+          </div>
+
+          <!-- Card: About Card 4 (In The Lab) -->
+          <div class="admin-card">
+            <h3>About Bento: 04 / In The Lab</h3>
+
+            <div class="form-group">
+              <label for="txtAboutHeading4">Heading</label>
+              <input type="text" id="txtAboutHeading4" placeholder="A snapshot of what’s on my mind">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutLabBuild">Building Snapshot</label>
+              <input type="text" id="txtAboutLabBuild" placeholder="Small vision games and microcontroller experiments">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutLabLearn">Learning Snapshot</label>
+              <input type="text" id="txtAboutLabLearn" placeholder="Unity 2D, game loops, state machines, trees & graphs">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutLabOff">Off-Screen Snapshot</label>
+              <input type="text" id="txtAboutLabOff" placeholder="Guitar, badminton, and getting out with my camera">
+            </div>
+
+            <div class="form-group">
+              <label for="txtAboutLabNote">Bottom Note</label>
+              <input type="text" id="txtAboutLabNote" placeholder="always tinkering with the next idea">
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── TAB 2: PROJECTS ─────────────────────────────────── -->
+      <section id="tab-projects" class="tab-content">
+        <div class="section-title-row">
+          <div>
+            <h2>Projects & Case Studies</h2>
+            <p class="section-desc">Manage featured case studies and prototypes across Home and Professional pages.</p>
+          </div>
+          <button id="addProjectBtn" class="btn btn-primary">+ Add New Project</button>
+        </div>
+
+        <div id="projectsList" class="projects-admin-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ── TAB 3: INTERESTS ────────────────────────────────── -->
+      <section id="tab-interests" class="tab-content">
+        <div class="section-title-row">
+          <div>
+            <h2>Interests & Activities</h2>
+            <p class="section-desc">Manage the interactive interest cards shown on your home and personal pages.</p>
+          </div>
+        </div>
+
+        <div class="cards-grid">
+          <div class="admin-card">
+            <h3>+ Add New Interest</h3>
+            <form id="addInterestForm">
+              <div class="form-group">
+                <label for="intName">Interest Name</label>
+                <input type="text" id="intName" placeholder="e.g. Game Development" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="intTagline">Tagline</label>
+                  <input type="text" id="intTagline" placeholder="e.g. building, competing" required>
+                </div>
+                <div class="form-group col-sm">
+                  <label for="intEmoji">Emoji</label>
+                  <input type="text" id="intEmoji" placeholder="🎮" required style="text-align:center">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">Add Interest</button>
+            </form>
+          </div>
+
+          <div class="admin-card">
+            <h3>Current Interests</h3>
+            <div id="interestsList" class="interests-admin-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB 4: PERSONAL PAGE ────────────────────────────── -->
+      <section id="tab-personal" class="tab-content">
+        <div class="section-title-row">
+          <div>
+            <h2>Personal Page Content</h2>
+            <p class="section-desc">Manage your hero, photo stack, guitar case, favourite games, and music rotation.</p>
+          </div>
+          <button id="savePersonalTextBtn" class="btn btn-primary">Save Personal Texts</button>
+        </div>
+
+        <div class="cards-grid">
+          
+          <!-- Hero & Ticker -->
+          <div class="admin-card">
+            <h3>Personal Hero & Ticker</h3>
+
+            <div class="form-group">
+              <label for="txtPersEyebrow">Eyebrow</label>
+              <input type="text" id="txtPersEyebrow" placeholder="the clumsy yet chaotic guy">
+            </div>
+
+            <div class="form-group">
+              <label for="txtPersH1">Main Title</label>
+              <input type="text" id="txtPersH1" placeholder="the real aranya">
+            </div>
+
+            <div class="form-group">
+              <label for="txtPersSub">Subtitle</label>
+              <textarea id="txtPersSub" rows="2" placeholder="beyond the code: games, guitar, goals..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="txtPersPills">Personality Pills <small>(Comma separated)</small></label>
+              <input type="text" id="txtPersPills" placeholder="🎮 gamer, 🎸 guitarist, 🏸 shuttler, 📸 photographer, ⚽ footballer, 🌍 traveller">
+            </div>
+
+            <div class="form-group">
+              <label for="txtPersTicker">Ticker Items <small>(Comma separated)</small></label>
+              <input type="text" id="txtPersTicker" placeholder="second-year CSE, VIT Pune, codes for fun, plays guitar, football fanatic...">
+            </div>
+          </div>
+
+          <!-- The Guitar Case -->
+          <div class="admin-card">
+            <h3>The Guitar Case</h3>
+
+            <div class="form-group">
+              <label for="txtGuitarModel">Guitar Model</label>
+              <input type="text" id="txtGuitarModel" placeholder="Fender Squier Sonic Stratocaster">
+            </div>
+
+            <div class="form-group">
+              <label for="txtGuitarSpecs">Specs</label>
+              <input type="text" id="txtGuitarSpecs" placeholder="Black • HSS Configuration">
+            </div>
+
+            <div class="form-group">
+              <label for="txtGuitarBio">Guitar Bio</label>
+              <textarea id="txtGuitarBio" rows="3" placeholder="Playing guitar eases my mind by ten fold..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="txtGuitarCanPlay">Songs I Can Play <small>(Comma separated)</small></label>
+              <textarea id="txtGuitarCanPlay" rows="3" placeholder="Do I Wanna Know, 505, Tum Hi Ho, Raabta, Here With Me, Freaks, All of Me..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="txtGuitarWannaLearn">Songs I Wanna Learn <small>(Comma separated)</small></label>
+              <input type="text" id="txtGuitarWannaLearn" placeholder="Hotel California, Free Bird, Sweater Weather">
+            </div>
+          </div>
+
+          <!-- Favourite Games -->
+          <div class="admin-card">
+            <div class="card-header-flex">
+              <h3>Favourite Games</h3>
+              <button id="addGameBtn" class="btn btn-sm btn-primary">+ Add Game</button>
+            </div>
+            <div id="gamesList" class="personal-admin-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Spotify / Music -->
+          <div class="admin-card">
+            <div class="card-header-flex">
+              <h3>Spotify Rotation</h3>
+              <button id="addSongBtn" class="btn btn-sm btn-primary">+ Add Track</button>
+            </div>
+            <div class="form-group">
+              <label for="txtSpotifyProfile">Spotify Profile Link</label>
+              <input type="url" id="txtSpotifyProfile" placeholder="https://open.spotify.com/user/...">
+            </div>
+            <div id="songsList" class="personal-admin-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Photo Stack ("Through the Lens") -->
+          <div class="admin-card">
+            <h3>Photo Stack ("Through The Lens")</h3>
+
+            <div class="form-group">
+              <label for="txtStackEyebrow">Eyebrow</label>
+              <input type="text" id="txtStackEyebrow" placeholder="through the lens">
+            </div>
+
+            <div class="form-group">
+              <label for="txtStackTitle">Title</label>
+              <input type="text" id="txtStackTitle" placeholder="life beyond the screen">
+            </div>
+
+            <div class="form-group">
+              <label for="txtStackDesc">Description</label>
+              <textarea id="txtStackDesc" rows="3" placeholder="i love taking photos when i travel and of nature..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="txtStackBtn">Button Text</label>
+              <input type="text" id="txtStackBtn" placeholder="📸 view my photos">
+            </div>
+          </div>
+
+          <!-- Personal Wins -->
+          <div class="admin-card">
+            <div class="card-header-flex">
+              <h3>Personal Wins & Milestones</h3>
+              <button id="addWinBtn" class="btn btn-sm btn-primary">+ Add Win</button>
+            </div>
+            <div id="winsList" class="personal-admin-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── TAB 5: PROFESSIONAL PAGE ────────────────────────── -->
+      <section id="tab-professional" class="tab-content">
+        <div class="section-title-row">
+          <div>
+            <h2>Professional Page Content</h2>
+            <p class="section-desc">Manage professional bio, resume link, skills chips, and story cards.</p>
+          </div>
+          <button id="saveProfBtn" class="btn btn-primary">Save Professional</button>
+        </div>
+
+        <div class="cards-grid">
+          
+          <div class="admin-card">
+            <h3>Hero & Bio</h3>
+
+            <div class="form-group">
+              <label for="txtProfBadge">Hero Badge</label>
+              <input type="text" id="txtProfBadge" placeholder="open to opportunities">
+            </div>
+
+            <div class="form-group">
+              <label for="txtProfH1">Hero Title</label>
+              <input type="text" id="txtProfH1" placeholder="my work & journey">
+            </div>
+
+            <div class="form-group">
+              <label for="txtProfSub">Hero Subtitle</label>
+              <textarea id="txtProfSub" rows="2" placeholder="second-year cse student building a foundation..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="txtProfBio">Professional Bio</label>
+              <textarea id="txtProfBio" rows="4" placeholder="I'm Aranya, second-year cse at VIT Pune. Passionate about DSA..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="txtProfResume">Resume File / URL</label>
+              <input type="text" id="txtProfResume" placeholder="resume.pdf or Google Drive link">
+            </div>
+
+            <div class="form-group">
+              <label for="txtProfSkills">Skill Chips <small>(Comma separated)</small></label>
+              <textarea id="txtProfSkills" rows="2" placeholder="Python, JavaScript, TypeScript, C#, HTML/CSS, React, Unity, OpenCV, Data Structures, Algorithms"></textarea>
+            </div>
+          </div>
+
+          <!-- 4 Story Cards -->
+          <div class="admin-card">
+            <h3>Story Cards (Who I Am Professionally)</h3>
+
+            <div class="form-group">
+              <label>01 / FOUNDATION</label>
+              <input type="text" id="txtStory1Title" placeholder="CSE Fundamentals" style="margin-bottom:0.4rem">
+              <textarea id="txtStory1Desc" rows="2" placeholder="Building a solid base — data structures to OS theory."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>02 / PRACTICE</label>
+              <input type="text" id="txtStory2Title" placeholder="Problem Solving & Game Development" style="margin-bottom:0.4rem">
+              <textarea id="txtStory2Desc" rows="2" placeholder="Daily grind on Leetcode and Codeforces..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>03 / BUILD</label>
+              <input type="text" id="txtStory3Title" placeholder="Projects & Software" style="margin-bottom:0.4rem">
+              <textarea id="txtStory3Desc" rows="2" placeholder="From games to tools i build things and crash them too..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>04 / COMMUNITY</label>
+              <input type="text" id="txtStory4Title" placeholder="Clubs & Collaboration" style="margin-bottom:0.4rem">
+              <textarea id="txtStory4Desc" rows="2" placeholder="Joined XRGF, a game development club at VIT Pune..."></textarea>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── TAB 6: MEDIA & PHOTOS ───────────────────────────── -->
+      <section id="tab-media" class="tab-content">
+        <div class="section-title-row">
+          <div>
+            <h2>Media & Photo Library</h2>
+            <p class="section-desc">Browse all 122 existing images in your website, or upload new files to Supabase cloud storage.</p>
+          </div>
+        </div>
+
+        <!-- 1. Existing Local Images Browser -->
+        <div class="admin-card" style="margin-bottom:2rem">
+          <div class="card-header-flex">
+            <div>
+              <h3>Existing Local Images (/images/)</h3>
+              <p style="font-size:0.85rem;color:var(--fg2);margin-top:0.2rem">Click "📋 Copy Path" on any image to copy its path and paste it into any project, game, or card!</p>
+            </div>
+          </div>
+
+          <div class="media-filter-bar">
+            <div class="filter-pills" id="localMediaFilters">
+              <button class="filter-pill active" data-cat="all">All (122)</button>
+              <button class="filter-pill" data-cat="projects">Projects</button>
+              <button class="filter-pill" data-cat="games">Games</button>
+              <button class="filter-pill" data-cat="photography">Photography</button>
+              <button class="filter-pill" data-cat="places">Places</button>
+              <button class="filter-pill" data-cat="music">Music</button>
+              <button class="filter-pill" data-cat="guitar">Guitar</button>
+              <button class="filter-pill" data-cat="journey">School & College</button>
+              <button class="filter-pill" data-cat="timeline">Roots & Awards</button>
+            </div>
+            <input type="text" id="localMediaSearch" placeholder="🔍 Search images by name..." class="media-search-input">
+          </div>
+
+          <div id="localMediaGallery" class="local-media-grid">
+            <!-- Populated dynamically via admin.js -->
+          </div>
+        </div>
+
+        <!-- 2. Cloud Storage Uploader -->
+        <div class="admin-card upload-dropzone-card">
+          <h3>Upload New Images to Cloud (Supabase CDN)</h3>
+          <div id="dropzone" class="dropzone" style="margin-top:1rem">
+            <div class="dropzone-icon">☁️</div>
+            <h4>Drag & drop new images here</h4>
+            <p>Uploads directly to your Supabase CDN storage bucket (PNG, JPG, WEBP).</p>
+            <input type="file" id="mediaFileInput" accept="image/*" style="display:none">
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('mediaFileInput').click()">Browse Files</button>
+            <div id="uploadProgress" class="upload-progress" style="display:none">
+              <div class="spinner"></div>
+              <span>Uploading to Supabase CDN...</span>
+            </div>
+          </div>
+
+          <h4 style="margin-top:1.8rem;margin-bottom:0.8rem;font-size:1.05rem;">Cloud Uploaded Media</h4>
+          <div id="mediaGallery" class="media-admin-gallery">
+            <!-- Uploaded photos appear here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB 7: FOOTER & SOCIALS ─────────────────────────── -->
+      <section id="tab-footer" class="tab-content">
+        <div class="section-title-row">
+          <div>
+            <h2>Footer & Social Links</h2>
+            <p class="section-desc">Manage branding, copyright, and global social links.</p>
+          </div>
+          <button id="saveFooterBtn" class="btn btn-primary">Save Footer & Socials</button>
+        </div>
+
+        <div class="cards-grid">
+          <div class="admin-card">
+            <h3>Footer Information</h3>
+
+            <div class="form-group">
+              <label for="txtFooterBrand">Footer Brand</label>
+              <input type="text" id="txtFooterBrand" placeholder="ara.">
+            </div>
+
+            <div class="form-group">
+              <label for="txtFooterSub">Footer Subtitle</label>
+              <input type="text" id="txtFooterSub" placeholder="CSE student · gamer · Pune, IN">
+            </div>
+
+            <div class="form-group">
+              <label for="txtFooterCopy">Copyright Text</label>
+              <input type="text" id="txtFooterCopy" placeholder="built with ♥ by aranya · 2026">
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3>Social Profiles</h3>
+
+            <div class="form-group">
+              <label for="txtSocGithub">GitHub Profile URL</label>
+              <input type="url" id="txtSocGithub" placeholder="https://github.com/07aranya">
+            </div>
+
+            <div class="form-group">
+              <label for="txtSocLinkedin">LinkedIn Profile URL</label>
+              <input type="url" id="txtSocLinkedin" placeholder="https://www.linkedin.com/in/07aranya/">
+            </div>
+
+            <div class="form-group">
+              <label for="txtSocEmail">Contact Email</label>
+              <input type="email" id="txtSocEmail" placeholder="07aranya@gmail.com">
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── PROJECT MODAL (ADD / EDIT) ──────────────────────────── -->
+  <div id="projectModal" class="modal-overlay" style="display:none">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="projModalTitle">Add Project</h3>
+        <button type="button" class="modal-close" onclick="closeProjectModal()">✕</button>
+      </div>
+
+      <form id="projectForm" class="modal-form">
+        <input type="hidden" id="projId">
+
+        <div class="form-row">
+          <div class="form-group col-2">
+            <label for="projTitle">Project Title</label>
+            <input type="text" id="projTitle" placeholder="e.g. Gesture Fruit Ninja" required>
+          </div>
+          <div class="form-group col">
+            <label for="projBadge">Category Badge</label>
+            <input type="text" id="projBadge" placeholder="01 / CASE STUDY · COMPUTER VISION">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="projLead">Short Summary / Lead</label>
+          <textarea id="projLead" rows="2" placeholder="A real-time fruit ninja remake in Python using your webcam..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="projTags">Tech Tags (comma separated)</label>
+            <input type="text" id="projTags" placeholder="python, opencv, mediapipe, pygame">
+          </div>
+          <div class="form-group col">
+            <label for="projVisibility">Page Visibility</label>
+            <select id="projVisibility">
+              <option value="both">Both Home & Professional</option>
+              <option value="home">Home Page Only</option>
+              <option value="professional">Professional Page Only</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="projLive">Live Demo URL</label>
+            <input type="url" id="projLive" placeholder="https://...">
+          </div>
+          <div class="form-group col">
+            <label for="projGithub">GitHub Repo URL</label>
+            <input type="url" id="projGithub" placeholder="https://github.com/07aranya/...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Thumbnail / Cover Image</label>
+          <div class="thumb-upload-row">
+            <input type="text" id="projThumb" placeholder="Image URL or upload below">
+            <input type="file" id="projThumbFile" accept="image/*" style="display:none">
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('projThumbFile').click()">Upload Image</button>
+          </div>
+        </div>
+
+        <div class="cs-accordion">
+          <div class="cs-accordion-title">Case Study Sections (Optional for in-depth projects)</div>
+
+          <div class="form-group">
+            <label for="csIdea">1. The Idea</label>
+            <textarea id="csIdea" rows="2" placeholder="What inspired this project? Why build it?"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="csBuilt">2. How I Built It</label>
+            <textarea id="csBuilt" rows="2" placeholder="Architecture, key libraries, and data flow."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="csTricky">3. The Tricky Part</label>
+            <textarea id="csTricky" rows="2" placeholder="An actual engineering challenge and how you solved it."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="csLearned">4. What I Learned</label>
+            <textarea id="csLearned" rows="2" placeholder="Key takeaways on game feel, algorithms, or systems."></textarea>
+          </div>
+        </div>
+
+        <div class="form-row checkbox-row">
+          <label class="custom-checkbox">
+            <input type="checkbox" id="projFeatured" checked>
+            <span>Show as Featured Case Study on Home Page</span>
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" onclick="closeProjectModal()">Cancel</button>
+          <button type="submit" id="saveProjBtn" class="btn btn-primary">Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── TOAST NOTIFICATION ──────────────────────────────────── -->
+  <div id="toast" class="toast" style="display:none"></div>
+
+  <script src="admin.js"></script>
+</body>
+
+</html>

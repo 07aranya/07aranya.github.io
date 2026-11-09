@@ -12,6 +12,15 @@
       --gold: #fbbf24;
       --bd: rgba(100, 160, 255, .08);
       --ease: cubic-bezier(.16, 1, .3, 1);
+      /* ── Hero Title Font Options (Syne-style wide & sculptural display fonts) ──
+         1. 'Clash Display', sans-serif       -> Razor-sharp, wide geometric, high-impact (Currently active)
+         2. 'Unbounded', sans-serif           -> Ultra-wide, futuristic, modern digital craftsmanship
+         3. 'Cabinet Grotesk', sans-serif     -> Quirky, wide brutalist ink-traps with personality
+         4. 'Epilogue', sans-serif            -> Wide, solid, architectural Swiss proportions
+         5. 'Syne', sans-serif                -> Sculptural, wide display (Site heading font)
+         6. 'Bricolage Grotesque', sans-serif -> Expressive, warm French grotesque with punch
+      */
+      --font-hero: 'Syne', sans-serif; 
     }
 
     [data-theme="light"] {
@@ -52,181 +61,6 @@
       z-index: -1;
       pointer-events: none;
       background: var(--bg);
-    }
-
-    /* â”€â”€ PRELOADER (Space-themed) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-    #pre {
-      position: fixed;
-      inset: 0;
-      z-index: 3000;
-      background: #00000f;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 2.5rem 3rem;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    /* Star field behind loader */
-    #pre::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, .7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 30% 70%, rgba(255, 255, 255, .5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 50% 40%, rgba(255, 255, 255, .6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 70% 10%, rgba(255, 255, 255, .8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 85% 60%, rgba(255, 255, 255, .4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 20% 90%, rgba(255, 255, 255, .6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 60% 80%, rgba(255, 255, 255, .5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 90% 35%, rgba(255, 255, 255, .7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 45% 55%, rgba(200, 245, 61, .4) 0%, transparent 100%),
-        radial-gradient(2px 2px at 75% 25%, rgba(255, 255, 255, .3) 0%, transparent 100%),
-        radial-gradient(2px 2px at 15% 50%, rgba(255, 255, 255, .2) 0%, transparent 100%),
-        radial-gradient(1px 1px at 55% 15%, rgba(255, 255, 255, .6) 0%, transparent 100%);
-      pointer-events: none;
-    }
-
-
-
-    #pre.done {
-      animation: preDone .9s .1s var(--ease) forwards
-    }
-
-    @keyframes preDone {
-      0% {
-        opacity: 1;
-        transform: none
-      }
-
-      60% {
-        opacity: 1;
-        transform: translateY(0) scaleY(1)
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateY(-8px);
-        pointer-events: none;
-        visibility: hidden
-      }
-    }
-
-    .pre-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      position: relative;
-      z-index: 2;
-    }
-
-    .pre-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: -.02em;
-      overflow: hidden;
-    }
-
-    .pre-logo span {
-      display: inline-block;
-      transform: translateY(110%);
-      animation: preUp .7s .1s var(--ease) forwards
-    }
-
-    .pre-logo em {
-      color: var(--lime);
-      font-style: normal
-    }
-
-    .pre-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: .68rem;
-      color: var(--fg2);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeIn .5s .4s forwards;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1
-      }
-    }
-
-    /* Big counter */
-    #pre-counter {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(7rem, 18vw, 16rem);
-      line-height: 1;
-      letter-spacing: -.06em;
-      color: var(--fg);
-      align-self: flex-end;
-      font-variant-numeric: tabular-nums;
-      overflow: hidden;
-      position: relative;
-      z-index: 2;
-    }
-
-    #pre-counter span {
-      display: block;
-      transform: translateY(110%);
-      animation: preUp .8s .2s var(--ease) forwards
-    }
-
-    .pre-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      position: relative;
-      z-index: 2;
-    }
-
-    .pre-bar-wrap {
-      flex: 1;
-      height: 2px;
-      background: rgba(255, 255, 255, .08);
-      position: relative;
-      overflow: hidden;
-      margin-right: 2rem;
-      margin-bottom: .2rem;
-      border-radius: 99px;
-    }
-
-    #pre-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--lime), #5ddfd0);
-      box-shadow: 0 0 6px rgba(0, 229, 255, .3);
-      transition: width .08s linear;
-      border-radius: 99px;
-    }
-
-    .pre-pct {
-      font-family: 'DM Mono', monospace;
-      font-size: .75rem;
-      color: var(--fg2);
-      letter-spacing: .1em;
-      overflow: hidden;
-    }
-
-    .pre-pct span {
-      display: inline-block;
-      transform: translateY(110%);
-      animation: preUp .6s .3s var(--ease) forwards
-    }
-
-    @keyframes preUp {
-      to {
-        transform: translateY(0)
-      }
     }
 
     /* ── CURSOR (MINIMAL & CLEAN) ── */

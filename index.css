@@ -37,16 +37,16 @@
     .h-lbl span {
       display: block;
       transform: translateY(110%);
-      animation: up .7s 3s var(--ease) forwards
+      animation: up .7s 0.75s var(--ease) forwards
     }
 
     .h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(4rem, 10vw, 9.5rem);
+      font-family: var(--font-hero, 'Syne', sans-serif);
+      font-size: clamp(3.6rem, 9.4vw, 8.6rem);
       font-weight: 800;
-      letter-spacing: -.048em;
-      line-height: .88;
-      margin-bottom: 2.5rem
+      letter-spacing: -.035em;
+      line-height: .92;
+      margin-bottom: 2rem
     }
 
     .h1 .row {
@@ -57,20 +57,21 @@
     .h1 .inner {
       display: block;
       transform: translateY(115%);
-      animation: up .95s var(--ease) forwards
+      animation: up 0.85s var(--ease) forwards;
+      will-change: transform;
     }
 
     .h1 .r1 .inner {
-      animation-delay: 3s
+      animation-delay: 0.08s;
     }
 
     .h1 .r2 .inner {
-      animation-delay: 3.15s
+      animation-delay: 0.2s;
     }
 
     .h1 .mt {
       color: var(--fg2);
-      font-weight: 600
+      font-weight: 700;
     }
 
     /* Name hover effect */
@@ -108,18 +109,18 @@
       border-radius: 99px;
       transform-origin: left;
       transform: scaleX(0);
-      animation: lineGrow 1s 4.3s var(--ease) forwards;
+      animation: lineGrow 0.75s 0.45s var(--ease) forwards;
     }
 
     @keyframes lineGrow {
       to {
-        transform: scaleX(1)
+        transform: scaleX(1);
       }
     }
 
     @keyframes up {
       to {
-        transform: translateY(0)
+        transform: translateY(0);
       }
     }
 
@@ -139,7 +140,8 @@
     .h-sub span {
       display: block;
       transform: translateY(115%);
-      animation: up .9s 3.3s var(--ease) forwards
+      animation: up 0.8s 0.3s var(--ease) forwards;
+      will-change: transform;
     }
 
     .swap {
@@ -148,25 +150,25 @@
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       display: inline-block;
-      transition: opacity .25s, transform .25s
+      transition: opacity .25s, transform .25s;
     }
 
     .swap.h {
       opacity: 0;
-      transform: translateY(-8px) scale(.95)
+      transform: translateY(-8px) scale(.95);
     }
 
     .h-ctas {
       display: flex;
       gap: .9rem;
       flex-wrap: wrap;
-      overflow: hidden
+      overflow: hidden;
     }
 
     .h-ctas span {
       display: block;
       transform: translateY(115%);
-      animation: up .9s 3.5s var(--ease) forwards
+      animation: up 0.8s 0.42s var(--ease) forwards;
     }
 
     .mag {
@@ -210,7 +212,7 @@
       align-items: center;
       gap: .5rem;
       opacity: 0;
-      animation: fadeIn 1s 4s forwards
+      animation: fadeIn 0.8s 0.55s forwards;
     }
 
     .pipe {
@@ -227,7 +229,7 @@
       width: 100%;
       height: 50%;
       background: var(--lime);
-      animation: pd 2s 4s ease-in-out infinite
+      animation: pd 2s 1.4s ease-in-out infinite
     }
 
     @keyframes pd {

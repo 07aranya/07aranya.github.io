@@ -1,26 +1,3 @@
-/* ══ PRELOADER ══════════════════════════════════ */
-document.body.style.overflow = 'hidden';
-const preNum = document.getElementById('preNum');
-const prePct = document.getElementById('prePct');
-const prBar = document.getElementById('pre-bar');
-let pct = 0, done = false;
-const iv = setInterval(() => {
-  const inc = Math.random() * 10 + 2;
-  pct = Math.min(pct + inc, 100);
-  const r = Math.round(pct);
-  preNum.textContent = r;
-  prePct.textContent = r + '%';
-  prBar.style.width = pct + '%';
-  if (pct >= 100 && !done) {
-    done = true; clearInterval(iv);
-    setTimeout(() => {
-      document.getElementById('pre').classList.add('done');
-      document.body.style.overflow = 'auto';
-      if (window.spawnPlanet) window.spawnPlanet();
-    }, 300);
-  }
-}, 85);
-
 /* ══ CURSOR ══════════════════════════════════════ */
 const cur = document.getElementById('cur');
 if (cur) {
@@ -135,6 +112,7 @@ function initCosmicTour() {
       onComplete: () => { isPlanetSpawned = true; }
     });
   };
+  window.spawnPlanet();
   const texLoader = new THREE.TextureLoader();
   texLoader.crossOrigin = "Anonymous";
 

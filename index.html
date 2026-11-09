@@ -13,7 +13,9 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,800&f[]=cabinet-grotesk@700,800,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Epilogue:wght@700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&family=Syne:wght@600;700;800&family=Unbounded:wght@600;700;800;900&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -33,21 +35,6 @@
 </head>
 
 <body>
-
-  <!-- ── PRELOADER ── -->
-  <div id="pre">
-    <div class="pre-top">
-      <div class="pre-logo"><span>ara<em>.</em></span></div>
-      <div class="pre-tag">portfolio · 2026</div>
-    </div>
-    <div id="pre-counter"><span id="preNum">0</span></div>
-    <div class="pre-bottom">
-      <div class="pre-bar-wrap">
-        <div id="pre-bar"></div>
-      </div>
-      <div class="pre-pct"><span id="prePct">0%</span></div>
-    </div>
-  </div>
 
   <div id="cur"></div>
   <div id="curR"></div>
@@ -543,6 +530,10 @@
     <div class="st-arr">↑</div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="default-data.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="hydrate.js"></script>
   <script src="main.js"></script>
 </body>
 
