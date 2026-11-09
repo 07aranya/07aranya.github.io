@@ -747,30 +747,32 @@ const interests = [
 const phItems = document.getElementById('phItems');
 const floatImg = document.getElementById('floatImg');
 const phBgImg = document.getElementById('phBgImg');
-interests.forEach((it, i) => {
-  const d = document.createElement('div');
-  d.className = 'ph-item';
-  d.dataset.reveal = '';
-  d.style.transitionDelay = (i * .05) + 's';
-  d.innerHTML = `<span class="phi-num">${String(i + 1).padStart(2, '0')}</span><span class="phi-name">${it.name}</span><span class="phi-tag">${it.tag}</span>`;
-  d.addEventListener('mouseenter', e => {
-    floatImg.textContent = it.em; floatImg.classList.add('show');
-    phBgImg.style.background = `radial-gradient(circle at center,rgba(0,229,255,.08),transparent 60%)`;
-    phBgImg.classList.add('active');
+if (phItems && floatImg && phBgImg) {
+  interests.forEach((it, i) => {
+    const d = document.createElement('div');
+    d.className = 'ph-item';
+    d.dataset.reveal = '';
+    d.style.transitionDelay = (i * .05) + 's';
+    d.innerHTML = `<span class="phi-num">${String(i + 1).padStart(2, '0')}</span><span class="phi-name">${it.name}</span><span class="phi-tag">${it.tag}</span>`;
+    d.addEventListener('mouseenter', e => {
+      floatImg.textContent = it.em; floatImg.classList.add('show');
+      phBgImg.style.background = `radial-gradient(circle at center,rgba(200,245,61,.08),transparent 60%)`;
+      phBgImg.classList.add('active');
+    });
+    d.addEventListener('mousemove', e => {
+      floatImg.style.left = e.clientX + 'px'; floatImg.style.top = e.clientY + 'px';
+    });
+    d.addEventListener('mouseleave', () => { floatImg.classList.remove('show'); phBgImg.classList.remove('active') });
+    phItems.appendChild(d);
   });
-  d.addEventListener('mousemove', e => {
-    floatImg.style.left = e.clientX + 'px'; floatImg.style.top = e.clientY + 'px';
-  });
-  d.addEventListener('mouseleave', () => { floatImg.classList.remove('show'); phBgImg.classList.remove('active') });
-  phItems.appendChild(d);
-});
+}
 
 /* ══ SCROLL REVEALS ════════════════════════════ */
 const revObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }), { threshold: .1 });
 document.querySelectorAll('[data-reveal]').forEach(el => revObs.observe(el));
 
 /* Sections Blur Fade — smooth scroll-based gradual transition */
-const blurSections = document.querySelectorAll('.sec, .now-sec, .photo-hover-sec, .split, .workbench-section');
+const blurSections = document.querySelectorAll('.sec, .now-sec, .photo-hover-sec, .split, .workbench-section, .interests-canvas-sec');
 let blurRaf = null;
 function updateBlur() {
   const vh = window.innerHeight;
