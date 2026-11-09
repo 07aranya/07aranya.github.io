@@ -1,0 +1,1550 @@
+/* ═════════════════════════════════════════════════════════════════
+   THE 16-BIT RETRO RPG ADVENTURE — PERSONAL SPACE
+   Aesthetic: Earthbound / Stardew Valley / Pokemon GBA / Chrono Trigger
+   Vibrant 16-bit color, pixel-beveled frames, authentic retro sprites,
+   chiseled drop-shadows, and razor-sharp pixelated typography.
+   ═════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&family=Silkscreen:wght@400;700&family=Press+Start+2P&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  /* 16-Bit Vibrant RPG Palette */
+  --pixel-bg: #0b0c16;
+  --pixel-bg2: #121424;
+  --pixel-sur: #181b30;
+  --pixel-sur-dark: #0f101d;
+  
+  --pixel-white: #f5f6fa;
+  --pixel-parchment: #f1ebd9;
+  --pixel-gray: #8892b0;
+  --pixel-dark-gray: #4a4d6b;
+  
+  --rpg-red: #ff4757;
+  --rpg-heart: #ff6b81;
+  --rpg-gold: #ffa502;
+  --rpg-coin: #ffd32a;
+  --rpg-green: #2ed573;
+  --rpg-lime: #7bed9f;
+  --rpg-blue: #1e90ff;
+  --rpg-cyan: #70a1ff;
+  --rpg-purple: #9b59b6;
+  --rpg-violet: #a55eea;
+  --rpg-orange: #ff7f50;
+  
+  --pixel-font-display: 'Pixelify Sans', 'Silkscreen', cursive;
+  --pixel-font-arcade: 'Press Start 2P', monospace;
+  --pixel-font-mono: 'DM Mono', monospace;
+  --pixel-font-body: 'DM Sans', sans-serif;
+  
+  /* 16-bit stepped pixel border & bevel */
+  --pixel-border: 2px solid #33385a;
+  --pixel-shadow: 0 4px 0 #000000;
+  --pixel-shadow-lg: 0 6px 0 #000000, 0 12px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Light Mode Retro Handheld GameBoy Pocket Tint */
+[data-theme="light"] {
+  --pixel-bg: #e6dfcf;
+  --pixel-bg2: #d8d0be;
+  --pixel-sur: #f2ece0;
+  --pixel-sur-dark: #cfc6b2;
+  --pixel-white: #1a1b24;
+  --pixel-gray: #6b6d80;
+  --pixel-border: 2px solid #5a5445;
+}
+
+/* Global Reset */
+* {
+  image-rendering: pixelated;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--pixel-bg) !important;
+  color: var(--pixel-white) !important;
+  font-family: var(--pixel-font-body);
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── 16-BIT RPG FRAME UTILITY ───────────────────────────────── */
+.rpg-box {
+  background: var(--pixel-sur);
+  border: 3px solid #3d426b;
+  border-radius: 4px;
+  box-shadow: 
+    inset 2px 2px 0 rgba(255, 255, 255, 0.12),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.45),
+    var(--pixel-shadow-lg);
+  position: relative;
+}
+
+.rpg-box-dark {
+  background: var(--pixel-sur-dark);
+  border: 2px solid #282c47;
+  border-radius: 4px;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* Stepped Pixel Corners */
+.pixel-corner-box {
+  position: relative;
+  background: var(--pixel-sur);
+  border: 2px solid #4a5180;
+  box-shadow: 0 4px 0 #000;
+}
+
+.pixel-corner-box::before,
+.pixel-corner-box::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--rpg-gold);
+}
+.pixel-corner-box::before { top: 2px; left: 2px; }
+.pixel-corner-box::after { top: 2px; right: 2px; }
+
+/* ── 1. HUD TOP BAR ────────────────────────────────────────── */
+.rpg-hud-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 0.75rem 2rem;
+  background: rgba(11, 12, 22, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid #2b2f4c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--pixel-font-display);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.hud-logo {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.85rem;
+  color: var(--rpg-coin);
+  text-decoration: none;
+  letter-spacing: -0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hud-logo span {
+  color: var(--rpg-lime);
+}
+
+.hud-stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #14172a;
+  border: 1px solid #323759;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.hud-bar {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  background: #090a13;
+  border: 1px solid #2c304d;
+  border-radius: 2px;
+}
+
+.hud-bar-segment {
+  width: 6px;
+  height: 10px;
+}
+.hud-bar-segment.hp { background: var(--rpg-red); }
+.hud-bar-segment.mana { background: var(--rpg-blue); }
+
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hud-coins {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.7rem;
+  color: var(--rpg-coin);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ── 2. HERO: 16-BIT RPG TITLE SCREEN ──────────────────────── */
+.ph {
+  padding: 8rem 2rem 4rem !important;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+
+.rpg-title-card {
+  background: var(--pixel-sur);
+  border: 4px solid #4a5180;
+  border-radius: 6px;
+  padding: 3rem 2rem;
+  box-shadow: 
+    inset 4px 4px 0 rgba(255, 255, 255, 0.15),
+    inset -4px -4px 0 rgba(0, 0, 0, 0.5),
+    var(--pixel-shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.rpg-title-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rpg-red), var(--rpg-gold), var(--rpg-lime), var(--rpg-cyan));
+}
+
+.rpg-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #0f111f;
+  border: 2px solid var(--rpg-gold);
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.68rem;
+  color: var(--rpg-coin);
+  margin-bottom: 1.4rem;
+  box-shadow: 0 3px 0 #000;
+  letter-spacing: 0.05em;
+}
+
+.ph-h {
+  font-family: var(--pixel-font-display);
+  font-size: clamp(2.8rem, 7vw, 5.2rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.02em;
+  color: var(--pixel-white);
+  text-shadow: 3px 3px 0 #000, 5px 5px 0 #2a2e4d;
+  margin-bottom: 1.2rem;
+}
+
+.ph-h .hero-highlight {
+  color: var(--rpg-lime);
+  text-shadow: 3px 3px 0 #000, 5px 5px 0 #1b4d2e;
+}
+
+.ph-sub {
+  font-family: var(--pixel-font-mono);
+  font-size: 1.05rem !important;
+  color: #b0b8d6 !important;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* 16-Bit Class Attribute Pills */
+.rpg-class-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.rpg-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #14172a;
+  border: 2px solid #363c61;
+  padding: 0.45rem 0.9rem;
+  border-radius: 4px;
+  font-family: var(--pixel-font-display);
+  font-size: 0.88rem;
+  color: #ede8e0;
+  box-shadow: 0 3px 0 #000;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+}
+
+.rpg-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--rpg-lime);
+  color: var(--rpg-lime);
+}
+
+.rpg-pill:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #000;
+}
+
+/* ── 3. QUEST TICKER (DIALOGUE BOX) ────────────────────────── */
+.rpg-dialogue-ticker {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.dialogue-box {
+  background: #0f111f;
+  border: 3px solid #3d436b;
+  border-radius: 4px;
+  padding: 0.9rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 0 #000;
+}
+
+.dialogue-speaker {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.65rem;
+  color: var(--rpg-gold);
+  background: #1b1e36;
+  padding: 4px 8px;
+  border: 1px solid #3d436b;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.dialogue-scroll {
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.dialogue-text {
+  display: inline-block;
+  font-family: var(--pixel-font-mono);
+  font-size: 0.88rem;
+  color: var(--pixel-parchment);
+  animation: dialogueMarquee 30s linear infinite;
+}
+
+@keyframes dialogueMarquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.dialogue-cursor {
+  width: 8px;
+  height: 8px;
+  background: var(--rpg-lime);
+  animation: cursorBlink 0.8s steps(2) infinite;
+  flex-shrink: 0;
+}
+
+@keyframes cursorBlink {
+  50% { opacity: 0; }
+}
+
+/* ── 4. SECTION HEADERS ────────────────────────────────────── */
+.sec {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4.5rem 2rem;
+}
+
+.rpg-sec-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+
+.rpg-sec-badge {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.72rem;
+  color: var(--rpg-lime);
+  background: #14172a;
+  border: 2px solid #363c61;
+  padding: 6px 12px;
+  border-radius: 3px;
+  box-shadow: 0 3px 0 #000;
+}
+
+.rpg-sec-title {
+  font-family: var(--pixel-font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--pixel-white);
+  letter-spacing: -0.01em;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.rpg-sec-line {
+  flex: 1;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #3d436b, #3d436b 8px, transparent 8px, transparent 16px);
+}
+
+/* ── 5. MEMORY CARTRIDGES (PHOTO ALBUM) ────────────────────── */
+.photo-stack-sec {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+}
+
+.rpg-photo-cabinet {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: var(--pixel-sur);
+  border: 3px solid #3d436b;
+  border-radius: 6px;
+  padding: 2.5rem;
+  box-shadow: var(--pixel-shadow-lg);
+}
+
+.photo-cabinet-meta h3 {
+  font-family: var(--pixel-font-display);
+  font-size: 2.2rem;
+  color: var(--pixel-white);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.photo-cabinet-desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #a4adc9;
+  margin-bottom: 1.8rem;
+}
+
+.rpg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #1f2442;
+  border: 2px solid var(--rpg-gold);
+  border-radius: 4px;
+  padding: 0.8rem 1.4rem;
+  font-family: var(--pixel-font-display);
+  font-size: 1rem;
+  color: var(--rpg-coin);
+  cursor: pointer;
+  box-shadow: 0 4px 0 #000;
+  text-decoration: none;
+  user-select: none;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+
+.rpg-btn:hover {
+  background: #2b325c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #000;
+}
+
+.rpg-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #000;
+}
+
+/* Pixel Cartridge Stack */
+.rpg-cartridge-stack {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 280px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.rpg-cartridge {
+  position: absolute;
+  inset: 0;
+  background: #161829;
+  border: 3px solid #4a5180;
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: 0 8px 0 #000;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.3s ease;
+}
+
+.cartridge-notch {
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  background: var(--rpg-gold);
+  color: #0b0c16;
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.55rem;
+  padding: 2px 6px;
+  border-radius: 2px;
+  border: 1px solid #000;
+}
+
+.cartridge-img-wrap {
+  width: 100%;
+  height: calc(100% - 28px);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid #282c47;
+}
+
+.cartridge-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cartridge-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  padding: 0 4px;
+  font-family: var(--pixel-font-mono);
+  font-size: 0.75rem;
+  color: var(--pixel-parchment);
+}
+
+/* ── 6. STAT SHEET & LORE (WHO I AM) ───────────────────────── */
+.rpg-character-sheet {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 2rem;
+}
+
+/* Left: Character Attribute Sheet */
+.char-sheet-card {
+  background: var(--pixel-sur);
+  border: 3px solid #3d436b;
+  border-radius: 6px;
+  padding: 1.8rem;
+  box-shadow: var(--pixel-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.char-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #2b2f4c;
+}
+
+.char-avatar-frame {
+  width: 64px;
+  height: 64px;
+  background: #101221;
+  border: 2px solid var(--rpg-lime);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 3px 0 #000;
+}
+
+.char-title-block h4 {
+  font-family: var(--pixel-font-display);
+  font-size: 1.3rem;
+  color: var(--pixel-white);
+  margin-bottom: 0.2rem;
+}
+
+.char-title-block span {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.62rem;
+  color: var(--rpg-coin);
+}
+
+.char-stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label-group {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.65rem;
+}
+
+.stat-name { color: #a4adc9; }
+.stat-val { color: var(--rpg-lime); }
+
+.stat-meter {
+  height: 12px;
+  background: #0b0c16;
+  border: 1px solid #2b2f4c;
+  border-radius: 2px;
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: 1px;
+}
+.meter-fill.str { background: var(--rpg-red); width: 85%; }
+.meter-fill.dex { background: var(--rpg-lime); width: 99%; }
+.meter-fill.intel { background: var(--rpg-blue); width: 88%; }
+.meter-fill.cha { background: var(--rpg-gold); width: 92%; }
+
+/* Right: 4 Lore Dialogue Blocks */
+.char-lore-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.lore-card {
+  background: #14172a;
+  border: 2px solid #363c61;
+  border-radius: 4px;
+  padding: 1.4rem;
+  box-shadow: 0 4px 0 #000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.lore-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--rpg-cyan);
+}
+
+.lore-kicker {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.62rem;
+  color: var(--rpg-cyan);
+}
+
+.lore-title {
+  font-family: var(--pixel-font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--pixel-white);
+}
+
+.lore-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #9ea7c4;
+}
+
+/* ── 7. INVENTORY BAG (THINGS I LOVE) ──────────────────────── */
+.rpg-inventory-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+}
+
+.item-slot {
+  background: #14172a;
+  border: 3px solid #363c61;
+  border-radius: 6px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 0 #000;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.item-slot:hover {
+  transform: translateY(-4px);
+  border-color: var(--rpg-lime);
+  background: #1b203a;
+  box-shadow: 0 8px 0 #000;
+}
+
+.item-slot.active {
+  border-color: var(--rpg-coin);
+  background: #212645;
+}
+
+.item-icon-box {
+  width: 56px;
+  height: 56px;
+  background: #0d0f1c;
+  border: 2px solid #282c47;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.item-name {
+  font-family: var(--pixel-font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--pixel-white);
+  margin-bottom: 0.2rem;
+}
+
+.item-badge {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.55rem;
+  color: var(--rpg-gold);
+  text-transform: uppercase;
+}
+
+/* Item Lore Inspector Box */
+.inventory-inspector {
+  background: #0f111f;
+  border: 3px solid var(--rpg-gold);
+  border-radius: 4px;
+  padding: 1rem 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  box-shadow: 0 4px 0 #000;
+}
+
+.inspector-prompt {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.68rem;
+  color: var(--rpg-coin);
+  background: #24200f;
+  padding: 4px 8px;
+  border: 1px solid var(--rpg-gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.inspector-text {
+  font-family: var(--pixel-font-mono);
+  font-size: 0.92rem;
+  color: var(--pixel-parchment);
+}
+
+/* ── 8. 16-BIT JUKEBOX (SPOTIFY CURRENT ROTATION) ──────────── */
+.rpg-jukebox-card {
+  background: var(--pixel-sur);
+  border: 3px solid #3d436b;
+  border-radius: 6px;
+  padding: 2.2rem;
+  box-shadow: var(--pixel-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.jukebox-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #2b2f4c;
+}
+
+.jukebox-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.jukebox-icon {
+  font-size: 1.6rem;
+}
+
+.jukebox-title {
+  font-family: var(--pixel-font-display);
+  font-size: 1.3rem;
+  color: var(--pixel-white);
+}
+
+.jukebox-sub {
+  font-family: var(--pixel-font-mono);
+  font-size: 0.78rem;
+  color: #a4adc9;
+}
+
+.spotify-pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1ed760;
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  color: #0b0c16;
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.65rem;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 3px 0 #000;
+}
+
+.spotify-pixel-btn:hover {
+  background: #2ee672;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 #000;
+}
+
+/* ── 9. GUITAR CASE: EQUIPMENT INSPECT SCREEN ──────────────── */
+.rpg-guitar-cabinet {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2rem;
+  background: var(--pixel-sur);
+  border: 3px solid #3d436b;
+  border-radius: 6px;
+  padding: 2.2rem;
+  box-shadow: var(--pixel-shadow-lg);
+}
+
+.guitar-spec-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.guitar-nameplate {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.guitar-type {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.62rem;
+  color: var(--rpg-coin);
+}
+
+.guitar-model-name {
+  font-family: var(--pixel-font-display);
+  font-size: 1.8rem;
+  color: var(--pixel-white);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.guitar-specs-tag {
+  font-family: var(--pixel-font-mono);
+  font-size: 0.85rem;
+  color: var(--rpg-lime);
+}
+
+.guitar-bio-text {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #a4adc9;
+}
+
+.guitar-photo-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.guitar-mini-frame {
+  height: 140px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid #3d436b;
+  background: #101221;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #000;
+}
+
+.guitar-mini-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.guitar-mini-frame:hover img {
+  transform: scale(1.05);
+}
+
+/* Quest Scroll Tabs: Can Play vs Wanna Learn */
+.guitar-quest-scroll {
+  background: #14172a;
+  border: 2px solid #363c61;
+  border-radius: 4px;
+  padding: 1.4rem;
+  box-shadow: 0 4px 0 #000;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quest-tab-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.quest-tab-btn {
+  flex: 1;
+  background: #1b1e36;
+  border: 2px solid #363c61;
+  padding: 0.6rem;
+  font-family: var(--pixel-font-display);
+  font-size: 0.95rem;
+  color: #a4adc9;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0 3px 0 #000;
+  transition: all 0.15s ease;
+}
+
+.quest-tab-btn.active {
+  background: var(--rpg-purple);
+  border-color: #c084fc;
+  color: #fff;
+}
+
+.quest-song-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+}
+
+.quest-song-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--pixel-font-mono);
+  font-size: 0.85rem;
+  color: var(--pixel-parchment);
+  padding: 0.35rem 0.6rem;
+  background: #0f111f;
+  border-radius: 3px;
+  border-left: 3px solid var(--rpg-lime);
+}
+
+/* ── 10. CARTRIDGE RACK (FAVOURITE GAMES) ──────────────────── */
+.games-cartridge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.game-cartridge-card {
+  background: #14172a;
+  border: 3px solid #363c61;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 5px 0 #000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.game-cartridge-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--rpg-coin);
+  box-shadow: 0 8px 0 #000;
+}
+
+.game-cover-art {
+  width: 100%;
+  height: 150px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid #282c47;
+}
+
+.game-cover-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.game-title {
+  font-family: var(--pixel-font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--pixel-white);
+}
+
+.game-rating {
+  color: var(--rpg-coin);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.game-genre-tag {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.58rem;
+  color: #7a829e;
+  text-transform: uppercase;
+}
+
+/* ── 11. TROPHY ROOM (ACHIEVEMENTS UNLOCKED) ────────────────── */
+.trophy-room-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.trophy-card {
+  background: var(--pixel-sur);
+  border: 3px solid #3d436b;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 0 #000;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.trophy-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--rpg-gold);
+  box-shadow: 0 7px 0 #000;
+}
+
+.trophy-icon-frame {
+  width: 54px;
+  height: 54px;
+  background: #101221;
+  border: 2px solid var(--rpg-gold);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  box-shadow: 0 3px 0 #000;
+}
+
+.trophy-body h4 {
+  font-family: var(--pixel-font-display);
+  font-size: 1.2rem;
+  color: var(--pixel-white);
+  margin-bottom: 0.35rem;
+}
+
+.trophy-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #a4adc9;
+  margin-bottom: 0.5rem;
+}
+
+.trophy-year-badge {
+  display: inline-block;
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.58rem;
+  color: var(--rpg-lime);
+  background: #0f111f;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid #282c47;
+}
+
+/* ── RESPONSIVE DESIGN ────────────────────────────────────── */
+@media (max-width: 960px) {
+  .rpg-character-sheet {
+    grid-template-columns: 1fr;
+  }
+  .rpg-photo-cabinet {
+    grid-template-columns: 1fr;
+  }
+  .rpg-guitar-cabinet {
+    grid-template-columns: 1fr;
+  }
+  .inventory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .games-cartridge-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .trophy-room-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .char-lore-grid {
+    grid-template-columns: 1fr;
+  }
+  .games-cartridge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── 12. RETRO 16-BIT PHOTO VAULT MODAL ───────────────────── */
+#photoModal {
+  background: rgba(11, 12, 22, 0.96) !important;
+}
+
+#photoModal .modal-content {
+  border: 4px solid #3d436b;
+  border-radius: 8px;
+  background: #14172a;
+  box-shadow: 0 10px 0 #000, 0 25px 60px rgba(0, 0, 0, 0.9);
+  padding: 1.5rem;
+}
+
+#photoModal .modal-img {
+  border-radius: 4px;
+  border: 3px solid #282c47;
+}
+
+#photoModal .modal-nav {
+  background: #1f2442;
+  border: 2px solid var(--rpg-gold);
+  border-radius: 4px;
+  color: var(--rpg-coin);
+  font-family: var(--pixel-font-display);
+  font-size: 1.4rem;
+  box-shadow: 0 4px 0 #000;
+  transition: all 0.15s ease;
+}
+
+#photoModal .modal-nav:hover {
+  background: #2b325c;
+  transform: translateY(-50%) scale(1.08);
+}
+
+#photoModal .modal-close {
+  background: #2b1f24;
+  border: 2px solid var(--rpg-red);
+  color: var(--rpg-red);
+  font-family: var(--pixel-font-arcade);
+  font-size: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 3px 0 #000;
+}
+
+#photoModal .modal-counter {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.72rem;
+  color: var(--rpg-coin);
+  background: #0b0c16;
+  border: 2px solid #3d436b;
+  padding: 4px 12px;
+  border-radius: 4px;
+  box-shadow: 0 3px 0 #000;
+}
+
+/* ── 13. RETRO 16-BIT BOTTOM PAGER BAR (PNAV) ─────────────── */
+#pnav {
+  position: fixed;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  background: #0f111f !important;
+  border: 3px solid #3d436b !important;
+  border-radius: 4px !important;
+  padding: 6px 8px !important;
+  box-shadow: 0 4px 0 #000, 0 10px 25px rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(10px);
+}
+
+.pb {
+  border-radius: 3px !important;
+  font-family: var(--pixel-font-arcade) !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  padding: 0.55rem 0.95rem !important;
+  color: #a4adc9 !important;
+  background: #181b2e !important;
+  border: 2px solid #2b2f4c !important;
+  box-shadow: 0 3px 0 #000 !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.12s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  user-select: none;
+}
+
+.pb:hover {
+  background: #232742 !important;
+  color: var(--rpg-coin) !important;
+  border-color: var(--rpg-gold) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 0 #000 !important;
+}
+
+.pb.active {
+  background: var(--rpg-gold) !important;
+  color: #0b0c16 !important;
+  border-color: #ffd32a !important;
+  box-shadow: 0 1px 0 #000 !important;
+  font-weight: 700 !important;
+  transform: translateY(2px) !important;
+}
+
+.pb.active::before {
+  content: '▶';
+  font-size: 0.52rem;
+  color: #0b0c16;
+}
+
+/* ── 14. 16-BIT ANIMATED ARANYA SPRITE ─────────────────────── */
+.rpg-hero-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.pixel-sprite-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pixel-sprite-wrapper {
+  animation: spriteBob 1.6s ease-in-out infinite;
+  transform-origin: bottom center;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pixel-sprite-container:hover .pixel-sprite-wrapper {
+  animation: none;
+  transform: scale(1.1) translateY(-4px);
+}
+
+.pixel-sprite-container.is-jumping .pixel-sprite-wrapper {
+  animation: spriteJump 0.5s ease-out !important;
+}
+
+@keyframes spriteBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes spriteJump {
+  0% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(-24px) scale(1.15); }
+  70% { transform: translateY(-8px) scale(0.95); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.pixel-speech-bubble {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f1ebd9;
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 6px 12px;
+  white-space: nowrap;
+  font-family: var(--pixel-font-mono);
+  font-size: 0.75rem;
+  color: #1a1714;
+  box-shadow: 0 4px 0 #000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 50;
+}
+
+.pixel-speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #f1ebd9 transparent transparent transparent;
+}
+
+.pixel-speech-bubble.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.sprite-click-hint {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.52rem;
+  color: var(--rpg-gold);
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* ── 15. PLAYABLE 8-BIT GUITAR RIFF SYNTH ─────────────────── */
+.rpg-riff-box {
+  margin-top: 1.2rem;
+  background: #0f111f;
+  border: 2px solid #363c61;
+  border-radius: 4px;
+  padding: 1rem;
+  box-shadow: 0 4px 0 #000;
+}
+
+.riff-box-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.62rem;
+}
+
+.riff-led {
+  width: 7px;
+  height: 7px;
+  background: var(--rpg-lime);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--rpg-lime);
+  animation: ledPulse 1.6s infinite;
+}
+
+.riff-box-title {
+  color: var(--rpg-coin);
+  flex: 1;
+}
+
+.riff-status {
+  color: #7a829e;
+}
+
+.riff-btn-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.riff-play-btn {
+  flex: 1;
+  min-width: 140px;
+  background: #191c33;
+  border: 2px solid #3d436b;
+  border-radius: 3px;
+  padding: 0.55rem 0.8rem;
+  font-family: var(--pixel-font-display);
+  font-size: 0.9rem;
+  color: var(--pixel-parchment);
+  cursor: pointer;
+  box-shadow: 0 3px 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.riff-play-btn:hover {
+  background: #252b4d;
+  border-color: var(--rpg-lime);
+  color: var(--rpg-lime);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 #000;
+}
+
+.riff-play-btn.playing {
+  background: var(--rpg-lime);
+  border-color: #fff;
+  color: #0b0c16;
+  font-weight: 700;
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #000;
+}
+
+/* ── 16. RETRO CRT SCANLINES & HUD CONTROLS ───────────────── */
+.hud-ctrl-btn {
+  background: #181b2e;
+  border: 2px solid #363c61;
+  border-radius: 3px;
+  padding: 4px 8px;
+  color: #a4adc9;
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.58rem;
+  cursor: pointer;
+  box-shadow: 0 2px 0 #000;
+  transition: all 0.12s ease;
+}
+
+.hud-ctrl-btn:hover,
+.hud-ctrl-btn.active {
+  background: var(--rpg-gold);
+  border-color: #ffd32a;
+  color: #0b0c16;
+  transform: translateY(-1px);
+}
+
+/* CRT Scanlines Overlay */
+body.crt-active::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  background: 
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%),
+    radial-gradient(circle, transparent 75%, rgba(0, 0, 0, 0.45) 100%);
+  background-size: 100% 3px, 100% 100%;
+}
+
+/* ── 17. ACHIEVEMENT UNLOCKED TOAST NOTIFIER ──────────────── */
+.rpg-achievement-toast {
+  position: fixed;
+  top: 4.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  background: #0f111f;
+  border: 3px solid var(--rpg-gold);
+  border-radius: 4px;
+  padding: 0.9rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  box-shadow: 0 6px 0 #000, 0 15px 35px rgba(0, 0, 0, 0.85);
+  transform: translateX(120%);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.rpg-achievement-toast.show {
+  transform: translateX(0);
+}
+
+.toast-trophy {
+  font-size: 1.8rem;
+}
+
+.toast-kicker {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.58rem;
+  color: var(--rpg-gold);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.toast-title {
+  font-family: var(--pixel-font-display);
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.toast-exp {
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.55rem;
+  color: var(--rpg-lime);
+}
+
+/* ── 18. WCA SPEEDCUBE SCRAMBLER WIDGET ────────────────────── */
+.cube-scramble-widget {
+  margin-top: 1rem;
+  background: #0f111f;
+  border: 2px solid #282c47;
+  border-radius: 4px;
+  padding: 0.85rem;
+}
+
+.scramble-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.scramble-gen-btn {
+  background: #1b1e36;
+  border: 2px solid var(--rpg-lime);
+  border-radius: 3px;
+  padding: 0.45rem 0.8rem;
+  color: var(--rpg-lime);
+  font-family: var(--pixel-font-arcade);
+  font-size: 0.55rem;
+  cursor: pointer;
+  box-shadow: 0 2px 0 #000;
+  transition: all 0.15s ease;
+}
+
+.scramble-gen-btn:hover {
+  background: var(--rpg-lime);
+  color: #0b0c16;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #000;
+}
+
+.scramble-cube-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 8px);
+  grid-template-rows: repeat(3, 8px);
+  gap: 1.5px;
+  background: #000;
+  padding: 2px;
+  border-radius: 2px;
+  border: 1px solid #3d436b;
+}
+
+.c-tile {
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+}
+
+.scramble-text-box {
+  font-family: var(--pixel-font-mono);
+  font-size: 0.78rem;
+  color: var(--rpg-coin);
+  background: #090a12;
+  padding: 6px 10px;
+  border-radius: 3px;
+  border: 1px solid #1c2136;
+  word-break: break-word;
+  line-height: 1.4;
+}

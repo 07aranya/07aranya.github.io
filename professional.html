@@ -4,22 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>aranya :) - professional</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
-    rel="stylesheet">
-  <meta name="description" content="Aranya's professional journey, skills, and projects.">
-  <meta property="og:title" content="aranya :) - professional">
-  <meta property="og:description" content="Aranya's professional journey, skills, and projects.">
+  <title>aranya :) - technical field journal</title>
+  
+  <meta name="description" content="Aranya's technical field journal: a leather-bound inventor's monograph covering game physics, computer vision, and software engineering.">
+  <meta property="og:title" content="aranya :) - technical field journal">
+  <meta property="og:description" content="A physical leather-bound inventor's journal covering game physics, computer vision, and software engineering.">
   <meta property="og:image" content="https://raw.githubusercontent.com/07aranya/portfolio-website-v1/main/images/og-image.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="professional.css">
+  <link rel="stylesheet" href="professional-book.css">
   <link rel="icon" type="image/jpeg" href="images/icon.jpg">
 
   <!-- Google tag (gtag.js) -->
@@ -28,537 +27,669 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-9VPVYT2XLS');
   </script>
 </head>
 
 <body>
+  <!-- Ambient Workbench Desk Surface -->
+  <div class="desk-surface"></div>
+
+  <!-- Cursor elements -->
   <div id="cur"></div>
   <div id="cur-r"></div>
-  <nav id="nav">
-    <a href="index.html" class="nl" data-page="index.html">ara<em>.</em></a>
-    <div class="nr">
-      <span class="n-pg">professional</span>
-      <div class="rope-wrap" id="thRope">
-        <div class="rope-cord"></div>
-        <div class="rope-knob"></div>
-        <span class="rope-lbl" id="rLbl">dark</span>
+
+  <div class="book-app-wrapper">
+    <!-- TOP WORKBENCH BAR -->
+    <nav id="nav">
+      <div class="nav-brand-group">
+        <a href="index.html" class="nl" data-page="index.html">ara<em>.</em></a>
+        <span class="journal-badge-tag">INVENTOR'S JOURNAL // VOL. II</span>
       </div>
-    </div>
+
+      <div class="nav-right-controls">
+        <div class="rope-wrap" id="thRope" title="Toggle desk lighting">
+          <div class="rope-cord"></div>
+          <div class="rope-knob"></div>
+          <span class="rope-lbl" id="rLbl">dark</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN 3D BOOK STAGE -->
+    <main class="book-stage-container">
+      
+      <!-- OUTER LEATHER BINDER CASING -->
+      <div class="leather-journal-casing" id="leatherJournalCasing">
+        
+        <!-- Brass Corner Protectors -->
+        <div class="brass-corner top-left"></div>
+        <div class="brass-corner top-right"></div>
+        <div class="brass-corner bottom-left"></div>
+        <div class="brass-corner bottom-right"></div>
+
+        <!-- HANGING RIBBON BOOKMARKS (INSTANT SPREAD JUMPS) -->
+        <div class="bookmark-ribbon-rack">
+          <button class="ribbon-tab active" data-spread="0" type="button" title="Jump to Frontispiece &amp; Prologue">
+            <span>🔖</span> Prologue
+          </button>
+          <button class="ribbon-tab" data-spread="1" type="button" title="Jump to Apparatus &amp; Skills">
+            <span>🔖</span> Toolbelt
+          </button>
+          <button class="ribbon-tab" data-spread="2" type="button" title="Jump to Primary Inventions">
+            <span>🔖</span> Inventions I
+          </button>
+          <button class="ribbon-tab" data-spread="3" type="button" title="Jump to Systems &amp; Vision">
+            <span>🔖</span> Inventions II
+          </button>
+          <button class="ribbon-tab" data-spread="4" type="button" title="Jump to Field Log &amp; Letters">
+            <span>🔖</span> Field Log
+          </button>
+        </div>
+
+        <!-- OPEN TWO-PAGE SPREAD CONTAINER -->
+        <div class="book-spread-container" id="bookSpreadContainer">
+          
+          <!-- ══════════════════════════════════════════════════════
+               SPREAD 0: PROLOGUE & CREDENTIALS (PAGES 01 & 02)
+               ══════════════════════════════════════════════════════ -->
+          <div class="spread-chapter active" data-spread-idx="0">
+            <!-- Left Page: Page 01 -->
+            <div class="book-page-leaf left-page">
+              <div class="page-running-head">
+                <span>VOL. II // FIELD MEMORANDUM</span>
+                <span>VIT PUNE '27</span>
+              </div>
+
+              <span class="p-chapter-kicker">FRONTISPIECE &amp; THESIS</span>
+              <h1 class="p-title-main">
+                The Technical Notebook of <em>Aranya Ghargade</em>
+              </h1>
+
+              <div class="frontispiece-box">
+                <span class="wax-seal-badge">AUTHENTICATED FIELD LOG</span>
+                <p class="p-lead-text" style="margin-bottom:0">
+                  "I investigate how software and hardware systems behave when pushed to their limits — from 3D physics loops in virtual reality to sub-30ms computer vision pipelines."
+                </p>
+              </div>
+
+              <p class="p-lead-text">
+                Currently in my second year pursuing a Bachelor of Technology in Computer Science &amp; Engineering at <strong>Vishwakarma Institute of Technology (VIT Pune)</strong>.
+              </p>
+
+              <div class="page-running-foot">
+                <span>FRONTISPIECE</span>
+                <span class="page-num">01</span>
+              </div>
+            </div>
+
+            <!-- Right Page: Page 02 -->
+            <div class="book-page-leaf right-page">
+              <div class="corner-peel right" title="Click corner to turn page"></div>
+              <div class="page-running-head">
+                <span>OVERVIEW &amp; CREDENTIALS</span>
+                <span>ARANYA.IO</span>
+              </div>
+
+              <span class="p-chapter-kicker">CURRICULUM VITAE &amp; INDICES</span>
+              <h2 class="p-title-main" style="font-size:1.6rem">
+                Essential Telemetry &amp; Access
+              </h2>
+
+              <p class="p-lead-text">
+                Direct access tokens to my complete curriculum vitae, active code repositories, and verified engineering metrics:
+              </p>
+
+              <div class="p-action-row">
+                <a class="p-btn-dark" href="resume.pdf" download="Aranya_Ghargade_Resume.pdf">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" />
+                  </svg>
+                  Inspect Resume (PDF)
+                </a>
+
+                <button class="p-btn-outline copy-email-btn" data-email="07aranya@gmail.com" type="button">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>07aranya@gmail.com</span>
+                </button>
+              </div>
+
+              <!-- Metric Indices -->
+              <div class="p-metric-grid">
+                <div class="p-metric-card">
+                  <div class="p-metric-val">06<em>PROTOTYPES</em></div>
+                  <div class="p-metric-label">Shipped Systems</div>
+                </div>
+                <div class="p-metric-card">
+                  <div class="p-metric-val">100+<em>PROBLEMS</em></div>
+                  <div class="p-metric-label">DSA LeetCode Benchmark</div>
+                </div>
+                <div class="p-metric-card">
+                  <div class="p-metric-val">&lt; 30ms<em>LATENCY</em></div>
+                  <div class="p-metric-label">OpenCV Landmark Vision</div>
+                </div>
+                <div class="p-metric-card">
+                  <div class="p-metric-val">96.4%<em>CBSE</em></div>
+                  <div class="p-metric-label">Academic Distinction</div>
+                </div>
+              </div>
+
+              <div class="p-action-row" style="margin-top:auto">
+                <a class="p-btn-outline" href="https://github.com/07aranya" target="_blank" rel="noopener">GitHub ↗</a>
+                <a class="p-btn-outline" href="https://www.linkedin.com/in/07aranya/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              </div>
+
+              <div class="page-running-foot">
+                <span>TABLE OF CREDENTIALS</span>
+                <span class="page-num">02</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════════════
+               SPREAD 1: THE APPARATUS & TOOLBELT (PAGES 03 & 04)
+               ══════════════════════════════════════════════════════ -->
+          <div class="spread-chapter" data-spread-idx="1">
+            <!-- Left Page: Page 03 -->
+            <div class="book-page-leaf left-page">
+              <div class="corner-peel left" title="Click corner to turn back"></div>
+              <div class="page-running-head">
+                <span>CHAPTER 01 // THE APPARATUS</span>
+                <span>LANGUAGES &amp; FOUNDATIONS</span>
+              </div>
+
+              <span class="p-chapter-kicker">TECHNICAL TOOLBELT</span>
+              <h2 class="p-title-main" style="font-size:1.7rem">
+                Languages &amp; Core Disciplines
+              </h2>
+
+              <p class="p-lead-text">
+                Tools selected for memory control, mathematical modeling, and fast execution:
+              </p>
+
+              <!-- Programming Languages -->
+              <div class="p-skill-cluster">
+                <div class="p-skill-header">Primary Programming Languages</div>
+                <div class="p-chip-list">
+                  <span class="p-chip"><strong>C#</strong> · Unity Game Mechanics &amp; Physics</span>
+                  <span class="p-chip"><strong>C++</strong> · Embedded Firmware &amp; DSA</span>
+                  <span class="p-chip"><strong>Python</strong> · Computer Vision &amp; Scripting</span>
+                  <span class="p-chip"><strong>TypeScript / JavaScript</strong> · Web DOM</span>
+                </div>
+              </div>
+
+              <!-- CS Core -->
+              <div class="p-skill-cluster">
+                <div class="p-skill-header">Computer Science Core Disciplines</div>
+                <div class="p-chip-list">
+                  <span class="p-chip">Data Structures &amp; Complexity Analysis</span>
+                  <span class="p-chip">Trees, Graph Traversals &amp; DAGs</span>
+                  <span class="p-chip">Dynamic Programming State Trees</span>
+                  <span class="p-chip">Object-Oriented Design &amp; Architecture</span>
+                </div>
+              </div>
+
+              <div class="page-running-foot">
+                <span>APPARATUS: PART I</span>
+                <span class="page-num">03</span>
+              </div>
+            </div>
+
+            <!-- Right Page: Page 04 -->
+            <div class="book-page-leaf right-page">
+              <div class="corner-peel right" title="Click corner to turn page"></div>
+              <div class="page-running-head">
+                <span>CHAPTER 01 // THE APPARATUS</span>
+                <span>ENGINES &amp; HARDWARE</span>
+              </div>
+
+              <span class="p-chapter-kicker">EXECUTION ENVIRONMENTS</span>
+              <h2 class="p-title-main" style="font-size:1.7rem">
+                Engines, Frameworks &amp; I/O
+              </h2>
+
+              <!-- Engines & Vision -->
+              <div class="p-skill-cluster">
+                <div class="p-skill-header">Engines &amp; Vision Systems</div>
+                <div class="p-chip-list">
+                  <span class="p-chip"><strong>Unity 3D</strong> · URP, Shaders &amp; XR Rig</span>
+                  <span class="p-chip"><strong>OpenCV</strong> · Real-Time Contour Extraction</span>
+                  <span class="p-chip"><strong>MediaPipe</strong> · 21 Hand Landmark Vectoring</span>
+                  <span class="p-chip"><strong>React.js</strong> · Component Interfaces</span>
+                </div>
+              </div>
+
+              <!-- Hardware & Tooling -->
+              <div class="p-skill-cluster">
+                <div class="p-skill-header">Hardware &amp; Developer Tooling</div>
+                <div class="p-chip-list">
+                  <span class="p-chip"><strong>Arduino &amp; ESP32</strong> · PWM Vibration Drivers</span>
+                  <span class="p-chip"><strong>Git &amp; GitHub</strong> · Version Control Workflows</span>
+                  <span class="p-chip"><strong>VS Code &amp; JetBrains Rider</strong> · Profiling</span>
+                  <span class="p-chip"><strong>Vercel &amp; Render</strong> · Static &amp; Edge Hosting</span>
+                </div>
+              </div>
+
+              <div class="frontispiece-box" style="margin-top:auto">
+                <p class="p-lead-text" style="font-size:0.86rem;margin-bottom:0">
+                  <em>Observation:</em> Languages and engines change every few years; invariant mathematical fundamentals, clean state encapsulation, and spatial reasoning endure.
+                </p>
+              </div>
+
+              <div class="page-running-foot">
+                <span>APPARATUS: PART II</span>
+                <span class="page-num">04</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════════════
+               SPREAD 2: PRIMARY INVENTIONS (PAGES 05 & 06)
+               ══════════════════════════════════════════════════════ -->
+          <div class="spread-chapter" data-spread-idx="2">
+            <!-- Left Page: Page 05 -->
+            <div class="book-page-leaf left-page">
+              <div class="corner-peel left" title="Click corner to turn back"></div>
+              <div class="page-running-head">
+                <span>CHAPTER 02 // FIELD REPORTS</span>
+                <span>INVENTION 01</span>
+              </div>
+
+              <span class="p-chapter-kicker">NATURAL LANGUAGE ACCESSIBILITY</span>
+              <h2 class="p-title-main" style="font-size:1.6rem">
+                AI Powered Vernacular Study Assistant
+              </h2>
+
+              <p class="p-lead-text">
+                Designed to dissolve the language barrier for Indian K-12 students. Explains complex STEM curriculum across 9+ Indian regional languages, augmenting questions with syllabus-specific context via Google Gemini.
+              </p>
+
+              <!-- Flow Diagram on Parchment -->
+              <div class="paper-flow-diagram">
+                <span class="p-flow-node">Student Query</span>
+                <span class="p-flow-arrow">➔</span>
+                <span class="p-flow-node">Language Detect</span>
+                <span class="p-flow-arrow">➔</span>
+                <span class="p-flow-node">Syllabus Inject</span>
+                <span class="p-flow-arrow">➔</span>
+                <span class="p-flow-node">Gemini LLM</span>
+                <span class="p-flow-arrow">➔</span>
+                <span class="p-flow-node">Response</span>
+              </div>
+
+              <div class="p-chip-list" style="margin: 0.8rem 0">
+                <span class="p-chip">Google Gemini API</span>
+                <span class="p-chip">Python</span>
+                <span class="p-chip">9+ Dialects</span>
+                <span class="p-chip">Vercel Edge</span>
+              </div>
+
+              <div class="p-action-row">
+                <a class="p-btn-dark" href="https://ai-vernacular-chatbot.vercel.app/" target="_blank" rel="noopener">
+                  Live Demonstration ↗
+                </a>
+                <a class="p-btn-outline" href="https://github.com/07aranya/VernacularChatbot" target="_blank" rel="noopener">
+                  Source Code ↗
+                </a>
+              </div>
+
+              <div class="page-running-foot">
+                <span>FIELD REPORT 01</span>
+                <span class="page-num">05</span>
+              </div>
+            </div>
+
+            <!-- Right Page: Page 06 -->
+            <div class="book-page-leaf right-page">
+              <div class="corner-peel right" title="Click corner to turn page"></div>
+              <div class="page-running-head">
+                <span>CHAPTER 02 // FIELD REPORTS</span>
+                <span>INVENTION 02</span>
+              </div>
+
+              <span class="p-chapter-kicker">SPATIAL IMMERSION &amp; XR</span>
+              <h2 class="p-title-main" style="font-size:1.6rem">
+                VR Horror Experience &amp; Spatial Tension
+              </h2>
+
+              <p class="p-lead-text">
+                Investigating psychological tension pacing in virtual reality via directional 3D audio cues and raycast-based environment triggers. Built in Unity with XR Interaction Toolkit for college tech showcases alongside the XRGF club.
+              </p>
+
+              <div class="p-project-entry">
+                <div class="p-project-id">SYSTEM SPECIFICATIONS</div>
+                <div class="p-project-body">
+                  • <strong>Platform:</strong> Unity 2022 LTS / Oculus XR<br>
+                  • <strong>Performance Target:</strong> Stable 90 FPS rendering on standalone headsets<br>
+                  • <strong>Mechanics:</strong> Dynamic occlusion culling &amp; state-machine enemy AI
+                </div>
+              </div>
+
+              <div class="p-action-row">
+                <button class="p-btn-dark" id="vrPhotosBtn" type="button">
+                  <span>📸</span> Inspect Project Screenshots
+                </button>
+              </div>
+
+              <div class="page-running-foot">
+                <span>FIELD REPORT 02</span>
+                <span class="page-num">06</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════════════
+               SPREAD 3: SECONDARY INVENTIONS (PAGES 07 & 08)
+               ══════════════════════════════════════════════════════ -->
+          <div class="spread-chapter" data-spread-idx="3">
+            <!-- Left Page: Page 07 -->
+            <div class="book-page-leaf left-page">
+              <div class="corner-peel left" title="Click corner to turn back"></div>
+              <div class="page-running-head">
+                <span>CHAPTER 02 // FIELD REPORTS</span>
+                <span>VISION &amp; HAPTICS</span>
+              </div>
+
+              <!-- Invention 03: Fruit Ninja -->
+              <div class="p-project-entry" style="margin-bottom:1.4rem">
+                <div class="p-project-top">
+                  <span class="p-project-id">INVENTION 03 // OPTICAL BLADE</span>
+                  <a href="https://github.com/07aranya/python-fruit-ninja" target="_blank" rel="noopener" class="p-btn-outline" style="padding:2px 8px;font-size:0.68rem">GitHub ↗</a>
+                </div>
+                <h4 class="p-project-title">Fruit Ninja Optical Gesture Tracking</h4>
+                <p class="p-project-body">
+                  Tracks 21 hand landmarks in real-time via commodity webcams using OpenCV and MediaPipe. Calculates instantaneous hand velocity vectors to compute physics blade slices in sub-30ms latency.
+                </p>
+                <button class="p-btn-outline" id="fnPhotosBtn" type="button" style="font-size:0.72rem;padding:3px 8px">
+                  <span>📸</span> Media
+                </button>
+              </div>
+
+              <!-- Invention 04: Haptic Helmet -->
+              <div class="p-project-entry">
+                <div class="p-project-top">
+                  <span class="p-project-id">INVENTION 04 // WEARABLE HAPTICS</span>
+                  <a href="https://github.com/07aranya/haptic-helmet-nav" target="_blank" rel="noopener" class="p-btn-outline" style="padding:2px 8px;font-size:0.68rem">GitHub ↗</a>
+                </div>
+                <h4 class="p-project-title">ASEP2 Haptic Navigation Helmet</h4>
+                <p class="p-project-body">
+                  An assistive wearable navigation system that guides riders and visually impaired users through non-intrusive directional vibration pulses mapped across the helmet circumference using an ESP32.
+                </p>
+                <div style="display:flex;gap:6px">
+                  <button class="p-btn-outline" id="asepPhotosBtn" type="button" style="font-size:0.72rem;padding:3px 8px">
+                    <span>📸</span> Photos
+                  </button>
+                  <a href="https://haptic-helmet-nav.onrender.com" target="_blank" rel="noopener" class="p-btn-outline" style="font-size:0.72rem;padding:3px 8px">
+                    Live Dashboard ↗
+                  </a>
+                </div>
+              </div>
+
+              <div class="page-running-foot">
+                <span>FIELD REPORT 03 &amp; 04</span>
+                <span class="page-num">07</span>
+              </div>
+            </div>
+
+            <!-- Right Page: Page 08 -->
+            <div class="book-page-leaf right-page">
+              <div class="corner-peel right" title="Click corner to turn page"></div>
+              <div class="page-running-head">
+                <span>CHAPTER 02 // FIELD REPORTS</span>
+                <span>WEB &amp; SIMULATION</span>
+              </div>
+
+              <!-- Invention 05: CBSE Redesign -->
+              <div class="p-project-entry" style="margin-bottom:1.4rem">
+                <div class="p-project-top">
+                  <span class="p-project-id">INVENTION 05 // ZERO-BLOAT DOM</span>
+                  <a href="https://cbse-website-new.vercel.app/" target="_blank" rel="noopener" class="p-btn-outline" style="padding:2px 8px;font-size:0.68rem">Live ↗</a>
+                </div>
+                <h4 class="p-project-title">CBSE Portal Architecture Redesign</h4>
+                <p class="p-project-body">
+                  A high-speed, zero-clutter recreation of the Central Board portal. Replaces heavy enterprise CMS bloat with a clean, decoupled client DOM achieving 100/100 Lighthouse performance.
+                </p>
+                <button class="p-btn-outline" id="cbsePhotosBtn" type="button" style="font-size:0.72rem;padding:3px 8px">
+                  <span>📸</span> Screenshots
+                </button>
+              </div>
+
+              <!-- Invention 06: AEM Gyro Ball Balancing -->
+              <div class="p-project-entry">
+                <div class="p-project-top">
+                  <span class="p-project-id">INVENTION 06 // CONTROL PHYSICS</span>
+                  <a href="https://github.com/07aranya/gyro-ball-controller" target="_blank" rel="noopener" class="p-btn-outline" style="padding:2px 8px;font-size:0.68rem">GitHub ↗</a>
+                </div>
+                <h4 class="p-project-title">AEM Gyro Ball Balancing Simulation</h4>
+                <p class="p-project-body">
+                  A physics simulation created for the Applied Engineering Mechanics course. Simulates platform tilting, angular momentum, and PID balancing loops to keep an airborne ball stabilized.
+                </p>
+                <button class="p-btn-outline" id="aemPhotosBtn" type="button" style="font-size:0.72rem;padding:3px 8px">
+                  <span>📸</span> Media
+                </button>
+              </div>
+
+              <div class="page-running-foot">
+                <span>FIELD REPORT 05 &amp; 06</span>
+                <span class="page-num">08</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════════════
+               SPREAD 4: FIELD LOG & CORRESPONDENCE (PAGES 09 & 10)
+               ══════════════════════════════════════════════════════ -->
+          <div class="spread-chapter" data-spread-idx="4">
+            <!-- Left Page: Page 09 -->
+            <div class="book-page-leaf left-page">
+              <div class="corner-peel left" title="Click corner to turn back"></div>
+              <div class="page-running-head">
+                <span>CHAPTER 03 // FIELD LOG</span>
+                <span>CHRONOLOGY &amp; MEMOS</span>
+              </div>
+
+              <span class="p-chapter-kicker">JOURNEY CHRONOLOGY</span>
+              <h2 class="p-title-main" style="font-size:1.6rem">
+                Field Log Milestones
+              </h2>
+
+              <div class="p-timeline-item">
+                <span class="p-time-year">2026 – PRESENT // CURRENT</span>
+                <h5 class="p-time-title">Second-Year CSE Undergraduate @ VIT Pune</h5>
+                <p class="p-time-desc">Deepening core algorithmic foundations on LeetCode, authoring graphics shaders, and collaborating on software.</p>
+              </div>
+
+              <div class="p-timeline-item">
+                <span class="p-time-year">2026 // CLUB PRODUCTION</span>
+                <h5 class="p-time-title">VR Horror Game Showcase (XRGF)</h5>
+                <p class="p-time-desc">Collaborated on spatial audio and enemy state machines for college fest showcase.</p>
+              </div>
+
+              <div class="p-timeline-item">
+                <span class="p-time-year">2023–25 // FOUNDATION</span>
+                <h5 class="p-time-title">Class 10th &amp; 12th Academic Distinction</h5>
+                <p class="p-time-desc">Graduated with 95.6% in Class 10th and 96.4% in Class 12th CBSE.</p>
+              </div>
+
+              <!-- Technical Memo -->
+              <div class="p-memo-box">
+                <strong style="font-family:var(--font-mono);font-size:0.7rem;color:var(--brass-dark)">RESEARCH MEMO // SHADER MATH</strong>
+                <p style="font-size:0.82rem;margin:4px 0 0;color:var(--ink-secondary)">
+                  Computing normalized surface normals (N) against view vectors (V) yields instant Fresnel rim glow:
+                </p>
+                <div class="p-memo-code">float rim = pow(1.0 - saturate(dot(N, V)), _Power);</div>
+              </div>
+
+              <div class="page-running-foot">
+                <span>FIELD LOG &amp; MEMOS</span>
+                <span class="page-num">09</span>
+              </div>
+            </div>
+
+            <!-- Right Page: Page 10 -->
+            <div class="book-page-leaf right-page">
+              <div class="page-running-head">
+                <span>CHAPTER 04 // CORRESPONDENCE</span>
+                <span>THE INBOX</span>
+              </div>
+
+              <span class="p-chapter-kicker">DIRECT TRANSMISSION</span>
+              <h2 class="p-title-main" style="font-size:1.6rem">
+                Send a Letter or Inquiry
+              </h2>
+
+              <p class="p-lead-text">
+                I am actively seeking software engineering internships, technical collaborations, and game development projects:
+              </p>
+
+              <div style="font-family:var(--font-mono);font-size:0.75rem;margin-bottom:0.8rem">
+                • <strong>Direct Mail:</strong> <button class="p-btn-outline copy-email-btn" data-email="07aranya@gmail.com" type="button" style="padding:2px 6px;font-size:0.7rem">07aranya@gmail.com [Copy]</button><br>
+                • <strong>Location:</strong> Pune, India (IST / UTC+5:30)<br>
+                • <strong>Response Guarantee:</strong> Within 24 hours
+              </div>
+
+              <!-- Correspondence Letter Form -->
+              <form action="https://api.web3forms.com/submit" method="POST" class="paper-form" id="contactForm">
+                <input type="hidden" name="access_key" value="bedbffae-b1e2-49b7-b907-a158323d77a8">
+                <input type="checkbox" name="botcheck" style="display: none;">
+
+                <div class="paper-input-group">
+                  <label class="paper-input-label">Sender Name</label>
+                  <input type="text" name="name" id="name" placeholder="Name" required class="paper-input">
+                </div>
+
+                <div class="paper-input-group">
+                  <label class="paper-input-label">Sender Email</label>
+                  <input type="email" name="email" id="email" placeholder="email@company.com" required class="paper-input">
+                </div>
+
+                <div class="paper-input-group">
+                  <label class="paper-input-label">Letter Payload / Message</label>
+                  <textarea name="message" id="message" rows="3" placeholder="Dear Aranya, I reviewed your technical journal..." required class="paper-textarea"></textarea>
+                </div>
+
+                <button type="submit" class="p-btn-dark" id="contactSubmitBtn">
+                  Send Letter <span>→</span>
+                </button>
+                <div id="formResult" style="font-family:var(--font-mono);font-size:0.74rem;margin-top:4px"></div>
+              </form>
+
+              <div class="page-running-foot">
+                <span>CORRESPONDENCE DESK</span>
+                <span class="page-num">10</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SPREAD BOTTOM FLIP CONTROLS -->
+        <div class="book-bottom-nav-bar">
+          <button class="book-turn-btn" id="btnPrevSpread" type="button">
+            <span>←</span> Previous Pages
+          </button>
+          
+          <div class="book-spread-indicator" id="spreadIndicator">
+            SPREAD 01 // PAGES 01–02 OF 10
+          </div>
+          
+          <button class="book-turn-btn" id="btnNextSpread" type="button">
+            Next Pages <span>→</span>
+          </button>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="fi">
+        <div>
+          <div class="fb" style="font-family:var(--font-serif);font-style:italic">ara<em>.</em></div>
+          <div class="ft">CSE student · builder · Pune, IN</div>
+        </div>
+        <div class="fls">
+          <a href="https://github.com/07aranya" class="fl" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/07aranya/" class="fl" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com" target="_blank" class="fl">
+            <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+      <div class="fcp" style="font-family:var(--font-mono)">VOLUME II INVENTOR'S FIELD JOURNAL // ARANYA GHARGADE · 2026</div>
+    </footer>
+  </div>
+
+  <!-- BOTTOM PAGER NAV -->
+  <nav id="pnav">
+    <a href="index.html" class="pb" data-page="index.html">home</a>
+    <a href="personal.html" class="pb" data-page="personal.html">personal</a>
+    <a href="professional.html" class="pb active" data-page="professional.html">professional</a>
   </nav>
 
-  <div class="pro-hero">
-    <div class="ph-bg">
-      <div class="ph-bg-grid"></div>
-      <div class="ph-glow"></div>
-    </div>
-    <div class="ph-in">
-      <div class="ph-badge">open to opportunities</div>
-      <h1 class="ph-h">
-        <span class="row r1"><span class="inner"><span class="dm">my work</span></span></span>
-        <span class="row r2"><span class="inner">&amp; <span class="gw">journey</span></span></span>
-      </h1>
-      <p class="ph-sub">second-year cse student building a foundation, one project at a time. here's what i've made so
-        far.</p>
-    </div>
-  </div>
-
-  <div class="asplit">
-    <div class="as-left">
-      <div class="as-head">who i am<br><span class="gw t">professionally.</span></div>
-      <p class="as-bio">I'm <strong>Aranya</strong>, second-year cse at <strong>VIT Pune</strong>. Passionate about
-        <strong>DSA</strong>, <strong>game development</strong>, and building real software. I learn by building things,
-        breaking them, and figuring out why.
-      </p>
-      <div class="chips">
-        <span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span>
-        <span class="chip">C#</span><span class="chip">HTML/CSS</span><span class="chip">React</span>
-        <span class="chip">Unity</span><span class="chip">OpenCV</span><span class="chip">Data Structures</span>
-        <span class="chip">Algorithms</span>
-      </div>
-      <a class="dl-btn" href="resume.pdf" download="Aranya_Ghargade_Resume.pdf" style="cursor:pointer">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" />
-        </svg>
-        Download Resume
-      </a>
-    </div>
-    <div class="as-right">
-      <div class="ss" id="ss0">
-        <div class="ss-n">01 / FOUNDATION</div>
-        <div class="ss-t">CSE Fundamentals</div>
-        <p class="ss-d">Building a solid base — data structures to OS theory. Fundamentals are everything.</p>
-      </div>
-      <div class="ss" id="ss1">
-        <div class="ss-n">02 / PRACTICE</div>
-        <div class="ss-t">Problem Solving & Game Development</div>
-        <p class="ss-d">Daily grind on Leetcode and Codeforces. Love creating and breaking game engines.</p>
-      </div>
-      <div class="ss" id="ss2">
-        <div class="ss-n">03 / BUILD</div>
-        <div class="ss-t">Projects & Software</div>
-        <p class="ss-d">From games to tools i build things and crash them too. Building is where theory meets reality.
-        </p>
-      </div>
-      <div class="ss" id="ss3">
-        <div class="ss-n">04 / COMMUNITY</div>
-        <div class="ss-t">Clubs & Collaboration</div>
-        <p class="ss-d">Joined XRGF, a game development club at VIT Pune, where i get to work with people with the same
-          interest as mine. </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- TECH STACK -->
-  <section class="stack-sec">
-    <div class="sec-head" data-reveal><span class="sec-n">001.5</span>
-      <h2 class="sec-h">my <span class="gw c">tech stack</span></h2>
-      <div class="sec-line"></div>
-    </div>
-    
-    <div class="stack-grid">
-      <div class="stack-item" data-reveal>
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" class="stack-icon">
-        <span class="stack-name">C#</span>
-      </div>
-      <div class="stack-item" data-reveal style="transition-delay: .05s">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="stack-icon">
-        <span class="stack-name">Python</span>
-      </div>
-      <div class="stack-item" data-reveal style="transition-delay: .1s">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="stack-icon">
-        <span class="stack-name">JavaScript</span>
-      </div>
-      <div class="stack-item" data-reveal style="transition-delay: .15s">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="stack-icon">
-        <span class="stack-name">TypeScript</span>
-      </div>
-      <div class="stack-item" data-reveal style="transition-delay: .2s">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="stack-icon">
-        <span class="stack-name">React</span>
-      </div>
-      <div class="stack-item" data-reveal style="transition-delay: .25s">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="Unity" class="stack-icon">
-        <span class="stack-name">Unity</span>
-      </div>
-      <div class="stack-item" data-reveal style="transition-delay: .3s">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="stack-icon">
-        <span class="stack-name">C++</span>
-      </div>
-      <div class="stack-item" data-reveal style="transition-delay: .35s">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="stack-icon">
-        <span class="stack-name">Arduino</span>
-      </div>
-      <div class="stack-item" data-reveal style="transition-delay: .4s">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="stack-icon">
-        <span class="stack-name">Git/GitHub</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section class="proj-section">
-    <div class="sec-head"><span class="sec-n">002</span>
-      <h2 class="sec-h">projects</h2>
-      <div class="sec-line"></div>
-    </div>
-    <p class="proj-sub">things i've built — games, web apps, and weekend hardware experiments.</p>
-
-    <!-- Featured -->
-    <div class="proj-featured" id="pf0">
-      <div class="pf-glow"></div>
-      <div class="pf-header">
-        <span class="pf-num">FEATURED PROJECT · 01</span>
-        <div class="pf-links">
-          <a href="https://github.com/07aranya/VernacularChatbot" target="_blank" rel="noopener noreferrer"
-            class="pf-link" title="GitHub">↗</a>
-          <a href="https://ai-vernacular-chatbot.vercel.app/" target="_blank" rel="noopener noreferrer" class="pf-link"
-            title="Live">⬡</a>
-        </div>
-      </div>
-      <div class="pf-name"> 💻 AI POWERED VERNACULAR CHATBOT</div>
-      <p class="pf-desc">a study chatbot that explains school topics in 9+ indian languages. answers questions based on cbse, icse, and state board syllabi using google gemini.</p>
-      <div class="pf-tags">
-        <span class="ptag">AI</span><span class="ptag">Python</span><span class="ptag">ML</span><span
-          class="ptag">NLP</span>
-      </div>
-    </div>
-
-    <!-- 3-col grid -->
-    <div class="proj-grid">
-      <div class="proj-sm" id="ps0">
-        <div class="ps-header">
-          <div class="ps-num">02</div>
-          <div style="display:flex;gap:8px;">
-            <a class="ps-link" id="vrPhotosBtn"
-              style="cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none;"
-              title="View Photos">📸</a>
-
-          </div>
-        </div>
-        <div class="ps-name">🧩 VR GAME</div>
-        <p class="ps-desc">a short vr horror experience made in unity for our college tech fest.</p>
-        <div class="ps-tags"><span class="ps-tag">VR</span><span class="ps-tag">Unity</span><span
-            class="ps-tag">C#</span></div>
-      </div>
-      <div class="proj-sm" id="ps1">
-        <div class="ps-header">
-          <div class="ps-num">03</div>
-          <div style="display:flex;gap:8px;">
-            <a class="ps-link" id="cbsePhotosBtn"
-              style="cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none;"
-              title="View Screenshots">📸</a>
-            <a href="https://cbse-website-new.vercel.app/" target="_blank" rel="noopener noreferrer"
-              class="ps-link">↗</a>
-          </div>
-        </div>
-        <div class="ps-name">🌐 CBSE CLONE WEBSITE</div>
-        <p class="ps-desc">a clean recreation of the cbse portal, organizing announcements, curriculum, and results into a simpler layout.</p>
-        <div class="ps-tags"><span class="ps-tag">HTML</span><span class="ps-tag">CSS</span><span
-            class="ps-tag">JavaScript</span></div>
-      </div>
-      <div class="proj-sm" id="ps2">
-        <div class="ps-header">
-          <div class="ps-num">04</div>
-          <div style="display:flex;gap:8px;">
-            <a class="ps-link" id="fnPhotosBtn"
-              style="cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none;"
-              title="View Screenshots">📸</a>
-            <a href="https://github.com/07aranya/python-fruit-ninja" target="_blank" rel="noopener noreferrer" class="ps-link" title="GitHub">↗</a>
-          </div>
-        </div>
-        <div class="ps-name">🍉 FRUIT NINJA GAME</div>
-        <p class="ps-desc">a fruit ninja clone that tracks your hands via webcam using opencv and mediapipe so you can slice fruit with gestures.</p>
-        <div class="ps-tags"><span class="ps-tag">Fruit Ninja</span><span class="ps-tag">Python</span><span
-            class="ps-tag">Pygame</span></div>
-      </div>
-      <div class="proj-sm" id="ps3">
-        <div class="ps-header">
-          <div class="ps-num">05</div>
-          <div style="display:flex;gap:8px;">
-            <a class="ps-link" id="asepPhotosBtn"
-              style="cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none;"
-              title="View Screenshots">📸</a>
-            <a href="https://haptic-helmet-nav.onrender.com" target="_blank" rel="noopener noreferrer" class="ps-link" title="Live">⬡</a>
-            <a href="https://github.com/07aranya/haptic-helmet-nav" target="_blank" rel="noopener noreferrer" class="ps-link" title="GitHub">↗</a>
-          </div>
-        </div>
-        <div class="ps-name">🧭 ASEP2 HAPTIC NAVIGATION</div>
-        <p class="ps-desc">a project focused on haptic feedback and navigation.</p>
-        <div class="ps-tags"><span class="ps-tag">Hardware</span><span class="ps-tag">C++</span></div>
-      </div>
-      <div class="proj-sm" id="ps4">
-        <div class="ps-header">
-          <div class="ps-num">06</div>
-          <div style="display:flex;gap:8px;">
-            <a class="ps-link" id="aemPhotosBtn"
-              style="cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none;"
-              title="View Screenshots">📸</a>
-            <a href="https://github.com/07aranya/gyro-ball-controller" target="_blank" rel="noopener noreferrer" class="ps-link" title="GitHub">↗</a>
-          </div>
-        </div>
-        <div class="ps-name">⚖️ AEM BALL BALANCING</div>
-        <p class="ps-desc">a ball balancing game project for the aem course.</p>
-        <div class="ps-tags"><span class="ps-tag">Python</span><span class="ps-tag">OpenCV</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACHIEVEMENTS JOURNEY -->
-  <section class="ach-section">
-    <div class="sec-head"><span class="sec-n">003</span>
-      <h2 class="sec-h">the <span class="gw v">journey</span></h2>
-      <div class="sec-line"></div>
-    </div>
-    <p class="ach-intro">Milestones, moments, and things worth remembering — in chronological order.</p>
-    <div class="journey">
-      <div class="j-track"></div>
-
-      <div class="j-entry" id="je0">
-        <div class="j-connector">
-          <div class="j-dot"></div>
-          <div class="j-line"></div>
-        </div>
-        <div class="j-content">
-          <div class="j-year"> 2023-25</div>
-          <div class="j-title">Class 10 - 12</div>
-          <p class="j-desc"> i completed my high school education scoring 95.6% in 10th grade and 96.4% in 12th grade
-          </p>
-          <span class="j-badge jb-edu">education</span>
-        </div>
-      </div>
-
-      <div class="j-entry" id="je1">
-        <div class="j-connector">
-          <div class="j-dot"></div>
-          <div class="j-line"></div>
-        </div>
-        <div class="j-content">
-          <div class="j-year">2025</div>
-          <div class="j-title">Joined VIT Pune </div>
-          <p class="j-desc">Joined Vishwakarma Institute of Technology, Pune to pursue a Bachelor of Technology
-            (B.Tech.) degree in Computer Science and Engineering (CSE).</p>
-          <span class="j-badge jb-win">college</span>
-        </div>
-      </div>
-
-      <div class="j-entry" id="je2">
-        <div class="j-connector">
-          <div class="j-dot"></div>
-          <div class="j-line"></div>
-        </div>
-        <div class="j-content">
-          <div class="j-year">2024–25</div>
-          <div class="j-title">Hackathons and Ideathons</div>
-          <p class="j-desc">Participated in hackathons and developed innovative solutions to real-world problems.</p>
-          <span class="j-badge jb-cert">hackathon</span>
-        </div>
-      </div>
-
-      <div class="j-entry" id="je3">
-        <div class="j-connector">
-          <div class="j-dot"></div>
-          <div class="j-line"></div>
-        </div>
-        <div class="j-content">
-          <div class="j-year">2026</div>
-          <div class="j-title">Game Development Contribution</div>
-          <p class="j-desc">Developed a vr horror game as a part of my college fest</p>
-          <span class="j-badge jb-club">Game Dev</span>
-        </div>
-      </div>
-
-      <div class="j-entry" id="je4">
-        <div class="j-connector">
-          <div class="j-dot"></div>
-          <div class="j-line"></div>
-        </div>
-        <div class="j-content">
-          <div class="j-year">PRESENT</div>
-          <div class="j-title">Ongoing — Always Building</div>
-          <p class="j-desc">Still in year two. The most exciting entries in this timeline haven't happened yet.</p>
-          <span class="j-badge jb-edu">now</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- BRAIN DUMP / NOTES -->
-  <section class="notes-sec">
-    <div class="sec-head" data-reveal><span class="sec-n">004</span>
-      <h2 class="sec-h">brain <span class="gw t">dump</span></h2>
-      <div class="sec-line"></div>
-    </div>
-    
-    <div class="notes-grid">
-      <div class="note-card" data-reveal>
-        <div class="note-date">Aug 12, 2026</div>
-        <h3 class="note-title">The Beauty of Shaders</h3>
-        <p class="note-body">spent the weekend messing around with unity shader graph. there's something magical about turning a few math nodes into a glowing, pulsating forcefield. definitely going down the tech art rabbit hole.</p>
-        <div class="note-tag">#GameDev</div>
-      </div>
-      
-      <div class="note-card" data-reveal style="transition-delay: .1s">
-        <div class="note-date">Jul 28, 2026</div>
-        <h3 class="note-title">Taming Dynamic Programming</h3>
-        <p class="note-body">DP used to terrify me. the trick was to stop trying to memorize the table and start thinking about the subproblems as a tree. once you see the overlapping branches, memoization feels obvious.</p>
-        <div class="note-tag">#DSA</div>
-      </div>
-      
-      <div class="note-card" data-reveal style="transition-delay: .2s">
-        <div class="note-date">Jul 15, 2026</div>
-        <h3 class="note-title">Building this Website</h3>
-        <p class="note-body">wanted to build a portfolio that didn't feel like a template. focused heavily on typography, subtle animations, and keeping everything vanilla HTML/CSS/JS for max performance.</p>
-        <div class="note-tag">#WebDev</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LET'S CONNECT -->
-  <section id="connect" class="sec">
-    <div class="sh" data-reveal><span class="shn">004</span><h2>let's connect</h2></div>
-    <div class="connect-cont" data-reveal>
-      <div class="connect-text">
-        <h3>Have an exciting project?</h3>
-        <p>I'm always open to discussing new opportunities, creative ideas, or collaborating on something awesome.</p>
-      </div>
-      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contactForm">
-        <input type="hidden" name="access_key" value="bedbffae-b1e2-49b7-b907-a158323d77a8">
-        <input type="checkbox" name="botcheck" style="display: none;">
-        
-        <div class="form-group">
-          <input type="text" name="name" id="name" placeholder="Your Name" required class="form-input">
-          <input type="email" name="email" id="email" placeholder="Your Email" required class="form-input">
-        </div>
-        <textarea name="message" id="message" rows="4" placeholder="Your Message" required class="form-input form-textarea"></textarea>
-        
-        <button type="submit" class="connect-btn">
-          Send Message <span class="cb-arrow"> </span>
-        </button>
-        <p class="form-result" id="formResult"></p>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <div class="fi">
-      <div>
-        <div class="fb">ara<em>.</em></div>
-        <div class="ft">CSE student · builder · Pune, IN</div>
-      </div>
-      <div class="fls">
-        <a href="https://github.com/07aranya" class="fl" target="_blank"><svg viewBox="0 0 24 24">
-            <path
-              d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-          </svg>GitHub</a>
-        <a href="https://www.linkedin.com/in/07aranya/" class="fl" 
-target="_blank"><svg
-            viewBox="0 0 24 24">
-            <path
-              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>LinkedIn</a>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com" target="_blank" class="fl"><svg
-            viewBox="0 0 24 24">
-            <path
-              d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
-          </svg>Email</a>
-      </div>
-    </div>
-    <div class="fcp">built with ♥ by aranya · 2026</div>
-  </footer>
-
-  <nav id="pill-nav">
-    <a href="index.html" class="pnb" data-page="index.html">home</a>
-    <a href="personal.html" class="pnb" data-page="personal.html">personal</a>
-    <a href="professional.html" class="pnb active" data-page="professional.html">professional</a>
-  </nav>
-
-  <!-- RESUME TOAST -->
-  <div id="resumeToast">
-    <svg width="16" height="16" fill="none" stroke="var(--coral)" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    resume coming soon!
-  </div>
-
-  <!-- SLIDESHOW MODAL -->
+  <!-- SCREENSHOT / MEDIA MODAL -->
   <div id="photoModal">
     <div class="modal-close" id="pmClose">×</div>
     <div class="modal-content">
       <div class="modal-nav modal-prev" id="pmPrev">←</div>
-      <img src="" class="modal-img" id="pmImg" alt="Slideshow Image">
+      <img src="" class="modal-img" id="pmImg" alt="Project Screenshot">
       <div class="modal-nav modal-next" id="pmNext">→</div>
-      <div class="modal-counter" id="pmCount">1 / 4</div>
+      <div class="modal-counter" id="pmCount">1 / 1</div>
     </div>
   </div>
 
+  <!-- TOAST NOTIFICATION -->
+  <div id="proToast">
+    <span>✦</span>
+    <span id="proToastMsg">Copied to clipboard</span>
+  </div>
+
+  <!-- SCRIPTS -->
   <script>
+    /* Cursor handling */
     const cur = document.getElementById('cur'), cr = document.getElementById('cur-r');
     let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
-    (function lr() { rx += (mx - rx) * .09; ry += (my - ry) * .09; cr.style.left = rx + 'px'; cr.style.top = ry + 'px'; requestAnimationFrame(lr) })();
+    document.addEventListener('mousemove', e => { 
+      mx = e.clientX; my = e.clientY; 
+      if (cur) { cur.style.left = mx + 'px'; cur.style.top = my + 'px'; }
+    });
+    (function lr() { 
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; 
+      if (cr) { cr.style.left = rx + 'px'; cr.style.top = ry + 'px'; }
+      requestAnimationFrame(lr); 
+    })();
+
+    /* Theme pull-rope */
     let dark = true;
     const rw = document.getElementById('thRope');
-    rw.addEventListener('click', () => { rw.classList.add('pulling'); setTimeout(() => rw.classList.remove('pulling'), 420); dark = !dark; document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light'); document.getElementById('rLbl').textContent = dark ? 'dark' : 'light' });
-    window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 60), { passive: true });
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis') }), { threshold: .1 });
-    document.querySelectorAll('.ss,.proj-featured,.proj-sm,.j-entry').forEach(el => io.observe(el));
-    const secObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view') }), { threshold: .05 });
-    document.querySelectorAll('.asplit, .proj-section, .ach-section').forEach(el => secObs.observe(el));
-    document.querySelectorAll('.proj-sm').forEach((el, i) => el.style.transitionDelay = (i * .08) + 's');
-    document.querySelectorAll('.j-entry').forEach((el, i) => el.style.transitionDelay = (i * .1) + 's');
-    document.querySelectorAll('.proj-sm').forEach(c => {
-      c.addEventListener('mousemove', e => {
-        const r = c.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-        c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-        c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-        c.style.setProperty('--ang', (Math.atan2(y, x) * 180 / Math.PI) + 'deg');
-      });
-    });
-    function nav2(url) { const o = document.getElementById('pg-ov'); if (o) { o.style.transition = 'transform .45s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(0)'; setTimeout(() => location.href = url, 440); } else { location.href = url; } }
-    document.querySelectorAll('[data-page]').forEach(el => el.addEventListener('click', e => { const p = el.getAttribute('data-page'); const c2 = location.pathname.split('/').pop() || 'professional.html'; if (!p || p === c2) return; e.preventDefault(); nav2(p) }));
-    window.addEventListener('pageshow', () => { const o = document.getElementById('pg-ov'); if (o) { o.style.transition = 'none'; o.style.transform = 'translateY(0)'; requestAnimationFrame(() => requestAnimationFrame(() => { o.style.transition = 'transform .6s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(100%)' })); } });
-
-    /* RESUME TOAST */
-    const resumeBtn = document.getElementById('resumeBtn');
-    const resumeToast = document.getElementById('resumeToast');
-    if (resumeBtn && resumeToast) {
-      let toastTimer;
-      resumeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        resumeToast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => {
-          resumeToast.classList.remove('show');
-        }, 3000);
+    if (rw) {
+      rw.addEventListener('click', () => { 
+        rw.classList.add('pulling'); 
+        setTimeout(() => rw.classList.remove('pulling'), 420); 
+        dark = !dark; 
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light'); 
+        document.getElementById('rLbl').textContent = dark ? 'dark' : 'light'; 
       });
     }
-
-    /* PHOTOS MODAL */
-    const projectPhotos = {
-      vr: ['images/projects/vrgame.jpeg'],
-      cbse: ['images/projects/cbse_new.png'],
-      fn: ['images/projects/fruitninja.jpg'],
-      asep: ['images/projects/asep.png'],
-      aem: ['images/projects/aem.jpg']
-    };
-    let activePhotos = [];
-    let photoIdx = 0;
-    const pm = document.getElementById('photoModal'),
-      pmImg = document.getElementById('pmImg'),
-      pmCount = document.getElementById('pmCount');
-
-    function openPhotoModal(key) {
-      activePhotos = projectPhotos[key] || [];
-      if (!activePhotos.length) return;
-      photoIdx = 0;
-      updatePhoto(0);
-      pm.classList.add('open');
-    }
-
-    function updatePhoto(dir) {
-      if (dir !== 0) {
-        pmImg.classList.add('fading');
-        setTimeout(() => {
-          photoIdx = (photoIdx + dir + activePhotos.length) % activePhotos.length;
-          pmImg.src = activePhotos[photoIdx];
-          pmCount.textContent = (photoIdx + 1) + ' / ' + activePhotos.length;
-          pmImg.onload = () => pmImg.classList.remove('fading');
-        }, 200);
-      } else {
-        pmImg.src = activePhotos[photoIdx];
-        pmCount.textContent = (photoIdx + 1) + ' / ' + activePhotos.length;
-      }
-    }
-
-    document.getElementById('vrPhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('vr'); });
-    document.getElementById('cbsePhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('cbse'); });
-    document.getElementById('fnPhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('fn'); });
-    document.getElementById('asepPhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('asep'); });
-    document.getElementById('aemPhotosBtn')?.addEventListener('click', (e) => { e.preventDefault(); openPhotoModal('aem'); });
-    document.getElementById('pmClose')?.addEventListener('click', () => pm.classList.remove('open'));
-    document.getElementById('pmPrev')?.addEventListener('click', (e) => { e.stopPropagation(); updatePhoto(-1); });
-    document.getElementById('pmNext')?.addEventListener('click', (e) => { e.stopPropagation(); updatePhoto(1); });
-    pm?.addEventListener('click', (e) => { if (e.target === pm) pm.classList.remove('open'); });
   </script>
-  <!-- SCROLL TO TOP BUTTON -->
-  <div class="scroll-top-btn" id="scrollTopBtn">
-    <svg class="st-circ" width="44" height="44">
-      <circle class="st-bg" cx="22" cy="22" r="20"></circle>
-      <circle class="st-prog" cx="22" cy="22" r="20"></circle>
-    </svg>
-    <div class="st-arr">↑</div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="default-data.js"></script>
   <script src="supabase-client.js"></script>
   <script src="hydrate.js"></script>
   <script src="main.js"></script>
+  <script src="professional-book.js"></script>
 </body>
 
 </html>

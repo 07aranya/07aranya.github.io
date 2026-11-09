@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>aranya :) - personal</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
-    rel="stylesheet">
-  <meta name="description" content="Aranya's personal space: music, games, and guitar.">
+  <title>aranya :) - personal rpg</title>
+  <meta name="description" content="Aranya's personal space: 16-bit RPG character sheet, guitar riffs, 59 photo prints, games, and speedcubing.">
   <meta property="og:title" content="aranya :) - personal">
-  <meta property="og:description" content="Aranya's personal space: music, games, and guitar.">
+  <meta property="og:description" content="Aranya's personal space: 16-bit RPG character sheet, guitar riffs, 59 photo prints, games, and speedcubing.">
   <meta property="og:image" content="https://raw.githubusercontent.com/07aranya/portfolio-website-v1/main/images/og-image.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&family=Silkscreen:wght@400;700&family=Press+Start+2P&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="personal.css">
+  <link rel="stylesheet" href="personal-pixel.css">
   <link rel="icon" type="image/jpeg" href="images/icon.jpg">
 
   <!-- Google tag (gtag.js) -->
@@ -27,7 +27,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-9VPVYT2XLS');
   </script>
 </head>
@@ -35,240 +34,468 @@
 <body>
   <div id="cur"></div>
   <div id="curR"></div>
-  <nav id="nav">
-    <a href="index.html" class="nl" data-page="index.html">ara<em>.</em></a>
-    <div class="nr">
-      <span class="n-pg">personal</span>
-      <div class="rope-w" id="rope">
+
+  <!-- 16-BIT RPG HUD NAVIGATION -->
+  <header class="rpg-hud-nav">
+    <div class="hud-left">
+      <a href="index.html" class="hud-logo"><span>⚔️</span> ARA<em>.</em>RPG</a>
+      <div class="hud-stat-pill">
+        <span style="color:var(--rpg-red);font-weight:700">HP</span>
+        <div class="hud-bar">
+          <span class="hud-bar-segment hp"></span>
+          <span class="hud-bar-segment hp"></span>
+          <span class="hud-bar-segment hp"></span>
+          <span class="hud-bar-segment hp"></span>
+          <span class="hud-bar-segment hp"></span>
+        </div>
+      </div>
+      <div class="hud-stat-pill">
+        <span style="color:var(--rpg-blue);font-weight:700">MP</span>
+        <div class="hud-bar">
+          <span class="hud-bar-segment mana"></span>
+          <span class="hud-bar-segment mana"></span>
+          <span class="hud-bar-segment mana"></span>
+          <span class="hud-bar-segment mana"></span>
+        </div>
+      </div>
+    </div>
+    <div class="hud-right">
+      <button class="hud-ctrl-btn" id="btnCrtToggle" type="button" title="Toggle 16-bit CRT scanlines filter">📺 CRT</button>
+      <button class="hud-ctrl-btn" id="btnSfxToggle" type="button" title="Toggle 8-bit retro sound effects">🔊 SFX</button>
+      <div class="hud-coins">🪙 2026G</div>
+      <div class="rope-w" id="rope" style="transform:scale(0.85)">
         <div class="rc"></div>
         <div class="rk"></div><span class="rl" id="rLbl">dark</span>
       </div>
     </div>
-  </nav>
+  </header>
 
+  <!-- HERO: 16-BIT TITLE SCREEN & CLASS ATTRIBUTES -->
   <div class="ph">
-    <div class="conf-bg" id="confBg"></div>
-    <div class="ph-ey"><span>the clumsy yet chaotic guy</span></div>
-    <h1 class="ph-h">
-      <span class="row r1"><span class="inner">the real</span></span>
-      <span class="row r2"><span class="inner">aranya</span></span>
-    </h1>
-    <p class="ph-sub"><span>beyond the code: games, guitar, goals, and everything that keeps me alive.</span></p>
-    <div class="p-pills"><span>
-        <div class="pp" style="--d:4s;--dl:0s">🎮 gamer</div>
-        <div class="pp" style="--d:5s;--dl:.3s">🎸 guitarist</div>
-        <div class="pp" style="--d:4.6s;--dl:.15s">🏸 shuttler</div>
-        <div class="pp" style="--d:3.8s;--dl:.9s">📸 photographer</div>
-        <div class="pp" style="--d:4.2s;--dl:.6s">⚽ footballer</div>
-        <div class="pp" style="--d:5.2s;--dl:.5s">🌍 traveller</div>
-      </span></div>
+    <div class="rpg-title-card" data-reveal>
+      <div class="rpg-hero-top-row">
+        <div class="pixel-sprite-container" id="aranyaSprite" title="Click Player 1 Aranya for quotes &amp; EXP!">
+          <div class="pixel-speech-bubble" id="spriteSpeechBubble">
+            <span>* Official 12.06s 3x3 Rubik's PB! *</span>
+          </div>
+          <div class="pixel-sprite-wrapper">
+            <svg width="76" height="76" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated;shape-rendering:crispEdges;display:block">
+              <!-- Pixel Art Aranya Sprite (16-bit character) -->
+              <!-- Hair / Headphone headband -->
+              <rect x="7" y="2" width="10" height="3" fill="#1b1c24"/>
+              <rect x="6" y="3" width="12" height="4" fill="#2d3436"/>
+              <!-- Headphones -->
+              <rect x="4" y="5" width="2" height="5" fill="#ffd32a"/>
+              <rect x="18" y="5" width="2" height="5" fill="#ffd32a"/>
+              <!-- Face Skin tone -->
+              <rect x="7" y="6" width="10" height="6" fill="#f5cd79"/>
+              <!-- Eyes (pixel glasses/eyes) -->
+              <rect x="8" y="7" width="3" height="2" fill="#0f111f"/>
+              <rect x="13" y="7" width="3" height="2" fill="#0f111f"/>
+              <rect x="9" y="7" width="1" height="1" fill="#1e90ff"/>
+              <rect x="14" y="7" width="1" height="1" fill="#1e90ff"/>
+              <!-- Smile -->
+              <rect x="11" y="10" width="2" height="1" fill="#e17055"/>
+              <!-- Hoodie / Jacket (Vibrant Royal Blue / Red trim) -->
+              <rect x="6" y="12" width="12" height="7" fill="#1e90ff"/>
+              <rect x="10" y="12" width="4" height="7" fill="#ff4757"/>
+              <!-- Hands -->
+              <rect x="4" y="15" width="2" height="3" fill="#f5cd79"/>
+              <rect x="18" y="15" width="2" height="3" fill="#f5cd79"/>
+              <!-- Guitar Neck / Strap (mini Strat silhouette) -->
+              <rect x="16" y="11" width="4" height="2" fill="#ffd32a"/>
+              <rect x="19" y="9" width="3" height="2" fill="#dfe6e9"/>
+              <!-- Pants (Dark Denim) -->
+              <rect x="7" y="19" width="4" height="4" fill="#1b1e36"/>
+              <rect x="13" y="19" width="4" height="4" fill="#1b1e36"/>
+              <!-- Retro Sneakers (White & Red) -->
+              <rect x="6" y="22" width="5" height="2" fill="#ffffff"/>
+              <rect x="6" y="23" width="5" height="1" fill="#ff4757"/>
+              <rect x="13" y="22" width="5" height="2" fill="#ffffff"/>
+              <rect x="13" y="23" width="5" height="1" fill="#ff4757"/>
+            </svg>
+          </div>
+          <span class="sprite-click-hint">[ CLICK ME ]</span>
+        </div>
+        <div style="flex:1;min-width:260px">
+          <div class="rpg-hero-badge">PLAYER 1 // LVL 19 CSE BUILDER</div>
+          <h1 class="ph-h">
+            the real <span class="hero-highlight">aranya</span>
+          </h1>
+          <p class="ph-sub">
+            beyond the code: game mechanics, guitar riffs, shuttle runs, and everything that resets my soul.
+          </p>
+        </div>
+      </div>
+      <div class="rpg-class-pills">
+        <span class="rpg-pill">🎮 class: game crafter</span>
+        <span class="rpg-pill">🎸 sub-class: strat bard</span>
+        <span class="rpg-pill">🏸 agi: court shuttler</span>
+        <span class="rpg-pill">⏱️ perk: 12.06s cube reflex</span>
+        <span class="rpg-pill">🌍 origin: 7 cities wanderer</span>
+      </div>
+    </div>
   </div>
 
-  <div class="ticker">
-    <div class="t-tr" id="tTr"></div>
+  <!-- QUEST DIALOGUE TICKER -->
+  <div class="rpg-dialogue-ticker" data-reveal>
+    <div class="dialogue-box">
+      <span class="dialogue-speaker">QUEST LOG</span>
+      <div class="dialogue-scroll">
+        <span class="dialogue-text">
+          * A wild Aranya appeared in Pune! * Equipped with Black Sonic Stratocaster (HSS) * High agility in badminton &amp; football * Solves 3x3 Rubik's cube in 12.06s * Late night game dev buff active * 59 memory prints unlocked *
+        </span>
+      </div>
+      <div class="dialogue-cursor"></div>
+    </div>
   </div>
 
-  <!-- ROTATING PHOTO STACK -->
+  <!-- 001 // MEMORY VAULT (59 PRINTS & CARTRIDGE STACK) -->
   <section class="photo-stack-sec">
-    <div class="stack-layout">
-      <div class="stack-text" data-reveal>
-        <div class="stack-eyebrow">through the lens</div>
-        <div class="stack-title">life beyond<br>the screen</div>
-        <p class="stack-desc">i love taking photos when i travel and of nature. these photos are some of my
-          favorites. from sunsets in goa to city lights.
+    <div class="rpg-sec-header" data-reveal>
+      <span class="rpg-sec-badge">001 // MEMORY VAULT</span>
+      <h2 class="rpg-sec-title">life through the lens</h2>
+      <div class="rpg-sec-line"></div>
+    </div>
+    <div class="rpg-photo-cabinet" data-reveal>
+      <div class="photo-cabinet-meta">
+        <span style="font-family:var(--pixel-font-arcade);font-size:0.65rem;color:var(--rpg-gold);display:block;margin-bottom:0.5rem">ARCHIVE // 59 PHOTOGRAPHS</span>
+        <h3>life beyond the screen</h3>
+        <p class="photo-cabinet-desc">
+          i love taking photos when i travel and of nature. from peaceful sunsets in goa to city lights in pune, each frame preserves memories that could be lost in time forever.
         </p>
-        <div class="stack-links">
-          <span class="sl" id="photoSlideshowBtn" style="cursor:pointer">📸 view my photos</span>
-          <!-- <span class="sl">🌍 my travel timeline</span> -->
-        </div>
+        <button class="rpg-btn" id="photoSlideshowBtn" type="button">
+          <span>📸</span> INSPECT PHOTO VAULT (59 PRINTS)
+        </button>
       </div>
-      <div class="card-stack" id="cardStack" data-reveal style="transition-delay:.15s">
-        <div class="stack-card"
-          style="background: url('images/neww/WhatsApp%20Image%202026-05-02%20at%2011.18.55.jpeg') center/cover;">
-          <div class="card-label">
-            bikesssss</div>
+      <div class="rpg-cartridge-stack" id="rpgCartridgeStack" title="Click cartridge stack to cycle!">
+        <div class="rpg-cartridge" style="transform: rotate(-3deg); z-index: 3;">
+          <span class="cartridge-notch">PRINT 01</span>
+          <div class="cartridge-img-wrap">
+            <img src="images/neww/WhatsApp Image 2026-05-02 at 11.28.00.jpeg" alt="Peaceful sunset in Goa" loading="lazy">
+          </div>
+          <div class="cartridge-label">
+            <span>peaceful sunset</span>
+            <span>goa · 35mm</span>
+          </div>
         </div>
-        <div class="stack-card"
-          style="background: url('images/neww/WhatsApp%20Image%202026-05-02%20at%2011.19.23.jpeg') center/cover;">
-          <div class="card-label">
-            temple pic</div>
+        <div class="rpg-cartridge" style="transform: rotate(3deg) translateY(8px); z-index: 2;">
+          <span class="cartridge-notch">PRINT 02</span>
+          <div class="cartridge-img-wrap">
+            <img src="images/neww/WhatsApp Image 2026-05-02 at 11.19.23.jpeg" alt="Temple architecture" loading="lazy">
+          </div>
+          <div class="cartridge-label">
+            <span>temple pic</span>
+            <span>heritage</span>
+          </div>
         </div>
-        <div class="stack-card"
-          style="background: url('images/neww/WhatsApp%20Image%202026-05-02%20at%2011.28.00.jpeg') center/cover;">
-          <div class="card-label">
-            peaceful sunset</div>
+        <div class="rpg-cartridge" style="transform: rotate(-1deg) translateY(16px); z-index: 1;">
+          <span class="cartridge-notch">PRINT 03</span>
+          <div class="cartridge-img-wrap">
+            <img src="images/neww/WhatsApp Image 2026-05-02 at 11.18.55.jpeg" alt="Motorcycles" loading="lazy">
+          </div>
+          <div class="cartridge-label">
+            <span>bikesssss</span>
+            <span>street</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- 002 // CHARACTER STAT SHEET & LORE (WHO I AM) -->
   <section class="sec">
-    <div class="sh" data-reveal><span class="shn">002</span>
-      <h2>who i am</h2>
-      <div class="shl"></div>
+    <div class="rpg-sec-header" data-reveal>
+      <span class="rpg-sec-badge">002 // CHARACTER SHEET</span>
+      <h2 class="rpg-sec-title">who i am</h2>
+      <div class="rpg-sec-line"></div>
     </div>
-    <div class="bento">
-      <div class="bc" data-reveal>
-        <span class="bc-em">👋</span>
-        <div class="bc-t">the intro</div>
-        <p class="bc-d">i'm aranya — second-year cse student at vit pune. i build software and games because it's genuinely fun. outside of code, i play badminton, practice guitar, shoot photos, and talk about game design.</p>
+    <div class="rpg-character-sheet" data-reveal>
+      <!-- Left: Attributes & Stat Bars -->
+      <div class="char-sheet-card">
+        <div class="char-header">
+          <div class="char-avatar-frame">🧙‍♂️</div>
+          <div class="char-title-block">
+            <h4>Aranya Ghargade</h4>
+            <span>VIT PUNE // 2ND YEAR CSE</span>
+          </div>
+        </div>
+        <div class="char-stats-list">
+          <div class="stat-row">
+            <div class="stat-label-group">
+              <span class="stat-name">⚔️ STR (COURT ATHLETICS)</span>
+              <span class="stat-val">85 / 100</span>
+            </div>
+            <div class="stat-meter"><div class="meter-fill str"></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label-group">
+              <span class="stat-name">⚡ DEX (12.06s CUBE REFLEX)</span>
+              <span class="stat-val">99 / 100</span>
+            </div>
+            <div class="stat-meter"><div class="meter-fill dex"></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label-group">
+              <span class="stat-name">🧠 INT (DSA &amp; CODE ARCH)</span>
+              <span class="stat-val">88 / 100</span>
+            </div>
+            <div class="stat-meter"><div class="meter-fill intel"></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label-group">
+              <span class="stat-name">🎸 CHA (STRATOCASTER RIFFS)</span>
+              <span class="stat-val">92 / 100</span>
+            </div>
+            <div class="stat-meter"><div class="meter-fill cha"></div></div>
+          </div>
+        </div>
       </div>
-      <div class="bc" data-reveal style="transition-delay:.08s">
-        <span class="bc-em">🌆</span>
-        <div class="bc-t">college life</div>
-        <p class="bc-d">currently living in pune, getting used to college life, hanging out with friends, and finding good food spots around the city.</p>
-      </div>
-      <div class="bc" data-reveal style="transition-delay:.16s">
-        <span class="bc-em">🧠</span>
-        <div class="bc-t">how i think</div>
-        <p class="bc-d">curious first, practical second. i get hooked on an idea, build a quick prototype, break it, figure out why it broke, and rebuild it better.</p>
-      </div>
-      <div class="bc" data-reveal style="transition-delay:.24s">
-        <span class="bc-em">🎯</span>
-        <div class="bc-t">right now</div>
-        <p class="bc-d">learning unity, building random side projects, practicing guitar chords, taking street photos, and playing football and games with friends.</p>
+      <!-- Right: 4 Lore Cards -->
+      <div class="char-lore-grid">
+        <div class="lore-card">
+          <span class="lore-kicker">QUEST 01 // ORIGIN</span>
+          <h4 class="lore-title">the intro</h4>
+          <p class="lore-desc">i'm aranya — second-year cse student at vit pune. i build software and games because it's genuinely fun. outside of code, i play badminton, practice guitar, shoot photos, and talk about game design.</p>
+        </div>
+        <div class="lore-card">
+          <span class="lore-kicker">QUEST 02 // REALM</span>
+          <h4 class="lore-title">college life</h4>
+          <p class="lore-desc">currently living in pune, getting used to college life, hanging out with friends, and finding good food spots around the city.</p>
+        </div>
+        <div class="lore-card">
+          <span class="lore-kicker">QUEST 03 // MINDSET</span>
+          <h4 class="lore-title">how i think</h4>
+          <p class="lore-desc">curious first, practical second. i get hooked on an idea, build a quick prototype, break it, figure out why it broke, and rebuild it better.</p>
+        </div>
+        <div class="lore-card">
+          <span class="lore-kicker">QUEST 04 // ACTIVE BUFF</span>
+          <h4 class="lore-title">right now</h4>
+          <p class="lore-desc">learning unity, building random side projects, practicing guitar chords, taking street photos, and playing football and games with friends.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- HOBBIES -->
-  <section class="sec" style="padding-top:0">
-    <div class="sh" data-reveal><span class="shn">003</span>
-      <h2>things i love</h2>
-      <div class="shl"></div>
+  <!-- 003 // INVENTORY BAG (THINGS I LOVE) -->
+  <section class="sec">
+    <div class="rpg-sec-header" data-reveal>
+      <span class="rpg-sec-badge">003 // INVENTORY BAG</span>
+      <h2 class="rpg-sec-title">things i love</h2>
+      <div class="rpg-sec-line"></div>
     </div>
-    <div class="hob-grid" id="hobGrid"></div>
+    <div class="rpg-inventory-wrap" data-reveal>
+      <div class="inventory-grid">
+        <div class="item-slot active" data-lore="Gaming (AAA &amp; Indie) — Exploring deep mechanics and atmospheric worlds provides pure inspiration to create games.">
+          <div class="item-icon-box">🎮</div>
+          <span class="item-name">Gaming</span>
+          <span class="item-badge">LVL 99 PASSION</span>
+        </div>
+        <div class="item-slot" data-lore="Music &amp; Sonic Moods — An absolute integral part of life. Listening to all genres from indie rock to atmospheric lo-fi.">
+          <div class="item-icon-box">🎵</div>
+          <span class="item-name">Music</span>
+          <span class="item-badge">DAILY BUFF</span>
+        </div>
+        <div class="item-slot" data-lore="Fender Guitar — Playing Bollywood melodies &amp; rock riffs eases my mind by ten fold.">
+          <div class="item-icon-box">🎸</div>
+          <span class="item-name">Guitar</span>
+          <span class="item-badge">EQUIPPED WEAPON</span>
+        </div>
+        <div class="item-slot" data-lore="Badminton — My go-to stress reliever. Fast court footwork, smashes, and agility fix everything.">
+          <div class="item-icon-box">🏸</div>
+          <span class="item-name">Badminton</span>
+          <span class="item-badge">STAMINA +20</span>
+        </div>
+        <div class="item-slot" data-lore="Football — Playing in free time with friends whenever I get a chance. Football fanatic at heart.">
+          <div class="item-icon-box">⚽</div>
+          <span class="item-name">Football</span>
+          <span class="item-badge">TEAM SPORT</span>
+        </div>
+        <div class="item-slot" data-lore="Photography — Capturing moments that could be lost in time forever. Preserving memories in frames.">
+          <div class="item-icon-box">📸</div>
+          <span class="item-name">Photography</span>
+          <span class="item-badge">OPTICS SKILL</span>
+        </div>
+        <div class="item-slot" data-lore="Travel — New places, new perspectives. Lived across 7 Indian cities and counting.">
+          <div class="item-icon-box">🌍</div>
+          <span class="item-name">Travel</span>
+          <span class="item-badge">WANDERER</span>
+        </div>
+        <div class="item-slot" data-lore="Coding for Fun — Building weird prototypes nobody asked for, breaking them, and learning everything.">
+          <div class="item-icon-box">💻</div>
+          <span class="item-name">Creative Code</span>
+          <span class="item-badge">CRAFT SPELL</span>
+        </div>
+      </div>
+      <div class="inventory-inspector">
+        <span class="inspector-prompt">ITEM INFO</span>
+        <span class="inspector-text" id="inventoryLoreText">Gaming (AAA &amp; Indie) — Exploring deep mechanics and atmospheric worlds provides pure inspiration to create games.</span>
+      </div>
+    </div>
   </section>
 
-  <!-- MUSIC PLAYER -->
-  <section class="sec" style="padding-top:0">
-    <div class="sh" data-reveal><span class="shn">004</span>
-      <h2>currently playing</h2>
-      <div class="shl"></div>
+  <!-- 004 // 16-BIT JUKEBOX (SPOTIFY CURRENT ROTATION) -->
+  <section class="sec">
+    <div class="rpg-sec-header" data-reveal>
+      <span class="rpg-sec-badge">004 // 16-BIT JUKEBOX</span>
+      <h2 class="rpg-sec-title">currently playing</h2>
+      <div class="rpg-sec-line"></div>
     </div>
-    <div class="mp" data-reveal>
-      <div class="mp-glow"></div>
-      <div class="mp-lbl">
-        <span class="mp-lbl-t">🎵 aranya's rotation — my current favourites!</span>
-        <a href="https://open.spotify.com/user/31qomjj2yspgvf2c3jafmxmdpihq?si=2f6a0a5e31334487" target="_blank"
-          class="spotify-btn">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-            <path
-              d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.54.659.301 1.02zm1.44-3.3c-.301.42-.84.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.781s.18-1.2.78-1.381c4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.239.54-.959.72-1.62.36z" />
-          </svg>
-          Spotify
+    <div class="rpg-jukebox-card" data-reveal>
+      <div class="jukebox-top">
+        <div class="jukebox-brand">
+          <span class="jukebox-icon">📻</span>
+          <div>
+            <h4 class="jukebox-title">aranya's rotation — heavy favourites!</h4>
+            <span class="jukebox-sub">// Frank Ocean · Arctic Monkeys · Pink Floyd · Radiohead · The Local Train</span>
+          </div>
+        </div>
+        <a href="https://open.spotify.com/user/31qomjj2yspgvf2c3jafmxmdpihq?si=2f6a0a5e31334487" target="_blank" class="spotify-pixel-btn">
+          <span>▶</span> OPEN SPOTIFY PROFILE
         </a>
       </div>
       <div class="mp-tracks" id="mpTr"></div>
     </div>
   </section>
 
-  <!-- GUITAR SECTION -->
-  <section class="sec" style="padding-top:0">
-    <div class="sh" data-reveal><span class="shn">005</span>
-      <h2>the guitar case</h2>
-      <div class="shl"></div>
+  <!-- 005 // WEAPON BLUEPRINT: THE GUITAR CASE -->
+  <section class="sec">
+    <div class="rpg-sec-header" data-reveal>
+      <span class="rpg-sec-badge">005 // EQUIPMENT BLUEPRINT</span>
+      <h2 class="rpg-sec-title">the guitar case</h2>
+      <div class="rpg-sec-line"></div>
     </div>
-
-    <div class="gtr-container" data-reveal>
-      <div class="gtr-left">
-        <div class="gtr-model">Fender Squier Sonic Stratocaster</div>
-        <div class="gtr-specs">Black • HSS Configuration</div>
-        <p class="gtr-bio">Playing guitar eases my mind by ten fold. Nothing beats the feeling of mastering a new riff
-          or learning a song I've loved for years.</p>
-
-        <div class="gtr-images">
-          <img src="images/guitar1.jpg" alt="Fender Squier Sonic Stratocaster close up" class="gtr-img"
-            onclick="window.open(this.src)">
-          <img src="images/guitar2.jpg" alt="Fender Squier Sonic Stratocaster full view" class="gtr-img"
-            onclick="window.open(this.src)">
+    <div class="rpg-guitar-cabinet" data-reveal>
+      <div class="guitar-spec-card">
+        <div class="guitar-nameplate">
+          <span class="guitar-type">LEGENDARY INSTRUMENT // HSS CONFIG</span>
+          <h3 class="guitar-model-name">Fender Squier Sonic Stratocaster</h3>
+          <span class="guitar-specs-tag">Black Finish • Humbucker / Single / Single Pickups</span>
+        </div>
+        <p class="guitar-bio-text">
+          Playing guitar eases my mind by ten fold. Nothing beats the feeling of mastering a new riff, practicing fingerpicking, or learning an Arctic Monkeys or Bollywood song I've loved for years.
+        </p>
+        <div class="guitar-photo-duo">
+          <div class="guitar-mini-frame" onclick="window.open('images/guitar1.jpg')">
+            <img src="images/guitar1.jpg" alt="Fender Stratocaster close up" loading="lazy">
+          </div>
+          <div class="guitar-mini-frame" onclick="window.open('images/guitar2.jpg')">
+            <img src="images/guitar2.jpg" alt="Fender Stratocaster full view" loading="lazy">
+          </div>
+        </div>
+        <!-- 8-BIT GUITAR RIFF SYNTH -->
+        <div class="rpg-riff-box">
+          <div class="riff-box-header">
+            <span class="riff-led"></span>
+            <span class="riff-box-title">8-BIT STRAT RIFF SYNTH</span>
+            <span class="riff-status" id="riffStatus">STANDBY</span>
+          </div>
+          <div class="riff-btn-row">
+            <button class="riff-play-btn" type="button" data-riff="505">
+              <span>▶</span> 505 (Arctic Monkeys)
+            </button>
+            <button class="riff-play-btn" type="button" data-riff="diwk">
+              <span>▶</span> Do I Wanna Know
+            </button>
+            <button class="riff-play-btn" type="button" data-riff="tumhiho">
+              <span>▶</span> Tum Hi Ho
+            </button>
+          </div>
         </div>
       </div>
-
-      <div class="gtr-right">
-        <div class="gtr-tabs">
-          <button class="gtr-tab active" onclick="switchGCTab('play')">Can Play</button>
-          <button class="gtr-tab" onclick="switchGCTab('learn')">Wanna Learn</button>
+      <div class="guitar-quest-scroll">
+        <div class="quest-tab-row">
+          <button class="quest-tab-btn active" data-tab="play">✓ Mastered Riffs</button>
+          <button class="quest-tab-btn" data-tab="learn">🔥 Quest Log</button>
         </div>
-
-        <div class="gtr-content active" id="gtrPlay">
-          <ul class="gtr-list">
-            <li><span class="gtr-icon">✓</span> Do I Wanna Know</li>
-            <li><span class="gtr-icon">✓</span> 505</li>
-            <li><span class="gtr-icon">✓</span> Tum Hi Ho</li>
-            <li><span class="gtr-icon">✓</span> Raabta</li>
-            <li><span class="gtr-icon">✓</span> Here With Me</li>
-            <li><span class="gtr-icon">✓</span> Freaks</li>
-            <li><span class="gtr-icon">✓</span> All of Me</li>
-            <li><span class="gtr-icon">✓</span> Perfect</li>
-            <li><span class="gtr-icon">✓</span> Khairiyat</li>
-            <li><span class="gtr-icon">✓</span> Wish You Were Here</li>
-            <li><span class="gtr-icon">✓</span> Choo Lo</li>
-            <li style="opacity: 0.6;"><span class="gtr-icon">...</span> and many more</li>
-          </ul>
-        </div>
-
-        <div class="gtr-content" id="gtrLearn">
-          <ul class="gtr-list">
-            <li><span class="gtr-icon">🔥</span> Hotel California</li>
-            <li><span class="gtr-icon">🔥</span> Free Bird</li>
-            <li><span class="gtr-icon">🔥</span> Sweater Weather</li>
-            <li style="opacity: 0.6;"><span class="gtr-icon">...</span> and more</li>
-          </ul>
-        </div>
+        <ul class="quest-song-list" id="gtrQuestPlay">
+          <li><span>✓</span> Do I Wanna Know — Arctic Monkeys</li>
+          <li><span>✓</span> 505 — Arctic Monkeys</li>
+          <li><span>✓</span> Tum Hi Ho — Arijit Singh</li>
+          <li><span>✓</span> Raabta — Agent Vinod</li>
+          <li><span>✓</span> Here With Me — d4vd</li>
+          <li><span>✓</span> Freaks — Surf Curse</li>
+          <li><span>✓</span> Wish You Were Here — Pink Floyd</li>
+          <li><span>✓</span> Choo Lo — The Local Train</li>
+          <li><span>✓</span> Khairiyat — Chhichhore</li>
+          <li><span>✓</span> Perfect — Ed Sheeran</li>
+        </ul>
+        <ul class="quest-song-list" id="gtrQuestLearn" style="display:none">
+          <li><span style="color:var(--rpg-gold)">🔥</span> Hotel California — Eagles</li>
+          <li><span style="color:var(--rpg-gold)">🔥</span> Free Bird — Lynyrd Skynyrd</li>
+          <li><span style="color:var(--rpg-gold)">🔥</span> Sweater Weather — The Neighbourhood</li>
+          <li><span style="color:var(--rpg-gold)">🔥</span> Starboy — The Weeknd</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- GAMES -->
-  <section class="sec" style="padding-top:0">
-    <div class="sh" data-reveal><span class="shn">006</span>
-      <h2>favourite games</h2>
-      <div class="shl"></div>
+  <!-- 006 // CARTRIDGE RACK: FAVOURITE GAMES -->
+  <section class="sec">
+    <div class="rpg-sec-header" data-reveal>
+      <span class="rpg-sec-badge">006 // CARTRIDGE RACK</span>
+      <h2 class="rpg-sec-title">favourite games</h2>
+      <div class="rpg-sec-line"></div>
     </div>
-    <div class="games-g" id="gamesG"></div>
+    <div class="games-cartridge-grid" id="gamesG" data-reveal></div>
   </section>
 
-  <!-- PERSONAL ACHIEVEMENTS -->
-  <section class="sec" style="padding-top:0">
-    <div class="sh" data-reveal><span class="shn">007</span>
-      <h2>personal wins</h2>
-      <div class="shl"></div>
+  <!-- 007 // TROPHY ROOM: ACHIEVEMENTS UNLOCKED -->
+  <section class="sec">
+    <div class="rpg-sec-header" data-reveal>
+      <span class="rpg-sec-badge">007 // TROPHY ROOM</span>
+      <h2 class="rpg-sec-title">achievements unlocked</h2>
+      <div class="rpg-sec-line"></div>
     </div>
-    <div class="pa-grid">
-      <div class="pa" data-reveal>
-        <div class="pa-ic">🏆</div>
-        <div>
-          <div class="pa-t">Runner up in Maharashtra State Level Football-Tennis</div>
-          <p class="pa-d"> this was a major achievement for me as i love playing and competing in sports </p>
-          <div class="pa-yr">2019</div>
+    <div class="trophy-room-grid" data-reveal>
+      <div class="trophy-card">
+        <div class="trophy-icon-frame">🏆</div>
+        <div class="trophy-body">
+          <h4>Maharashtra State Runner-Up</h4>
+          <p class="trophy-desc">State Level Football-Tennis championship runner-up. A defining athletic milestone competing in sports under high pressure.</p>
+          <span class="trophy-year-badge">UNLOCKED: 2019</span>
         </div>
       </div>
-      <div class="pa" data-reveal style="transition-delay:.08s">
-        <div class="pa-ic">🎸</div>
-        <div>
-          <div class="pa-t">Guitar Milestone</div>
-          <p class="pa-d">Tum Hi Ho was the first song i learnt to play on guitar. was a great feeling to play a
-            song flawlessly for the first time</p>
-          <div class="pa-yr">2020</div>
+      <div class="trophy-card">
+        <div class="trophy-icon-frame">🎸</div>
+        <div class="trophy-body">
+          <h4>First Flawless Guitar Song</h4>
+          <p class="trophy-desc">Tum Hi Ho was the first full melody learned and played flawlessly on acoustic guitar. Sparked a lifelong passion for strings.</p>
+          <span class="trophy-year-badge">UNLOCKED: 2020</span>
         </div>
       </div>
-      <div class="pa" data-reveal style="transition-delay:.16s">
-        <div class="pa-ic">📸</div>
-        <div>
-          <div class="pa-t">Trips</div>
-          <p class="pa-d">Goa trip with friends and Nainital, Hampi trip with family are some of my favorite
-            trips</p>
-          <div class="pa-yr">2023–26</div>
+      <div class="trophy-card">
+        <div class="trophy-icon-frame">📸</div>
+        <div class="trophy-body">
+          <h4>Wanderer Expeditions</h4>
+          <p class="trophy-desc">Goa road trips with friends, and family trips across Nainital and Hampi heritage ruins, capturing hundreds of camera memories.</p>
+          <span class="trophy-year-badge">UNLOCKED: 2023–26</span>
         </div>
       </div>
-      <div class="pa" data-reveal style="transition-delay:.24s">
-        <div class="pa-ic">⭐</div>
-        <div>
-          <div class="pa-t">Personal Challenge</div>
-          <p class="pa-d">Learnt to solve 3x3 Rubik's cube in under 30 seconds. my personal best is 12.06 seconds. </p>
-          <div class="pa-yr">2026</div>
+      <div class="trophy-card">
+        <div class="trophy-icon-frame">⚡</div>
+        <div class="trophy-body">
+          <h4>Sub-13s Competitive Cubing (12.06s PB)</h4>
+          <p class="trophy-desc">Learnt CFOP algorithms, look-ahead, and sub-200ms finger-tricks. Personal Best: 12.06 seconds on official 3x3 Rubik's cube.</p>
+          <!-- WCA SPEEDCUBE SCRAMBLER WIDGET -->
+          <div class="cube-scramble-widget">
+            <div class="scramble-top-row">
+              <button class="scramble-gen-btn" id="btnGenScramble" type="button">🎲 NEW WCA SCRAMBLE</button>
+              <div class="scramble-cube-preview" id="cubeFacePreview" title="3x3 Face Preview">
+                <span class="c-tile" style="background:#ffffff"></span>
+                <span class="c-tile" style="background:#2ed573"></span>
+                <span class="c-tile" style="background:#ff4757"></span>
+                <span class="c-tile" style="background:#1e90ff"></span>
+                <span class="c-tile" style="background:#ffd32a"></span>
+                <span class="c-tile" style="background:#ff7f50"></span>
+                <span class="c-tile" style="background:#2ed573"></span>
+                <span class="c-tile" style="background:#ffffff"></span>
+                <span class="c-tile" style="background:#1e90ff"></span>
+              </div>
+            </div>
+            <div class="scramble-text-box" id="scrambleText">R2 D' F2 U B2 D' F2 R2 B2 U' L' B D2 R2 F' U' R F2 D2 R'</div>
+          </div>
+          <span class="trophy-year-badge">UNLOCKED: 2026</span>
         </div>
       </div>
     </div>
@@ -277,39 +504,26 @@
   <footer>
     <div class="fi">
       <div>
-        <div class="fb">ara<em>.</em></div>
-        <div class="fst">CSE student · gamer · Pune, IN</div>
+        <div class="fb" style="font-family:var(--pixel-font-display)">ara<em>.</em>rpg</div>
+        <div class="fst" style="font-family:var(--pixel-font-mono)">CSE student · gamer · Pune, IN</div>
       </div>
       <div class="fls">
-        <a href="https://github.com/07aranya" class="fl" target="_blank"><svg viewBox="0 0 24 24">
-            <path
-              d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-          </svg>GitHub</a>
-        <a href="https://www.linkedin.com/in/07aranya/" class="fl" target="_blank"><svg
-            viewBox="0 0 24 24">
-            <path
-              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>LinkedIn</a>
-        <!-- <a href="https://twitter.com/" class="fl" target="_blank"><svg viewBox="0 0 24 24">
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.737l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-          </svg>Twitter</a> -->
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com" target="_blank" class="fl"><svg
-            viewBox="0 0 24 24">
-            <path
-              d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
-          </svg>Email</a>
+        <a href="https://github.com/07aranya" class="fl" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" /></svg>GitHub</a>
+        <a href="https://www.linkedin.com/in/07aranya/" class="fl" target="_blank"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>LinkedIn</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=07aranya@gmail.com" target="_blank" class="fl"><svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" /></svg>Email</a>
       </div>
     </div>
-    <div class="fcp">made with ♥ and caffeine by aranya · 2026</div>
+    <div class="fcp" style="font-family:var(--pixel-font-mono)">* SAVED GAME // MADE WITH ♥ AND CAFFEINE BY ARANYA · 2026 *</div>
   </footer>
 
+  <!-- BOTTOM PAGER NAV -->
   <nav id="pnav">
     <a href="index.html" class="pb" data-page="index.html">home</a>
     <a href="personal.html" class="pb active" data-page="personal.html">personal</a>
     <a href="professional.html" class="pb" data-page="professional.html">professional</a>
   </nav>
 
+  <!-- PHOTO MODAL (59 PHOTOGRAPHS) -->
   <div id="photoModal">
     <div class="modal-close" id="pmClose">×</div>
     <div class="modal-content">
@@ -324,78 +538,22 @@
     /* CURSOR */
     const cur = document.getElementById('cur'), curR = document.getElementById('curR');
     let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
-    (function l() { rx += (mx - rx) * .09; ry += (my - ry) * .09; curR.style.left = rx + 'px'; curR.style.top = ry + 'px'; requestAnimationFrame(l) })();
-    window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 50), { passive: true });
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; if (cur) { cur.style.left = mx + 'px'; cur.style.top = my + 'px'; } });
+
+    /* THEME TOGGLE PULL ROPE */
     let dark = true;
     const ropeEl = document.getElementById('rope');
-    ropeEl.addEventListener('click', () => { ropeEl.classList.add('pull'); setTimeout(() => ropeEl.classList.remove('pull'), 400); dark = !dark; document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light'); document.getElementById('rLbl').textContent = dark ? 'dark' : 'light' });
-
-    /* CONFETTI */
-    const cb = document.getElementById('confBg');
-    const cc = ['#b07aee', '#c8f53d', '#5ddfd0', '#ff5f5f', '#f5c540'];
-    for (let i = 0; i < 30; i++) { const el = document.createElement('div'); el.className = 'cp'; const s = Math.random() * 7 + 3; el.style.cssText = `width:${s}px;height:${s}px;background:${cc[Math.floor(Math.random() * cc.length)]};left:${Math.random() * 100}%;--d:${7 + Math.random() * 9}s;--dl:${Math.random() * 7}s;--x:${(Math.random() - .5) * 50}px;--dr:${(Math.random() - .5) * 80}px;border-radius:${Math.random() > .5 ? '50%' : '2px'}`; cb.appendChild(el) }
-
-    /* TICKER */
-    const tF = ['second-year CSE', 'VIT Pune', 'codes for fun', 'plays guitar', 'football fanatic', 'shuttler', 'photographer', 'traveller', 'night owl builder'];
-    const tTr = document.getElementById('tTr');
-    [...tF, ...tF, ...tF].forEach(s => { const d = document.createElement('div'); d.className = 't-it'; d.innerHTML = `<span class="t-d"></span>${s}`; tTr.appendChild(d) });
-
-    /* CARD STACK CLICK TO CYCLE */
-    const stack = document.getElementById('cardStack');
-    const cards = stack.querySelectorAll('.stack-card');
-    let topIdx = 0;
-    stack.addEventListener('click', () => {
-      stack.classList.add('clicked');
-      setTimeout(() => {
-        const top = cards[topIdx];
-        top.style.transition = 'none';
-        top.style.transform = 'rotate(-6deg) translateY(0)';
-        top.style.zIndex = '0';
-        setTimeout(() => top.style.transition = '', 20);
-        topIdx = (topIdx + 1) % cards.length;
-        cards.forEach((c, i) => {
-          const pos = (i - topIdx + cards.length) % cards.length;
-          c.style.zIndex = (cards.length - pos).toString();
-          if (pos === 0) c.style.transform = 'rotate(-6deg) translateY(0px)';
-          else if (pos === 1) c.style.transform = 'rotate(-2deg) translateY(8px)';
-          else c.style.transform = 'rotate(3deg) translateY(14px)';
-        });
-        stack.classList.remove('clicked');
-      }, 300);
-    });
-
-    /* HOBBIES */
-    const hobbies = [
-      { em: '🎮', n: 'gaming', d: 'love playing unique games, be it AAA or indie. exploring new games is something i love doing. guess this provides me my inspiration to create my own games too!', tlt: '-2deg', hc: '#c8f53d' },
-      { em: '🎵', n: 'music', d: 'music is an absolute integral part of my life. love listening to all genres of music.', tlt: '-2.5deg', hc: '#c8f53d' },
-      { em: '🎸', n: 'guitar', d: 'playing bollywood songs on guitar eases my mind by ten fold. wishing to get an electric guitar soon.', tlt: '2deg', hc: '#b07aee' },
-      { em: '🏸', n: 'badminton', d: 'my go-to stress reliever. court time fixes everything. ', tlt: '2.5deg', hc: '#5ddfd0' },
-      { em: '⚽', n: 'football', d: 'i absolutely love football. playing it in my free time whenever i get a chance is something i love doing.  ', tlt: '-1.5deg', hc: '#ff5f5f' },
-      { em: '📸', n: 'photography', d: 'capturing moments that could be lost in time forever, my camera is my way of preserving memories.', tlt: '-2deg', hc: '#f5c540' },
-      { em: '🌍', n: 'travel', d: 'new places, new perspectives. every trip changes something.', tlt: '1.5deg', hc: '#ff5f5f' },
-
-      { em: '💻', n: 'Coding (for fun)', d: 'building random stuff nobody asked for but teaches everything. ', tlt: '2deg', hc: '#b07aee' },
-    ];
-    const hg = document.getElementById('hobGrid');
-    hobbies.forEach((h, i) => {
-      const d = document.createElement('div'); d.className = 'hob'; d.style.cssText = `--tlt:${h.tlt};--hc:${h.hc};transition-delay:${i * .05}s`;
-      d.setAttribute('data-reveal', '');
-      d.innerHTML = `<span class="h-em">${h.em}</span><div class="h-n">${h.n}</div><p class="h-d">${h.d}</p>`;
-      d.addEventListener('click', e => {
-        const ems = ['✨', '🔥', '⭐', '💫', '🎉'];
-        for (let j = 0; j < 8; j++) {
-          const s = document.createElement('span'); const ang = Math.random() * Math.PI * 2, dist = 45 + Math.random() * 65;
-          s.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:${12 + Math.random() * 13}px;pointer-events:none;z-index:9999`;
-          s.textContent = ems[Math.floor(Math.random() * ems.length)]; document.body.appendChild(s);
-          s.animate([{ transform: 'translate(0,0) scale(1)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * dist}px,${Math.sin(ang) * dist}px) scale(.2)`, opacity: 0 }], { duration: 650, easing: 'cubic-bezier(.2,.8,.4,1)' }).onfinish = () => s.remove();
-        }
+    if (ropeEl) {
+      ropeEl.addEventListener('click', () => {
+        ropeEl.classList.add('pull');
+        setTimeout(() => ropeEl.classList.remove('pull'), 400);
+        dark = !dark;
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        document.getElementById('rLbl').textContent = dark ? 'dark' : 'light';
       });
-      hg.appendChild(d);
-    });
+    }
 
-    /* MUSIC */
-    // Just paste your Spotify track links here!
+    /* MUSIC TRACKS EMBED GENERATOR */
     const spotifyLinks = [
       'https://open.spotify.com/track/7eqoqGkKwgOaWNNHx90uEZ', // Nights - Frank Ocean
       'https://open.spotify.com/track/4t5joZkdlXlvzLXJbkgppJ?si=50e02019846d4025',
@@ -406,78 +564,71 @@
     ];
 
     const mpTrEl = document.getElementById('mpTr');
-    mpTrEl.style.display = 'flex';
-    mpTrEl.style.flexDirection = 'column';
-    mpTrEl.style.gap = '12px';
+    if (mpTrEl) {
+      mpTrEl.style.display = 'flex';
+      mpTrEl.style.flexDirection = 'column';
+      mpTrEl.style.gap = '12px';
 
-    spotifyLinks.forEach(link => {
-      // Automatically convert regular track links to embed links
-      let embedUrl = link;
-      if (link.includes('/track/')) {
-        const trackId = link.split('/track/')[1].split('?')[0];
-        embedUrl = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`;
-      }
+      spotifyLinks.forEach(link => {
+        let embedUrl = link;
+        if (link.includes('/track/')) {
+          const trackId = link.split('/track/')[1].split('?')[0];
+          embedUrl = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`;
+        }
 
-      const iframe = document.createElement('iframe');
-      iframe.style.borderRadius = '12px';
-      iframe.width = '100%';
-      iframe.height = '152';
-      iframe.frameBorder = '0';
-      iframe.allowFullscreen = true;
-      iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-      iframe.loading = 'lazy';
-      iframe.src = embedUrl;
+        const iframe = document.createElement('iframe');
+        iframe.style.borderRadius = '8px';
+        iframe.style.border = '2px solid #363c61';
+        iframe.width = '100%';
+        iframe.height = '152';
+        iframe.frameBorder = '0';
+        iframe.allowFullscreen = true;
+        iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+        iframe.loading = 'lazy';
+        iframe.src = embedUrl;
 
-      mpTrEl.appendChild(iframe);
-    });
-
-    /* GUITAR SECTION */
-    function switchGCTab(tab) {
-      // Update Tabs
-      document.querySelectorAll('.gtr-tab').forEach(el => el.classList.remove('active'));
-      document.querySelector(`.gtr-tab[onclick*="${tab}"]`).classList.add('active');
-
-      // Update Content
-      document.querySelectorAll('.gtr-content').forEach(el => {
-        el.classList.remove('active');
-        // Force reflow for animation
-        void el.offsetWidth;
+        mpTrEl.appendChild(iframe);
       });
-
-      if (tab === 'play') {
-        document.getElementById('gtrPlay').classList.add('active');
-      } else {
-        document.getElementById('gtrLearn').classList.add('active');
-      }
     }
 
-    /* GAMES */
+    /* GAMES RACK RENDERING */
     const games = [
-      { img: 'images/games/rdr2.jpeg', n: 'Red Dead Redemption 2', g: 'Story/Open World', r: '★★★★★' },
-      { img: 'images/games/gow.jpeg', n: 'God of War', g: 'Gameplay/Story  ', r: '★★★★★' },
-      { img: 'images/games/got.jpeg', n: 'Ghost of Tsushima', g: 'Visuals/Combat', r: '★★★★☆' },
-      { img: 'images/games/gta4.jpeg', n: 'GTA IV', g: 'Story/Open World', r: '★★★★★' },
-      { img: 'images/games/spiderman2.jpeg', n: 'Spiderman 2', g: 'Web-slinging/Combat', r: '★★★★☆' },
-      { img: 'images/games/mw2.jpeg', n: 'COD MW Series', g: 'Action', r: '★★★★★' }
+      { img: 'images/games/rdr2.jpeg', n: 'Red Dead Redemption 2', g: 'Story / Open World', r: '★★★★★' },
+      { img: 'images/games/gow.jpeg', n: 'God of War', g: 'Action / Lore', r: '★★★★★' },
+      { img: 'images/games/got.jpeg', n: 'Ghost of Tsushima', g: 'Visuals / Combat', r: '★★★★☆' },
+      { img: 'images/games/gta4.jpeg', n: 'GTA IV', g: 'Story / World', r: '★★★★★' },
+      { img: 'images/games/spiderman2.jpeg', n: 'Spider-Man 2', g: 'Web-slinging', r: '★★★★☆' },
+      { img: 'images/games/mw2.jpeg', n: 'COD MW Series', g: 'Campaign / FPS', r: '★★★★★' }
     ];
-    const gg = document.getElementById('gamesG');
-    games.forEach((g, i) => {
-      const d = document.createElement('div');
-      d.className = 'gcard';
-      d.setAttribute('data-reveal', '');
-      d.style.transitionDelay = (i * .06) + 's';
-      d.innerHTML = `<div class="gc-art"><img src="${g.img}" class="gc-img" alt="${g.n}" onerror="this.src='https://placehold.co/400x200/1a1a2e/b07aee?text=Game'"></div><div class="gc-b"><div class="gc-n">${g.n}</div><div class="gc-g">${g.g}</div><div class="gc-r">${g.r}</div></div>`;
-      gg.appendChild(d);
-    });
 
-    /* SCROLL REVEAL */
+    const gg = document.getElementById('gamesG');
+    if (gg) {
+      games.forEach((g, i) => {
+        const d = document.createElement('div');
+        d.className = 'game-cartridge-card';
+        d.setAttribute('data-reveal', '');
+        d.style.transitionDelay = (i * .06) + 's';
+        d.innerHTML = `
+          <div class="game-cover-art">
+            <img src="${g.img}" alt="${g.n}" loading="lazy" onerror="this.src='images/projects/vrgame.jpeg'">
+          </div>
+          <div class="game-meta-row">
+            <div>
+              <div class="game-title">${g.n}</div>
+              <div class="game-genre-tag">${g.g}</div>
+            </div>
+            <div class="game-rating">${g.r}</div>
+          </div>
+        `;
+        gg.appendChild(d);
+      });
+    }
+
+    /* SCROLL REVEAL OBSERVER */
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }), { threshold: .08 });
     document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 
-    function n2(url) { const o = document.getElementById('pgOv'); if (o) { o.style.transition = 'transform .44s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(0)'; setTimeout(() => location.href = url, 420); } else { location.href = url; } }
-    document.querySelectorAll('[data-page]').forEach(el => el.addEventListener('click', e => { const p = el.getAttribute('data-page'); const c2 = location.pathname.split('/').pop() || 'personal.html'; if (!p || p === c2) return; e.preventDefault(); n2(p) }));
-    window.addEventListener('pageshow', () => { const o = document.getElementById('pgOv'); if (o) { o.style.transition = 'none'; o.style.transform = 'translateY(0)'; requestAnimationFrame(() => requestAnimationFrame(() => { o.style.transition = 'transform .6s cubic-bezier(.7,0,.3,1)'; o.style.transform = 'translateY(100%)' })); } });
-    /* PHOTO SLIDESHOW */
+    /* 59 PHOTO ARCHIVE SLIDESHOW */
     const photoFiles = [
       "images/photography/WhatsApp Image 2026-05-02 at 11.18.54 (2).jpeg",
       "images/photography/WhatsApp Image 2026-05-02 at 11.18.54.jpeg",
@@ -567,6 +718,7 @@
     document.getElementById('pmNext').addEventListener('click', (e) => { e.stopPropagation(); updatePhoto(1); });
     pm.addEventListener('click', (e) => { if (e.target === pm || e.target === document.querySelector('.modal-content')) pm.classList.remove('open'); });
   </script>
+
   <!-- SCROLL TO TOP BUTTON -->
   <div class="scroll-top-btn" id="scrollTopBtn">
     <svg class="st-circ" width="44" height="44">
@@ -576,11 +728,22 @@
     <div class="st-arr">↑</div>
   </div>
 
+  <!-- 16-BIT ACHIEVEMENT NOTIFIER TOAST -->
+  <div class="rpg-achievement-toast" id="rpgToast">
+    <div class="toast-trophy">🏆</div>
+    <div>
+      <span class="toast-kicker">ACHIEVEMENT UNLOCKED!</span>
+      <div class="toast-title" id="toastTitle">First Discovery</div>
+      <span class="toast-exp" id="toastExp">+50 EXP</span>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="default-data.js"></script>
   <script src="supabase-client.js"></script>
   <script src="hydrate.js"></script>
   <script src="main.js"></script>
+  <script src="personal-pixel.js"></script>
 </body>
 
 </html>

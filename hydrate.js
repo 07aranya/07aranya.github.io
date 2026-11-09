@@ -141,27 +141,27 @@ function hydrateSiteContent(c, page) {
   // ── PERSONAL PAGE FIELDS ──
   if (page.isPersonal) {
     if (c.personal_hero_eyebrow) {
-      const el = document.querySelector('.p-eyebrow, .hero-eyebrow');
+      const el = document.querySelector('.p-eyebrow, .hero-eyebrow, .rpg-hero-badge');
       if (el) el.textContent = c.personal_hero_eyebrow;
     }
     if (c.personal_hero_sub) {
-      const el = document.querySelector('.p-sub, .hero-sub');
+      const el = document.querySelector('.p-sub, .hero-sub, .ph-sub');
       if (el) el.textContent = c.personal_hero_sub;
     }
     if (c.personal_stack_desc) {
-      const el = document.querySelector('.ps-desc, .photo-stack-desc');
+      const el = document.querySelector('.ps-desc, .photo-stack-desc, .photo-cabinet-desc');
       if (el) el.textContent = c.personal_stack_desc;
     }
     if (c.guitar_model) {
-      const el = document.querySelector('.guitar-model');
+      const el = document.querySelector('.guitar-model, .guitar-model-name');
       if (el) el.textContent = c.guitar_model;
     }
     if (c.guitar_specs) {
-      const el = document.querySelector('.guitar-specs');
+      const el = document.querySelector('.guitar-specs, .guitar-specs-tag');
       if (el) el.textContent = c.guitar_specs;
     }
     if (c.guitar_bio) {
-      const el = document.querySelector('.guitar-bio');
+      const el = document.querySelector('.guitar-bio, .guitar-bio-text');
       if (el) el.textContent = c.guitar_bio;
     }
   }

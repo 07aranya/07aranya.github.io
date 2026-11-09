@@ -1,0 +1,1086 @@
+/**
+ * Professional Tab: "The Engineering Lab Notebook" Stylesheet
+ * Inspired by MIT Media Lab, Bret Victor (worrydream.com), and Stripe Press.
+ * Technical research monograph aesthetic with warm paper/slate tones,
+ * margin notes, figure diagrams, algorithmic breakdowns, and prototype reports.
+ */
+
+:root {
+  --nb-bg: #0e1014;
+  --nb-bg-sub: #14171d;
+  --nb-card: #191c24;
+  --nb-card-hover: #1f232d;
+  --nb-card-elevated: #242834;
+  
+  --nb-border: rgba(255, 255, 255, 0.08);
+  --nb-border-strong: rgba(255, 255, 255, 0.16);
+  --nb-border-warm: rgba(229, 142, 38, 0.3);
+  
+  --nb-ink: #f1f3f7;
+  --nb-ink-secondary: #a3abbb;
+  --nb-ink-muted: #6b7588;
+  
+  --nb-amber: #e58e26;
+  --nb-terracotta: #e05638;
+  --nb-cobalt: #546de5;
+  --nb-sage: #38ada9;
+  
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', 'DM Mono', monospace;
+}
+
+[data-theme="light"] {
+  --nb-bg: #f9f8f5;
+  --nb-bg-sub: #f0eee8;
+  --nb-card: #ffffff;
+  --nb-card-hover: #fcfbfa;
+  --nb-card-elevated: #ffffff;
+  
+  --nb-border: rgba(0, 0, 0, 0.08);
+  --nb-border-strong: rgba(0, 0, 0, 0.18);
+  --nb-border-warm: rgba(184, 107, 18, 0.35);
+  
+  --nb-ink: #16181d;
+  --nb-ink-secondary: #4a5260;
+  --nb-ink-muted: #8c95a5;
+  
+  --nb-amber: #b86b12;
+  --nb-terracotta: #c0392b;
+  --nb-cobalt: #34495e;
+  --nb-sage: #16a085;
+}
+
+/* ── 1. GLOBAL BASE & TECHNICAL GRID ──────────────────────── */
+body {
+  background-color: var(--nb-bg);
+  color: var(--nb-ink);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle engineering graph paper lines */
+.lab-grid-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, var(--nb-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--nb-border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 20%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 20%, #000 30%, transparent 85%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.lab-container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 2. MONOGRAPH TOP NAVIGATION ───────────────────────────── */
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(14, 16, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--nb-border);
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] #nav {
+  background: rgba(249, 248, 245, 0.9);
+}
+
+#nav.sc {
+  background: rgba(14, 16, 20, 0.96);
+  border-bottom-color: var(--nb-border-strong);
+}
+
+.nav-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nl {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--nb-ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nl em {
+  font-style: normal;
+  color: var(--nb-amber);
+}
+
+.notebook-vol-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-ink-muted);
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  padding: 2px 7px;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.nav-anchors {
+  display: none;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+@media (min-width: 880px) {
+  .nav-anchors { display: flex; }
+}
+
+.nav-anchor-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--nb-ink-secondary);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.15s ease;
+}
+
+.nav-anchor-link:hover {
+  color: var(--nb-amber);
+}
+
+.nav-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ── 3. LAB COVER / HERO SECTION ───────────────────────────── */
+.lab-hero-section {
+  padding: 7.5rem 0 3.5rem;
+  position: relative;
+}
+
+.lab-meta-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--nb-amber);
+  background: rgba(229, 142, 38, 0.08);
+  border: 1px solid var(--nb-border-warm);
+  padding: 5px 12px;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+.lab-meta-ribbon .ribbon-sep {
+  color: var(--nb-ink-muted);
+}
+
+.lab-hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--nb-ink);
+  margin-bottom: 1.2rem;
+  max-width: 950px;
+}
+
+.lab-hero-headline em {
+  font-style: italic;
+  color: var(--nb-amber);
+}
+
+.lab-hero-abstract {
+  font-size: clamp(1.02rem, 1.8vw, 1.18rem);
+  color: var(--nb-ink-secondary);
+  max-width: 760px;
+  line-height: 1.7;
+  margin-bottom: 2.2rem;
+}
+
+/* Action Strip */
+.lab-action-tray {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 3.2rem;
+}
+
+.btn-lab-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--nb-ink);
+  color: var(--nb-bg);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.65rem 1.3rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-lab-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.btn-lab-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--nb-card);
+  color: var(--nb-ink);
+  border: 1px solid var(--nb-border);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.65rem 1.1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-lab-secondary:hover {
+  background: var(--nb-card-hover);
+  border-color: var(--nb-border-strong);
+  transform: translateY(-1px);
+}
+
+.btn-lab-secondary.copy-email-btn.copied {
+  border-color: var(--nb-sage);
+  color: var(--nb-sage);
+}
+
+/* Lab Key Indices (Metrics) */
+.lab-indices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 1.4rem;
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  border-radius: 6px;
+}
+
+.lab-index-card {
+  padding: 0.4rem 0.6rem;
+  border-left: 2px solid var(--nb-border-warm);
+}
+
+.lab-index-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.lab-index-value {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--nb-ink);
+  letter-spacing: -0.01em;
+}
+
+.lab-index-value em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--nb-ink-muted);
+  font-weight: 400;
+  margin-left: 5px;
+}
+
+.lab-index-detail {
+  font-size: 0.8rem;
+  color: var(--nb-ink-secondary);
+  margin-top: 0.25rem;
+  line-height: 1.45;
+}
+
+/* ── 4. CHAPTER HEADINGS ───────────────────────────────────── */
+.chapter-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--nb-border);
+}
+
+.chapter-number {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-style: italic;
+  color: var(--nb-amber);
+}
+
+.chapter-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--nb-ink);
+}
+
+.chapter-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--nb-ink-muted);
+  margin-left: auto;
+}
+
+/* ── 5. CHAPTER 01: PROTOTYPE EXPERIMENTS (PROJECTS) ───────── */
+.experiments-sec {
+  margin-bottom: 5.5rem;
+}
+
+.experiment-filter-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.exp-filter-pill {
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--nb-ink-secondary);
+  padding: 0.45rem 0.95rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.exp-filter-pill:hover {
+  color: var(--nb-ink);
+  border-color: var(--nb-border-strong);
+}
+
+.exp-filter-pill.active {
+  background: var(--nb-card);
+  color: var(--nb-amber);
+  border-color: var(--nb-border-warm);
+  font-weight: 500;
+}
+
+/* Featured Lab Report 01: Vernacular Study Assistant */
+.lab-featured-report {
+  background: var(--nb-card);
+  border: 1px solid var(--nb-border-warm);
+  border-radius: 6px;
+  padding: 2.2rem;
+  margin-bottom: 2.2rem;
+  position: relative;
+}
+
+.report-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.report-id {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--nb-amber);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.report-links-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.report-link-chip {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--nb-ink-secondary);
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  padding: 4px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+
+.report-link-chip:hover {
+  border-color: var(--nb-amber);
+  color: var(--nb-amber);
+}
+
+.report-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--nb-ink);
+  margin-bottom: 0.9rem;
+}
+
+.report-hypothesis-box {
+  background: var(--nb-bg-sub);
+  border-left: 3px solid var(--nb-amber);
+  padding: 0.85rem 1.2rem;
+  margin-bottom: 1.2rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.hypothesis-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.hypothesis-text {
+  font-size: 0.92rem;
+  color: var(--nb-ink-secondary);
+  line-height: 1.6;
+}
+
+.report-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.tag-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  color: var(--nb-ink-secondary);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+/* Interactive Prototype Drawer */
+.lab-drawer {
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  border-radius: 4px;
+  padding: 1.1rem;
+}
+
+.lab-drawer-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--nb-border);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+
+.drawer-tab-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--nb-ink-muted);
+  padding: 3px 9px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.drawer-tab-btn:hover {
+  color: var(--nb-ink);
+}
+
+.drawer-tab-btn.active {
+  background: var(--nb-card);
+  color: var(--nb-amber);
+  border: 1px solid var(--nb-border-warm);
+}
+
+.drawer-tab-pane {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--nb-ink-secondary);
+  line-height: 1.6;
+}
+
+.drawer-tab-pane.active {
+  display: block;
+}
+
+/* Technical Blueprint Flow */
+.technical-flow-chart {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.flow-block {
+  background: var(--nb-card);
+  border: 1px solid var(--nb-border);
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  color: var(--nb-ink);
+}
+
+.flow-block.accent {
+  border-color: var(--nb-border-warm);
+  color: var(--nb-amber);
+  background: rgba(229, 142, 38, 0.05);
+}
+
+.flow-arrow {
+  color: var(--nb-ink-muted);
+  font-size: 0.8rem;
+}
+
+/* 2-Column Prototype Grid */
+.prototypes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 1.5rem;
+}
+
+.proto-card {
+  background: var(--nb-card);
+  border: 1px solid var(--nb-border);
+  border-radius: 6px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.15s ease;
+}
+
+.proto-card:hover {
+  background: var(--nb-card-hover);
+  border-color: var(--nb-border-strong);
+  transform: translateY(-2px);
+}
+
+.proto-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.proto-id {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-amber);
+  text-transform: uppercase;
+}
+
+.proto-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.6rem;
+  color: var(--nb-ink);
+}
+
+.proto-abstract {
+  font-size: 0.9rem;
+  color: var(--nb-ink-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.1rem;
+  flex: 1;
+}
+
+/* ── 6. CHAPTER 02: APPARATUS & TOOLBELT (SKILLS) ──────────── */
+.apparatus-sec {
+  margin-bottom: 5.5rem;
+}
+
+.apparatus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.2rem;
+}
+
+.apparatus-cluster {
+  background: var(--nb-card);
+  border: 1px solid var(--nb-border);
+  border-radius: 6px;
+  padding: 1.6rem;
+}
+
+.cluster-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--nb-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 0.65rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--nb-border);
+}
+
+.cluster-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cluster-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.84rem;
+}
+
+.cluster-item-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--nb-ink);
+}
+
+.cluster-item-name img {
+  width: 16px;
+  height: 16px;
+}
+
+.cluster-item-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-ink-muted);
+}
+
+/* ── 7. CHAPTER 03: FIELD LOG & CHRONOLOGY (TIMELINE) ──────── */
+.fieldlog-sec {
+  margin-bottom: 5.5rem;
+}
+
+.journal-timeline {
+  position: relative;
+  border-left: 1px solid var(--nb-border-warm);
+  padding-left: 2rem;
+  margin-left: 0.8rem;
+}
+
+.journal-entry {
+  position: relative;
+  margin-bottom: 2.4rem;
+}
+
+.journal-entry::before {
+  content: '';
+  position: absolute;
+  left: calc(-2rem - 5px);
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--nb-card);
+  border: 2px solid var(--nb-amber);
+}
+
+.journal-entry.active::before {
+  background: var(--nb-amber);
+  box-shadow: 0 0 8px rgba(229, 142, 38, 0.4);
+}
+
+.journal-date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--nb-amber);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.journal-heading-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.45rem;
+}
+
+.journal-entry-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--nb-ink);
+}
+
+.journal-field-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--nb-ink-muted);
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  padding: 2px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.journal-entry-text {
+  font-size: 0.9rem;
+  color: var(--nb-ink-secondary);
+  line-height: 1.65;
+}
+
+/* ── 8. CHAPTER 04: TECHNICAL RESEARCH MEMOS (NOTES) ───────── */
+.memos-sec {
+  margin-bottom: 5.5rem;
+}
+
+.memos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.memo-card {
+  background: var(--nb-card);
+  border: 1px solid var(--nb-border);
+  border-radius: 6px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.memo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.memo-id {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-amber);
+}
+
+.memo-date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-ink-muted);
+}
+
+.memo-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.65rem;
+  color: var(--nb-ink);
+}
+
+.memo-body {
+  font-size: 0.88rem;
+  color: var(--nb-ink-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.1rem;
+  flex: 1;
+}
+
+.memo-formula-box {
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  border-radius: 4px;
+  padding: 0.65rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--nb-ink);
+  overflow-x: auto;
+  margin-bottom: 0.85rem;
+}
+
+.memo-footer {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-ink-muted);
+}
+
+/* ── 9. CHAPTER 05: CORRESPONDENCE & INBOX ─────────────────── */
+.correspondence-sec {
+  margin-bottom: 6rem;
+}
+
+.correspondence-card {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 2.8rem;
+  background: var(--nb-card);
+  border: 1px solid var(--nb-border);
+  border-radius: 6px;
+  padding: 2.6rem;
+}
+
+@media (max-width: 860px) {
+  .correspondence-card { grid-template-columns: 1fr; padding: 1.6rem; }
+}
+
+.dispatch-left h3 {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.9rem;
+  color: var(--nb-ink);
+}
+
+.dispatch-lead {
+  font-size: 0.94rem;
+  color: var(--nb-ink-secondary);
+  line-height: 1.65;
+  margin-bottom: 1.8rem;
+}
+
+.dispatch-meta-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.dispatch-meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.meta-item-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.meta-item-val {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  color: var(--nb-ink);
+}
+
+/* Form */
+.terminal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.terminal-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .terminal-form-row { grid-template-columns: 1fr; }
+}
+
+.form-group-console {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.console-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--nb-ink-muted);
+  letter-spacing: 0.04em;
+}
+
+.console-input,
+.console-textarea {
+  background: var(--nb-bg-sub);
+  border: 1px solid var(--nb-border);
+  color: var(--nb-ink);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.console-input:focus,
+.console-textarea:focus {
+  border-color: var(--nb-amber);
+  background: var(--nb-card);
+}
+
+.console-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.dispatch-submit-btn {
+  align-self: flex-start;
+  background: var(--nb-ink);
+  color: var(--nb-bg);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.75rem 1.4rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.dispatch-submit-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.dispatch-result-msg {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  margin-top: 0.4rem;
+}
+
+.dispatch-result-msg.success { color: var(--nb-sage); }
+.dispatch-result-msg.error { color: var(--nb-terracotta); }
+
+/* ── 10. REUSABLE TOAST NOTIFICATION ──────────────────────── */
+#proToast {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 2rem;
+  z-index: 9999;
+  background: var(--nb-card-elevated);
+  border: 1px solid var(--nb-border-warm);
+  border-radius: 4px;
+  padding: 0.75rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--nb-ink);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateY(120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#proToast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ── 11. BOTTOM PAGER BAR OVERRIDE ────────────────────────── */
+#pnav,
+#pill-nav {
+  position: fixed;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 16, 20, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 999px !important;
+  padding: 5px 7px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-theme="light"] #pnav,
+[data-theme="light"] #pill-nav {
+  background: rgba(249, 248, 245, 0.92) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.pb,
+.pnb {
+  border-radius: 999px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.02em !important;
+  text-transform: lowercase !important;
+  padding: 0.45rem 0.95rem !important;
+  color: var(--nb-ink-secondary) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease !important;
+  user-select: none;
+}
+
+.pb:hover,
+.pnb:hover {
+  color: var(--nb-ink) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.pb.active,
+.pnb.active {
+  background: var(--nb-ink) !important;
+  color: var(--nb-bg) !important;
+  font-weight: 500 !important;
+}
