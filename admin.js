@@ -150,6 +150,10 @@ async function loadSiteContent() {
   setVal('txtSwapWords', getVal('hero_swap_words'));
   setVal('txtScrub', getVal('welcome_scrub_text'));
 
+  setVal('txtWbCubePb', getVal('workbench_speedcube_pb'));
+  setVal('txtWbLocation', getVal('workbench_status_location'));
+  setVal('txtWbBalance', getVal('workbench_status_balance'));
+
   setVal('txtAboutKicker1', getVal('about_card1_kicker'));
   setVal('txtAboutHeadline1', getVal('about_card1_heading'));
   setVal('txtAboutBio1', getVal('about_card1_bio'));
@@ -242,6 +246,10 @@ async function saveHomeContent() {
       'hero_subtitle': getValInput('txtHeroSub'),
       'hero_swap_words': getValInput('txtSwapWords'),
       'welcome_scrub_text': getValInput('txtScrub'),
+
+      'workbench_speedcube_pb': getValInput('txtWbCubePb'),
+      'workbench_status_location': getValInput('txtWbLocation'),
+      'workbench_status_balance': getValInput('txtWbBalance'),
 
       'about_card1_kicker': getValInput('txtAboutKicker1'),
       'about_card1_heading': getValInput('txtAboutHeadline1'),

@@ -1,0 +1,725 @@
+/* ── THE STUDIO WORKBENCH (ABOUT ME) ──────────────────────────
+   Aesthetic: Dieter Rams / Teenage Engineering / Analog Studio Craft
+   Warm dark graphite, tactile matte cards, crisp hairline borders,
+   warm acid lime (#c8f53d) & amber accents — zero cyber-neon glow.
+── */
+
+.workbench-section {
+  position: relative;
+  z-index: 2;
+  padding: 6rem 3rem 8rem;
+  border-top: 1px solid var(--bd);
+  background: rgba(8, 8, 13, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.wb-layout-wrap {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ── 1. PRIMARY EDITORIAL INTRO (Immediate full story upfront) ── */
+.wb-primary-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.wb-bio-header {
+  max-width: 900px;
+}
+
+.wb-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--lime);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.wb-headline {
+  font-family: var(--font-hero, 'Syne', sans-serif);
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  margin-bottom: 1.2rem;
+}
+
+.wb-headline .gw {
+  color: var(--fg);
+  border-bottom: 2px solid rgba(200, 245, 61, 0.4);
+}
+
+.wb-lead-p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #a6a096;
+  max-width: 820px;
+}
+
+/* Dual Column Breakdown: Tech vs Life (Balanced 50/50) */
+.wb-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.8rem;
+}
+
+.wb-dual-card {
+  background: rgba(18, 18, 26, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 14px;
+  padding: 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.wb-dual-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+.dual-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dual-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--lime);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.dual-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: #7a7670;
+  text-transform: lowercase;
+}
+
+.wb-dual-card h4 {
+  font-family: 'Clash Display', 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 0.2rem;
+}
+
+.wb-dual-card p {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #9c968c;
+}
+
+.dual-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.dual-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #a8a298;
+}
+
+.dual-item strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.d-bullet {
+  color: var(--lime);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── 2. THE PHYSICAL WORKBENCH DESK ───────────────────────── */
+.wb-interactive-row {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr 1fr;
+  gap: 1.8rem;
+  align-items: stretch;
+}
+
+/* Card 1: Analog Cassette Memo Deck */
+.wb-analog-deck {
+  background: rgba(16, 16, 24, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.deck-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tape-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tape-rec-led {
+  width: 7px;
+  height: 7px;
+  background: #ff5f5f;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 95, 95, 0.6);
+  animation: ledBlink 1.8s ease-in-out infinite;
+}
+
+@keyframes ledBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.tape-code {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: #8c867c;
+  text-transform: uppercase;
+}
+
+.deck-tape-case {
+  display: flex;
+  align-items: center;
+}
+
+.cassette-mini {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(10, 10, 15, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.mini-spool {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px dashed #7a7670;
+  transition: transform 0.4s ease;
+}
+
+.cassette-mini.spinning .mini-spool {
+  animation: spoolSpin 2s linear infinite;
+}
+
+@keyframes spoolSpin {
+  to { transform: rotate(360deg); }
+}
+
+.mini-window {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--lime);
+  letter-spacing: 0.05em;
+}
+
+.deck-active-memo {
+  min-height: 90px;
+}
+
+.memo-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.memo-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--lime);
+  font-weight: 500;
+}
+
+.memo-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: #7a7670;
+  text-transform: uppercase;
+}
+
+.memo-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+}
+
+.memo-desc {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #9e988e;
+}
+
+.deck-tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.track-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.85rem;
+  background: rgba(10, 10, 16, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  color: #a8a298;
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.track-pill:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--fg);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.track-pill.active {
+  background: rgba(200, 245, 61, 0.08);
+  border-color: rgba(200, 245, 61, 0.35);
+  color: var(--lime);
+}
+
+.tp-icon {
+  font-size: 0.65rem;
+  margin-right: 0.5rem;
+  opacity: 0.6;
+}
+
+.track-pill.active .tp-icon {
+  opacity: 1;
+}
+
+.tp-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  flex: 1;
+}
+
+.tp-badge {
+  font-size: 0.68rem;
+  color: #6a6660;
+  text-transform: lowercase;
+}
+
+.track-pill.active .tp-badge {
+  color: rgba(200, 245, 61, 0.8);
+}
+
+/* Card 2: Polaroid on Physical Desk Surface */
+.wb-polaroid-desk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wb-polaroid {
+  background: #f7f6f2;
+  border-radius: 3px;
+  padding: 10px 10px 12px;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.5);
+  cursor: grab;
+  position: relative;
+  transform: rotate(-1.5deg);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  user-select: none;
+  width: 100%;
+  max-width: 290px;
+}
+
+.wb-polaroid:hover {
+  transform: rotate(0deg) translateY(-4px) scale(1.02);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.65);
+}
+
+.wb-polaroid:active {
+  cursor: grabbing;
+}
+
+.polaroid-pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.15rem;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+}
+
+.polaroid-img-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #141416;
+}
+
+.polaroid-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.polaroid-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding: 0 2px;
+  color: #24221e;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.polaroid-caption .drag-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: #7a7670;
+  text-transform: uppercase;
+}
+
+/* Card 3: Speedcube Reflex Tester */
+.wb-reflex-card {
+  background: rgba(16, 16, 24, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.reflex-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.reflex-icon {
+  font-size: 1.5rem;
+}
+
+.reflex-title {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--fg);
+}
+
+.reflex-pb {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.74rem;
+  color: #8c867c;
+}
+
+.reflex-pb strong {
+  color: var(--lime);
+}
+
+.reflex-desc {
+  font-size: 0.85rem;
+  color: #9e988e;
+  line-height: 1.55;
+}
+
+.reflex-game {
+  width: 100%;
+}
+
+.reflex-screen {
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.reflex-screen.ready {
+  background: rgba(10, 10, 16, 0.85);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  color: var(--fg);
+}
+
+.reflex-screen.ready:hover {
+  border-color: var(--lime);
+  background: rgba(200, 245, 61, 0.04);
+}
+
+.reflex-screen.waiting {
+  background: rgba(255, 95, 95, 0.12);
+  border: 1px solid rgba(255, 95, 95, 0.4);
+  color: #ff9999;
+}
+
+.reflex-screen.now {
+  background: var(--lime);
+  border: 1px solid var(--lime);
+  color: #08080d;
+}
+
+.reflex-screen.result {
+  background: rgba(200, 245, 61, 0.1);
+  border: 1px solid rgba(200, 245, 61, 0.4);
+  color: var(--lime);
+}
+
+.reflex-screen.early {
+  background: rgba(255, 95, 95, 0.18);
+  border: 1px solid #ff5f5f;
+  color: #ff7777;
+}
+
+.screen-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+  margin-bottom: 0.2rem;
+}
+
+.screen-main {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* ── 3. TACTILE SPECIMEN TRAY (Solid, readable, zero jitter) ── */
+.wb-specimens-tray {
+  background: rgba(16, 16, 24, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 14px;
+  padding: 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.specimens-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.specimens-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.specimens-icon {
+  font-size: 1.4rem;
+}
+
+.specimens-header h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 0.15rem;
+}
+
+.specimens-header p {
+  font-size: 0.82rem;
+  color: #7a7670;
+}
+
+.specimens-legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: #8c867c;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.3rem;
+}
+
+.legend-dot.tech {
+  background: var(--lime);
+}
+
+.legend-dot.life {
+  background: var(--gold);
+}
+
+/* Two distinct racks of solid capsules */
+.specimens-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.specimen-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.group-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: #7a7670;
+  text-transform: uppercase;
+}
+
+.capsules-rack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.capsule-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  border-radius: 99px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 16, 0.65);
+  color: #d6d0c4;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+/* Tech category styling */
+.capsule-pill.tech:hover,
+.capsule-pill.tech.active {
+  background: rgba(200, 245, 61, 0.12);
+  border-color: rgba(200, 245, 61, 0.5);
+  color: var(--lime);
+  transform: translateY(-2px);
+}
+
+/* Life category styling */
+.capsule-pill.life:hover,
+.capsule-pill.life.active {
+  background: rgba(245, 197, 64, 0.12);
+  border-color: rgba(245, 197, 64, 0.5);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.capsule-pill:active {
+  transform: scale(0.96);
+}
+
+/* Live Inspector Readout Bar */
+.specimen-readout {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 1rem;
+  background: rgba(8, 8, 12, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.readout-prompt {
+  color: var(--lime);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.readout-text {
+  color: #a8a298;
+  transition: color 0.2s ease;
+}
+
+/* ── RESPONSIVE DESIGN ────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .wb-interactive-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .wb-polaroid-desk {
+    grid-column: span 2;
+    order: -1;
+  }
+  .wb-polaroid {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 820px) {
+  .workbench-section {
+    padding: 4rem 1.5rem 6rem;
+  }
+  .wb-dual-grid {
+    grid-template-columns: 1fr;
+  }
+  .specimens-columns {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .wb-interactive-row {
+    grid-template-columns: 1fr;
+  }
+  .wb-polaroid-desk {
+    grid-column: auto;
+  }
+}

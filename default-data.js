@@ -14,6 +14,11 @@ window.SITE_DEFAULT_DATA = {
     'hero_swap_words': 'building things 🔨, solving problems 🧩, making games 🎮, grinding DSA 📊, learning everything 📚, shipping code 🚀',
     'welcome_scrub_text': 'welcome to my profile, <br> a journey awaits you to explore!',
 
+    // The Workbench (Interactive About)
+    'workbench_speedcube_pb': '12.06s',
+    'workbench_status_location': 'Pune, India (VIT CSE)',
+    'workbench_status_balance': '50% code · 50% life',
+
     // HOME: About Bento Cards
     'about_card1_kicker': '01 / THE BUILDER',
     'about_card1_heading': 'I like making software you can reach out and touch.',

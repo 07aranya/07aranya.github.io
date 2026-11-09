@@ -63,17 +63,31 @@ function hydrateSiteContent(c, page) {
       }
     }
 
-    // About Bento Card 1 (The Builder)
+    // The Interactive Workbench
+    if (c.workbench_speedcube_pb) {
+      const pb = document.querySelector('.reflex-pb strong');
+      if (pb) pb.textContent = c.workbench_speedcube_pb;
+    }
+    if (c.workbench_status_location) {
+      const p1 = document.querySelector('.wb-status-bar .wb-stat-pill:nth-child(1)');
+      if (p1) p1.innerHTML = `<span class="status-dot"></span> ${c.workbench_status_location}`;
+    }
+    if (c.workbench_status_balance) {
+      const p2 = document.querySelector('.wb-status-bar .wb-stat-pill:nth-child(2)');
+      if (p2) p2.innerHTML = `<span class="status-dot"></span> ${c.workbench_status_balance}`;
+    }
+
+    // About Bento Card 1 (The Builder - fallback)
     if (c.about_card1_kicker) {
       const k = document.querySelector('.about-intro .about-kicker');
       if (k) k.textContent = c.about_card1_kicker;
     }
     if (c.about_card1_heading) {
-      const h3 = document.querySelector('.about-intro h3');
+      const h3 = document.querySelector('.wb-headline, .about-intro h3');
       if (h3) h3.innerHTML = c.about_card1_heading;
     }
     if (c.about_card1_bio) {
-      const p = document.querySelector('.about-intro p');
+      const p = document.querySelector('.wb-lead-p, .about-intro p');
       if (p) p.textContent = c.about_card1_bio;
     }
     if (c.about_card1_location) {

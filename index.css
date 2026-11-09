@@ -1567,34 +1567,6 @@
       }
     }
 
-    /* â”€â”€ SCRUB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-    .scrub-sec {
-      padding: 10rem 3rem;
-      overflow: hidden;
-      border-top: 1px solid var(--bd);
-      margin-bottom: 120vh;
-    }
-
-    .scrub-t {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.4rem, 5.5vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -.04em;
-      line-height: 1.05
-    }
-
-    .sw2 {
-      display: inline;
-      color: transparent;
-      -webkit-text-stroke: 1px var(--fg3);
-      transition: color .1s, -webkit-text-stroke .1s
-    }
-
-    .sw2.lit {
-      color: var(--fg);
-      -webkit-text-stroke: 0px transparent
-    }
-
     /* hover words */
     .gw {
       cursor: default;

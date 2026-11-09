@@ -770,7 +770,7 @@ const revObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersec
 document.querySelectorAll('[data-reveal]').forEach(el => revObs.observe(el));
 
 /* Sections Blur Fade — smooth scroll-based gradual transition */
-const blurSections = document.querySelectorAll('.sec, .now-sec, .photo-hover-sec, .split');
+const blurSections = document.querySelectorAll('.sec, .now-sec, .photo-hover-sec, .split, .workbench-section');
 let blurRaf = null;
 function updateBlur() {
   const vh = window.innerHeight;
@@ -873,48 +873,6 @@ setInterval(() => {
     }
   });
 }, 3000);
-
-/* ══ SCROLL SCRUB ═══════════════════════════════ */
-const sWords = 'welcome to my profile, <br> a journey awaits you to explore!'.split(' ');
-const sEl = document.getElementById('scrubT');
-if (sEl) {
-  sWords.forEach((w, i) => {
-    if (w === '<br>') {
-      const br = document.createElement('div');
-      br.style.height = '1.5rem'; // Adds space between the two lines
-      br.style.width = '100%';
-      sEl.appendChild(br);
-      return;
-    }
-    const s = document.createElement('span');
-    s.className = (i < 4) ? 'sw2 c-accent' : 'sw2';
-    s.textContent = w + ' ';
-    sEl.appendChild(s);
-  });
-}
-if (!document.getElementById('scrubStyle')) {
-  const st = document.createElement('style');
-  st.id = 'scrubStyle';
-  st.textContent = '.sw2.c-accent.lit { color: var(--lime) !important; text-shadow: 0 0 20px rgba(0,229,255,0.4); }';
-  document.head.appendChild(st);
-}
-const sSpans = sEl ? sEl.querySelectorAll('.sw2') : [];
-let sRaf = null;
-function doScrub() {
-  if (!sEl) return;
-  const r = document.getElementById('scrubSec').getBoundingClientRect();
-  const vh = window.innerHeight;
-  // Delay the animation start: wait until the section is 35% into the screen from the bottom
-  const prog = Math.max(0, Math.min(1, (vh - r.top - vh * 0.35) / (r.height * 0.8)));
-  const lit = Math.round(prog * sSpans.length * 1.2);
-  sSpans.forEach((sp, i) => {
-    if (i < lit && !sp.classList.contains('lit')) sp.classList.add('lit');
-    else if (i >= lit && sp.classList.contains('lit')) sp.classList.remove('lit');
-  });
-  sRaf = null;
-}
-window.addEventListener('scroll', () => { if (!sRaf) sRaf = requestAnimationFrame(doScrub) }, { passive: true });
-doScrub();
 
 /* ══ PROJECT CARD TILT ══════════════════════════ */
 document.querySelectorAll('.proj-feat, .proj-card').forEach(c => {

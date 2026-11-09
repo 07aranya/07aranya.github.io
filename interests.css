@@ -1,0 +1,338 @@
+/* ── SECTION 002: FREE-FLOATING SCATTERED INTERESTS ARENA ─────────
+   Aesthetic: Studio desk surface with a central stack of 7 free artifacts
+   that explode outward into organic positions and can be freely dragged.
+── */
+
+.interests-canvas-sec {
+  position: relative;
+  z-index: 2;
+  padding: 5rem 2rem 7rem;
+  border-top: 1px solid var(--bd);
+  background: rgba(8, 8, 13, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+}
+
+.interests-header-wrap {
+  max-width: 1300px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.interests-subhead {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  color: #7a7670;
+  text-transform: lowercase;
+}
+
+/* ── THE FREE ARENA CANVAS ────────────────────────────────── */
+.interests-arena {
+  position: relative;
+  width: 100%;
+  max-width: 1350px;
+  height: 840px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200, 245, 61, 0.025) 0%, rgba(12, 12, 18, 0.6) 100%);
+  border: 1px dashed rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Arena Background Watermark / Grid */
+.arena-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* ── CENTER CONTROL ANCHOR ────────────────────────────────── */
+.interests-center-anchor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  pointer-events: none;
+}
+
+.scatter-trigger-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.6rem;
+  background: #0d0d14;
+  border: 1px solid rgba(200, 245, 61, 0.4);
+  border-radius: 99px;
+  color: #ede8e0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scatter-trigger-btn:hover {
+  background: #141420;
+  border-color: var(--lime);
+  color: var(--lime);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+}
+
+.scatter-trigger-btn:active {
+  transform: scale(0.97);
+}
+
+.trigger-led {
+  width: 7px;
+  height: 7px;
+  background: var(--lime);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--lime);
+  animation: ledPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.trigger-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: #7a7670;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  pointer-events: none;
+  background: rgba(8, 8, 12, 0.8);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* ── THE 7 FREE-FLOATING ARTIFACT CARDS ────────────────────── */
+.free-card {
+  position: absolute;
+  width: 250px;
+  background: rgba(18, 18, 26, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 10px 14px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transform-origin: center center;
+  transition: transform 0.65s cubic-bezier(0.2, 1, 0.3, 1), 
+              opacity 0.4s ease, 
+              box-shadow 0.25s ease;
+}
+
+.free-card:active {
+  cursor: grabbing;
+}
+
+.free-card.is-dragging {
+  transition: none !important;
+  z-index: 60 !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+}
+
+/* Subtle physical stickers / tape on top */
+.card-sticker {
+  position: absolute;
+  top: -7px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: #a8a298;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.free-card:hover {
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.7);
+}
+
+/* Card Image Area */
+.card-media-wrap {
+  width: 100%;
+  height: 145px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111116;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.card-media-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  filter: contrast(1.03) saturate(1.05);
+  transition: transform 0.4s ease;
+}
+
+.free-card:hover .card-media-wrap img {
+  transform: scale(1.04);
+}
+
+/* Card Content Area */
+.card-body {
+  padding: 0 4px;
+}
+
+.card-tag-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.card-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  color: var(--lime);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.card-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: #6a6660;
+}
+
+.card-title {
+  font-family: 'Clash Display', 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+.card-desc {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #9e988e;
+}
+
+/* ── STATE 1: INITIAL CENTER STACK (PACKED) ───────────────── */
+.interests-arena.state-stacked .free-card {
+  top: 50%;
+  left: 50%;
+  opacity: 0.94;
+}
+
+/* Hovering over the center pile slightly fans the deck */
+.interests-arena.state-stacked:hover .free-card {
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.75);
+}
+
+/* ── STATE 2: SCATTERED FREELY ACROSS ARENA ────────────────── */
+/* Each of the 7 cards lands in an artfully distributed, organic coordinate */
+.interests-arena.state-scattered .free-card[data-index="0"] {
+  top: 9%;
+  left: 10%;
+  transform: rotate(-4deg);
+}
+
+.interests-arena.state-scattered .free-card[data-index="1"] {
+  top: 8%;
+  left: 71%;
+  transform: rotate(5deg);
+}
+
+.interests-arena.state-scattered .free-card[data-index="2"] {
+  top: 6%;
+  left: 41%;
+  transform: rotate(-2deg);
+}
+
+.interests-arena.state-scattered .free-card[data-index="3"] {
+  top: 48%;
+  left: 6%;
+  transform: rotate(3.5deg);
+}
+
+.interests-arena.state-scattered .free-card[data-index="4"] {
+  top: 49%;
+  left: 74%;
+  transform: rotate(-5deg);
+}
+
+.interests-arena.state-scattered .free-card[data-index="5"] {
+  top: 68%;
+  left: 52%;
+  transform: rotate(3deg);
+}
+
+.interests-arena.state-scattered .free-card[data-index="6"] {
+  top: 67%;
+  left: 23%;
+  transform: rotate(-3.5deg);
+}
+
+/* ── RESPONSIVE DESIGN ────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .interests-arena {
+    height: 980px;
+  }
+  .interests-arena.state-scattered .free-card[data-index="0"] { top: 7%; left: 6%; }
+  .interests-arena.state-scattered .free-card[data-index="1"] { top: 7%; left: 64%; }
+  .interests-arena.state-scattered .free-card[data-index="2"] { top: 28%; left: 36%; }
+  .interests-arena.state-scattered .free-card[data-index="3"] { top: 49%; left: 5%; }
+  .interests-arena.state-scattered .free-card[data-index="4"] { top: 49%; left: 66%; }
+  .interests-arena.state-scattered .free-card[data-index="5"] { top: 72%; left: 55%; }
+  .interests-arena.state-scattered .free-card[data-index="6"] { top: 72%; left: 14%; }
+}
+
+@media (max-width: 768px) {
+  .interests-canvas-sec {
+    padding: 3.5rem 1rem 5rem;
+  }
+  .interests-arena {
+    height: 1200px;
+  }
+  .free-card {
+    width: 215px;
+    padding: 8px 8px 12px;
+  }
+  .card-media-wrap {
+    height: 120px;
+  }
+  .interests-arena.state-scattered .free-card[data-index="0"] { top: 5%; left: 5%; }
+  .interests-arena.state-scattered .free-card[data-index="1"] { top: 5%; left: 45%; }
+  .interests-arena.state-scattered .free-card[data-index="2"] { top: 22%; left: 24%; }
+  .interests-arena.state-scattered .free-card[data-index="3"] { top: 40%; left: 5%; }
+  .interests-arena.state-scattered .free-card[data-index="4"] { top: 40%; left: 45%; }
+  .interests-arena.state-scattered .free-card[data-index="5"] { top: 60%; left: 24%; }
+  .interests-arena.state-scattered .free-card[data-index="6"] { top: 78%; left: 15%; }
+}

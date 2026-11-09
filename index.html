@@ -21,6 +21,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="workbench.css">
+  <link rel="stylesheet" href="interests.css">
   <link rel="icon" type="image/jpeg" href="images/icon.jpg">
 
   <!-- Google tag (gtag.js) -->
@@ -72,68 +74,344 @@
     </div>
   </section>
 
-  <div class="mq">
-    <div class="mq-t" id="mqT"></div>
-  </div>
-
-  <!-- SCRUB -->
-  <div class="scrub-sec" id="scrubSec">
-    <div class="scrub-t" id="scrubT"></div>
-  </div>
-
-  <!-- ABOUT ME HEADER -->
-  <section id="about"
-    style="padding: 8rem 3rem 0; border-top: 1px solid var(--bd); position: relative; z-index: 2; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(2, 0, 16, 0.25);">
-    <div class="sh" data-reveal style="margin-bottom: 0;"><span class="shn">001</span>
-      <h2>about me</h2>
+  <!-- 001 // ABOUT ME (THE STUDIO WORKBENCH) -->
+  <section class="workbench-section" id="about" aria-label="About Aranya - The Studio Workbench">
+    <div class="sh" data-reveal style="max-width: 1300px; margin: 0 auto 2.5rem;">
+      <span class="shn">001</span>
+      <h2>about <span class="gw c">me</span></h2>
       <div class="shl"></div>
+    </div>
+
+    <div class="wb-layout-wrap">
+      <!-- 1. PRIMARY EDITORIAL INTRO (Immediate full story upfront) -->
+      <div class="wb-primary-intro" data-reveal>
+        <div class="wb-bio-header">
+          <div class="wb-kicker">01 // THE CORE NARRATIVE</div>
+          <h3 class="wb-headline">
+            Building software you can <span class="gw">reach out and touch</span>, and cracking open the black boxes under the hood.
+          </h3>
+          <p class="wb-lead-p">
+            I’m Aranya, a second-year CSE student at VIT Pune. Whether it’s writing zero-latency webcam gesture tracking in OpenCV, tuning gyroscope balance loops on an ESP32, or practicing sub-200ms finger-trick reflexes on a Rubik’s cube, I thrive at the friction point where digital code meets physical reality.
+          </p>
+        </div>
+
+        <!-- The Dual Reality: Tech vs Non-Tech side-by-side -->
+        <div class="wb-dual-grid">
+          <!-- 01: Engineering & Tangible Code -->
+          <div class="wb-dual-card tech-card">
+            <div class="dual-header">
+              <span class="dual-tag">01 / IN THE TERMINAL</span>
+              <span class="dual-meta">software · hardware · vision</span>
+            </div>
+            <h4>Tangible Systems &amp; Feel</h4>
+            <p>
+              I care deeply about how systems <em>feel</em>. Not just whether an algorithm runs, but how smoothly an input pipeline dampens sensor noise, how responsive a game loop updates state, and how physical microcontrollers translate raw voltages into playful user interfaces.
+            </p>
+            <div class="dual-bullets">
+              <div class="dual-item"><span class="d-bullet">↳</span><span><strong>Computer Vision:</strong> Real-time gesture interaction (OpenCV, MediaPipe) with custom smoothing.</span></div>
+              <div class="dual-item"><span class="d-bullet">↳</span><span><strong>Embedded Hardware:</strong> ESP32, Arduino, I2C sensor fusion, gyro-stabilized motion controls.</span></div>
+              <div class="dual-item"><span class="d-bullet">↳</span><span><strong>Game Engines &amp; Logic:</strong> Unity (C#) mechanics, state machines, spatial audio, and clean DSA.</span></div>
+            </div>
+          </div>
+
+          <!-- 02: Real World, Reflex & Sound -->
+          <div class="wb-dual-card life-card">
+            <div class="dual-header">
+              <span class="dual-tag">02 / IN THE PHYSICAL WORLD</span>
+              <span class="dual-meta">reflex · music · roots</span>
+            </div>
+            <h4>Muscle Memory &amp; Adaptability</h4>
+            <p>
+              What happens off-screen shapes how I think on-screen. High-speed pattern recognition under pressure, listening closely to nuances in an audio track, and learning to rebuild from zero in new environments.
+            </p>
+            <div class="dual-bullets">
+              <div class="dual-item"><span class="d-bullet">↳</span><span><strong>Speedcubing (PB: 12.06s):</strong> Sub-13s 3x3 solver. Pure algorithmic spatial memory and sub-200ms finger tricks.</span></div>
+              <div class="dual-item"><span class="d-bullet">↳</span><span><strong>Fender Stratocaster:</strong> Black Squier Sonic HSS. Picking up Bollywood melodies and indie riffs by ear to reset the mind.</span></div>
+              <div class="dual-item"><span class="d-bullet">↳</span><span><strong>Court Sports &amp; 7 Cities:</strong> Badminton reflexes, state-level football-tennis runner-up, and lived across 7 Indian cities.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. THE PHYSICAL WORKBENCH DESK (Mixtape, Polaroid, Speedcube Reflex) -->
+      <div class="wb-interactive-row" data-reveal>
+        <!-- Card 1: Analog Cassette Memo Deck -->
+        <div class="wb-analog-deck">
+          <div class="deck-topbar">
+            <div class="tape-status">
+              <span class="tape-rec-led"></span>
+              <span class="tape-code">DECK 01 // AUDIO MEMOS</span>
+            </div>
+            <div class="deck-tape-case">
+              <div class="cassette-mini" id="wbCassetteMini">
+                <span class="mini-spool left"></span>
+                <span class="mini-window">ARANYA_C90</span>
+                <span class="mini-spool right"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-active-memo">
+            <div class="memo-title-row">
+              <span class="memo-num" id="wbActiveNum">MEMO 01</span>
+              <span class="memo-tag" id="wbActiveTag">NON-TECH // ROOTS</span>
+            </div>
+            <h4 class="memo-name" id="wbActiveTitle">origins.wav</h4>
+            <p class="memo-desc" id="wbActiveStory">
+              Lived across 7 cities — Nagpur, Mumbai, Goa, Hyderabad, Baramati, Kolhapur, and Pune. Constantly moving taught me to observe people quickly and feel comfortable building from zero in any room.
+            </p>
+          </div>
+
+          <!-- 4 Track Selectors -->
+          <div class="deck-tracks" role="tablist">
+            <button class="track-pill active" data-track="0">
+              <span class="tp-icon">▶</span>
+              <span class="tp-label">01. origins.wav</span>
+              <span class="tp-badge">7 cities</span>
+            </button>
+            <button class="track-pill" data-track="1">
+              <span class="tp-icon">▶</span>
+              <span class="tp-label">02. tangible_code.flac</span>
+              <span class="tp-badge">sensors &amp; vision</span>
+            </button>
+            <button class="track-pill" data-track="2">
+              <span class="tp-icon">▶</span>
+              <span class="tp-label">03. the_12s_mind.mp3</span>
+              <span class="tp-badge">12.06s pb</span>
+            </button>
+            <button class="track-pill" data-track="3">
+              <span class="tp-icon">▶</span>
+              <span class="tp-label">04. strat_chords.aiff</span>
+              <span class="tp-badge">fender strat</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Center Draggable Polaroid Photo -->
+        <div class="wb-polaroid-desk">
+          <div class="wb-polaroid" id="wbPolaroid">
+            <div class="polaroid-pin">📌</div>
+            <div class="polaroid-img-wrap">
+              <img id="wbPolaroidImg" src="images/neww/WhatsApp Image 2026-05-02 at 11.28.00.jpeg" alt="Field photograph" loading="lazy">
+            </div>
+            <div class="polaroid-caption" id="wbPolaroidCaption">
+              <span>sunset in goa · adaptable roots</span>
+              <small class="drag-hint">⇄ draggable</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Playable Speedcube Reflex Tester -->
+        <div class="wb-reflex-card">
+          <div class="reflex-header">
+            <span class="reflex-icon">🧩</span>
+            <div>
+              <span class="reflex-title">Speedcube Reflex</span>
+              <span class="reflex-pb">Aranya's 3x3 Record: <strong>12.06s</strong></span>
+            </div>
+          </div>
+          <p class="reflex-desc">
+            Competitive cubing trains sub-200ms visual pattern recognition &amp; finger triggers. Test your own reaction latency below:
+          </p>
+          <div class="reflex-game">
+            <div class="reflex-screen ready" id="reflexScreen">
+              <span class="screen-sub">BENCHMARK TEST</span>
+              <span class="screen-main" id="reflexText">CLICK TO START</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. TACTILE SPECIMEN TRAY (Crisp, stable, readable, zero jitter!) -->
+      <div class="wb-specimens-tray" data-reveal>
+        <div class="specimens-header">
+          <div class="specimens-title-group">
+            <span class="specimens-icon">🏷️</span>
+            <div>
+              <h4>Tactile Specimen Index</h4>
+              <p>Direct dimensions of my craft &amp; life — tap or hover any tag to inspect</p>
+            </div>
+          </div>
+          <div class="specimens-legend">
+            <span><span class="legend-dot tech"></span> Tech Craft</span>
+            <span><span class="legend-dot life"></span> Life &amp; Reflex</span>
+          </div>
+        </div>
+
+        <!-- Two stable, beautifully arranged trays -->
+        <div class="specimens-columns">
+          <!-- Tech Tray -->
+          <div class="specimen-group">
+            <span class="group-label">ENGINEERING &amp; CODE (50%)</span>
+            <div class="capsules-rack" id="techRack">
+              <button class="capsule-pill tech" data-tip="Game mechanics, state machines, physics &amp; loops">Unity 2D/3D</button>
+              <button class="capsule-pill tech" data-tip="Real-time webcam tracking &amp; custom input smoothing">OpenCV &amp; MediaPipe</button>
+              <button class="capsule-pill tech" data-tip="Gyroscope balance robot &amp; sensor I/O protocols">ESP32 &amp; Arduino</button>
+              <button class="capsule-pill tech" data-tip="Engine scripting, algorithms &amp; systems architecture">C# &amp; C++</button>
+              <button class="capsule-pill tech" data-tip="Rapid prototyping, vision pipelines &amp; scripts">Python</button>
+              <button class="capsule-pill tech" data-tip="Hardware-to-software physical interfaces">Sensor I/O</button>
+            </div>
+          </div>
+
+          <!-- Non-Tech Tray -->
+          <div class="specimen-group">
+            <span class="group-label">LIFE, REFLEX &amp; SOUND (50%)</span>
+            <div class="capsules-rack" id="lifeRack">
+              <button class="capsule-pill life" data-tip="Official 12.06s PB · sub-13s competitive solver">12.06s Speedcubing</button>
+              <button class="capsule-pill life" data-tip="Black Sonic Strat (HSS) · riffs &amp; ear melodies">Fender Stratocaster</button>
+              <button class="capsule-pill life" data-tip="Court footwork, agility &amp; hand-eye coordination">Badminton</button>
+              <button class="capsule-pill life" data-tip="Nagpur, Mumbai, Goa, Baramati, Hyderabad, Kolhapur, Pune">7 Indian Cities</button>
+              <button class="capsule-pill life" data-tip="State-level runner up tournament competitor">Football-Tennis Medal</button>
+              <button class="capsule-pill life" data-tip="Street and sunset photography observer">Camera &amp; Film</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Capsule Inspection readout bar -->
+        <div class="specimen-readout" id="specimenReadout">
+          <span class="readout-prompt">↳ INSPECTOR:</span>
+          <span class="readout-text" id="readoutText">Hover or click any specimen tag above to view context.</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ABOUT BENTO -->
-  <section class="about-grid split" aria-label="About Aranya">
-    <article class="about-card about-intro" data-reveal>
-      <div class="about-kicker">01 / THE BUILDER</div>
-      <h3>I like making software you can <span class="gw">reach out and touch.</span></h3>
-      <p>I’m Aranya, a second-year CSE student at VIT Pune. I’m drawn to the little details that make an experience feel real: a camera that moves just right, a gesture that registers instantly, or a sensor that turns a physical motion into play. I often rebuild a small version from scratch to understand what’s happening under the hood.</p>
-      <div class="about-location"><span class="status-dot"></span> currently based in Pune, India</div>
-    </article>
-
-    <article class="about-card about-tools" data-reveal>
-      <div class="about-kicker">02 / MY TOOLBELT</div>
-      <h3>Tools I reach for</h3>
-      <div class="tool-group"><span class="tool-label">LANGUAGES</span><div class="tags"><span class="tg">C#</span><span class="tg">C++</span><span class="tg">Python</span><span class="tg">TypeScript</span></div></div>
-      <div class="tool-group"><span class="tool-label">ENGINES &amp; TOOLS</span><div class="tags"><span class="tg">Unity</span><span class="tg">Pygame</span><span class="tg">OpenCV</span><span class="tg">Git</span></div></div>
-      <div class="tool-group"><span class="tool-label">HARDWARE</span><div class="tags"><span class="tg">ESP32</span><span class="tg">Arduino</span><span class="tg">sensor I/O</span></div></div>
-    </article>
-
-    <article class="about-card about-principles" data-reveal>
-      <div class="about-kicker">03 / HOW I THINK</div>
-      <h3>Things building has taught me</h3>
-      <div class="principle"><span class="principle-mark">↳</span><p><strong>Understand the black box.</strong> I like rebuilding a small version of a system once, just to see how the pieces work.</p></div>
-      <div class="principle"><span class="principle-mark">↳</span><p><strong>Feel matters.</strong> My gesture game taught me that smoothing noisy input can matter more than tracking every raw movement.</p></div>
-      <div class="principle"><span class="principle-mark">↳</span><p><strong>Make it tangible.</strong> A quick playable prototype or sensor demo teaches me more than an idea left on paper.</p></div>
-    </article>
-
-    <article class="about-card about-lab" data-reveal>
-      <div class="about-kicker">04 / IN THE LAB</div>
-      <h3>A snapshot of what’s on my mind</h3>
-      <div class="lab-row"><span class="lab-label">BUILDING</span><p>Small vision games and microcontroller experiments</p></div>
-      <div class="lab-row"><span class="lab-label">LEARNING</span><p>Unity 2D, game loops, state machines, trees &amp; graphs</p></div>
-      <div class="lab-row"><span class="lab-label">OFF-SCREEN</span><p>Guitar, badminton, and getting out with my camera</p></div>
-      <div class="lab-note"><span class="status-dot"></span> always tinkering with the next idea</div>
-    </article>
-  </section>
-
-  <!-- HOVER PHOTO SECTION -->
-  <section class="photo-hover-sec" id="interests">
-    <div id="floatImg"></div>
-    <div class="ph-bg-img" id="phBgImg"></div>
-    <div class="sh" data-reveal><span class="shn">002</span>
-      <h2>interests</h2>
-      <div class="shl"></div>
+  <!-- 002 // INTERESTS (FREE SCATTER ARENA) -->
+  <section class="interests-canvas-sec" id="interests" aria-label="Aranya's Interests - Free Scattered Studio Deck">
+    <div class="interests-header-wrap" data-reveal>
+      <div class="sh" style="margin-bottom: 0;">
+        <span class="shn">002</span>
+        <h2>interests &amp; <span class="gw c">passions</span></h2>
+        <div class="shl"></div>
+      </div>
+      <span class="interests-subhead">// interactive deck · click to scatter &amp; drag</span>
     </div>
-    <div class="ph-items" id="phItems"></div>
+
+    <!-- Free-Floating Studio Arena -->
+    <div class="interests-arena state-stacked" id="interestsArena" data-reveal>
+      <div class="arena-grid-pattern"></div>
+
+      <!-- Center Unpack / Gather Trigger Deck -->
+      <div class="interests-center-anchor">
+        <button id="btnScatterInterests" class="scatter-trigger-btn" type="button" aria-label="Unpack and scatter interests deck">
+          <span class="trigger-led"></span>
+          <span id="scatterBtnText">UNPACK INTERESTS (7)</span>
+        </button>
+        <span class="trigger-hint" id="scatterBtnHint">click to scatter across the studio</span>
+      </div>
+
+      <!-- 01: Guitar -->
+      <div class="free-card" data-index="0">
+        <span class="card-sticker">SONIC STRAT</span>
+        <div class="card-media-wrap">
+          <img src="images/guitar1.jpg" alt="Fender Squier Sonic Stratocaster" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag">01 // MUSIC</span>
+            <span class="card-num">🎸</span>
+          </div>
+          <h3 class="card-title">Fender Stratocaster</h3>
+          <p class="card-desc">Black Squier Sonic HSS. Learning Arctic Monkeys riffs &amp; Bollywood melodies by ear to reset the mind.</p>
+        </div>
+      </div>
+
+      <!-- 02: Game Development -->
+      <div class="free-card" data-index="1">
+        <span class="card-sticker">UNITY 2D/3D</span>
+        <div class="card-media-wrap">
+          <img src="images/projects/vrgame.jpeg" alt="Game development project" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag">02 // WORLDS</span>
+            <span class="card-num">🎮</span>
+          </div>
+          <h3 class="card-title">Game Development</h3>
+          <p class="card-desc">Designing mechanics from zero: state machines, responsive movement, game loops &amp; spatial atmosphere.</p>
+        </div>
+      </div>
+
+      <!-- 03: DSA & Algorithms -->
+      <div class="free-card" data-index="2">
+        <span class="card-sticker">LEETCODE &amp; LOGIC</span>
+        <div class="card-media-wrap">
+          <img src="images/projects/cbse.png" alt="Algorithm engineering" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag">03 // PROBLEM SOLVING</span>
+            <span class="card-num">🧩</span>
+          </div>
+          <h3 class="card-title">DSA &amp; Algorithms</h3>
+          <p class="card-desc">Grinding trees, graphs, dynamic programming, and writing clean, cache-friendly time complexity.</p>
+        </div>
+      </div>
+
+      <!-- 04: Badminton & Football -->
+      <div class="free-card" data-index="3">
+        <span class="card-sticker">STATE RUNNER-UP</span>
+        <div class="card-media-wrap">
+          <img src="images/state level/football medal.jpeg" alt="State level athletics and medal" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag">04 // ATHLETICS</span>
+            <span class="card-num">🏸⚽</span>
+          </div>
+          <h3 class="card-title">Badminton &amp; Football</h3>
+          <p class="card-desc">Fast court footwork, split-second reflexes, endurance, and competing in state-level football-tennis.</p>
+        </div>
+      </div>
+
+      <!-- 05: Music -->
+      <div class="free-card" data-index="4">
+        <span class="card-sticker">HEAVY ROTATION</span>
+        <div class="card-media-wrap">
+          <img src="images/album covers/nights.jpg" alt="Frank Ocean Nights album art" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag">05 // ROTATION</span>
+            <span class="card-num">🎵</span>
+          </div>
+          <h3 class="card-title">Music &amp; Sonic Moods</h3>
+          <p class="card-desc">Frank Ocean, Arctic Monkeys, Pink Floyd, Radiohead &amp; The Local Train soundtracking midnight code.</p>
+        </div>
+      </div>
+
+      <!-- 06: Travel & 7 Cities -->
+      <div class="free-card" data-index="5">
+        <span class="card-sticker">7 CITIES</span>
+        <div class="card-media-wrap">
+          <img src="images/places/goa1.jpeg" alt="Travel landscape and Goa sunsets" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag">06 // ROOTS</span>
+            <span class="card-num">🌍</span>
+          </div>
+          <h3 class="card-title">Travel &amp; 7 Cities</h3>
+          <p class="card-desc">Nagpur, Mumbai, Goa, Hyderabad, Baramati, Kolhapur, Pune. Rapid adaptability and observing people.</p>
+        </div>
+      </div>
+
+      <!-- 07: Speedcubing -->
+      <div class="free-card" data-index="6">
+        <span class="card-sticker">PB: 12.06s</span>
+        <div class="card-media-wrap">
+          <img src="images/art dance and olympiads/allmedals.jpeg" alt="Competition speedcubing and medals" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag">07 // REFLEX</span>
+            <span class="card-num">⏱️</span>
+          </div>
+          <h3 class="card-title">12.06s Speedcubing</h3>
+          <p class="card-desc">Sub-13s competitive 3x3 solver. Pure algorithmic spatial memory, look-ahead &amp; sub-200ms finger tricks.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- PROJECTS SHOWCASE -->
@@ -535,6 +813,7 @@
   <script src="supabase-client.js"></script>
   <script src="hydrate.js"></script>
   <script src="main.js"></script>
+  <script src="workbench.js"></script>
 </body>
 
 </html>
