@@ -169,16 +169,31 @@ function hydrateSiteContent(c, page) {
   // ── PROFESSIONAL PAGE FIELDS ──
   if (page.isProfessional) {
     if (c.prof_hero_badge) {
-      const el = document.querySelector('.badge-pill, .hero-badge');
+      const el = document.querySelector('.badge-pill, .hero-badge, .journal-badge-tag');
       if (el) el.textContent = c.prof_hero_badge;
     }
+    if (c.prof_hero_h1) {
+      const el = document.querySelector('.p-title-main');
+      if (el) el.innerHTML = c.prof_hero_h1;
+    }
     if (c.prof_hero_sub) {
-      const el = document.querySelector('.prof-sub, .hero-sub');
-      if (el) el.textContent = c.prof_hero_sub;
+      const el = document.querySelector('.prof-sub, .hero-sub, .frontispiece-box p');
+      if (el) el.textContent = `"${c.prof_hero_sub.replace(/^"|"$/g, '')}"`;
     }
     if (c.prof_bio_text) {
-      const el = document.querySelector('.prof-bio-text');
-      if (el) el.textContent = c.prof_bio_text;
+      const el = document.querySelector('.prof-bio-text, .left-page > p.p-lead-text:last-of-type');
+      if (el) el.innerHTML = c.prof_bio_text;
+    }
+    if (c.prof_resume_url) {
+      const el = document.querySelector('.p-action-row a.p-btn-dark');
+      if (el) {
+        el.href = c.prof_resume_url;
+        if (!c.prof_resume_url.endsWith('.pdf')) {
+          el.removeAttribute('download');
+          el.target = '_blank';
+          el.rel = 'noopener';
+        }
+      }
     }
   }
 
@@ -327,15 +342,17 @@ async function hydratePersonal(content) {
   // Games
   const games = await window.sbHelpers.getPersonalItems('game');
   if (games && games.length > 0) {
-    const grid = document.querySelector('.games-grid, #gamesGrid');
+    const grid = document.querySelector('#gamesG, .games-cartridge-grid, .games-grid, #gamesGrid');
     if (grid) {
       grid.innerHTML = games.map(g => `
-        <div class="game-card">
-          ${g.image_url ? `<img src="${g.image_url}" alt="${g.title}" loading="lazy">` : ''}
-          <div class="game-info">
-            <h4>${g.title}</h4>
-            <span>${g.subtitle || ''}</span>
-            <div class="rating">${'★'.repeat(g.rating || 5)}${'☆'.repeat(5 - (g.rating || 5))}</div>
+        <div class="cartridge-box">
+          <div class="cartridge-label">
+            ${g.image_url ? `<img src="${g.image_url}" alt="${g.title}" loading="lazy">` : ''}
+            <div class="cartridge-meta">
+              <h5>${g.title}</h5>
+              <span>${g.subtitle || ''}</span>
+              <div class="cartridge-rating">${'★'.repeat(g.rating || 5)}${'☆'.repeat(5 - (g.rating || 5))}</div>
+            </div>
           </div>
         </div>
       `).join('');
@@ -344,9 +361,9 @@ async function hydratePersonal(content) {
 
   // Guitar Songs
   if (content && content.guitar_can_play) {
-    const canPlayEl = document.querySelector('#canPlayList, .songs-can-play');
+    const canPlayEl = document.querySelector('#gtrQuestPlay, #canPlayList, .songs-can-play');
     if (canPlayEl) {
-      canPlayEl.innerHTML = content.guitar_can_play.split(',').map(s => `<span class="song-chip">${s.trim()}</span>`).join('');
+      canPlayEl.innerHTML = content.guitar_can_play.split(',').map(s => `<li><span>✓</span> ${s.trim()}</li>`).join('');
     }
   }
 }
