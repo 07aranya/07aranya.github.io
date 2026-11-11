@@ -124,7 +124,7 @@ window.SITE_DEFAULT_DATA = {
       lead_description: 'an interactive multilingual learning companion breaking regional language barriers for students across 9+ indian vernacular languages.',
       tech_tags: ['typescript', 'react', 'gemini api', '9+ languages', 'cbse / state board'],
       github_url: 'https://github.com/07aranya/VernacularChatbot',
-      live_url: 'https://ai-vernacular-chatbot.vercel.app/',
+      live_url: 'https://vernacular-chatbot.vercel.app/',
       thumbnail_url: 'images/projects/chatbot.png',
       the_idea: 'many students in regional schools struggle when technical and scientific concepts are taught purely in standard english. this chatbot bridges the comprehension gap.',
       how_i_built_it: 'built with react and typescript, featuring dual-persona switching (friendly peer vs concise tutor). calls google’s gemini api with customized system prompts grounded in ncert curriculum standards.',
