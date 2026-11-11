@@ -204,7 +204,12 @@ function hydrateSiteContent(c, page) {
   }
   if (c.social_github) {
     document.querySelectorAll('a[href*="github.com/"]').forEach(a => {
-      if (!a.getAttribute('href').includes('repo') && !a.classList.contains('cs-link') && !a.classList.contains('exp-link')) {
+      if (a.closest('#work, .cs-card, .proj-card, .p-project-entry, [data-spread-idx="2"], [data-spread-idx="3"]')) return;
+      if (a.classList.contains('cs-link') || a.classList.contains('exp-link') || a.classList.contains('proj-link')) return;
+      try {
+        const parts = new URL(a.href).pathname.split('/').filter(Boolean);
+        if (parts.length <= 1) a.href = c.social_github;
+      } catch {
         a.href = c.social_github;
       }
     });
@@ -251,9 +256,41 @@ async function hydrateIndex() {
   }
 }
 
+function escHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function observeReveals(root) {
+  if (!root || typeof IntersectionObserver === 'undefined') return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  root.querySelectorAll('[data-reveal]').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('in');
+    } else {
+      obs.observe(el);
+    }
+  });
+}
+
 function renderHomeProjects(projects) {
-  const container = document.querySelector('#work .proj-list');
-  if (!container) return;
+  const featuredContainer = document.querySelector('#work .cs-list');
+  const otherContainer = document.querySelector('#work .proj-grid');
+  const moreHead = document.querySelector('#work .more-proj-head');
+  if (!featuredContainer && !otherContainer) return;
 
   const homeProjects = projects.filter(p => p.page_visibility === 'both' || p.page_visibility === 'home' || !p.page_visibility);
   if (homeProjects.length === 0) return;
@@ -261,80 +298,103 @@ function renderHomeProjects(projects) {
   const featured = homeProjects.filter(p => p.is_featured);
   const others = homeProjects.filter(p => !p.is_featured);
 
-  let html = '';
+  // Render Featured Case Studies into .cs-list using index.html / home.css markup
+  if (featuredContainer) {
+    featuredContainer.style.display = featured.length > 0 ? '' : 'none';
+    featuredContainer.innerHTML = featured.length > 0 ? featured.map((p, idx) => {
+      const num = String(idx + 1).padStart(2, '0');
+      const tagsHtml = (p.tech_tags || []).map(t => `<span>${escHtml(t)}</span>`).join('');
 
-  // Render Featured Case Studies
-  featured.forEach((p, idx) => {
-    const num = String(idx + 1).padStart(2, '0');
-    const tagsHtml = (p.tech_tags || []).map(t => `<span class="p-tag">${t}</span>`).join('');
-    
-    let linksHtml = '';
-    if (p.live_url) linksHtml += `<a href="${p.live_url}" target="_blank" rel="noopener" class="cs-link cs-link-primary">live demo ↗</a>`;
-    if (p.github_url) linksHtml += `<a href="${p.github_url}" target="_blank" rel="noopener" class="cs-link">source code ↗</a>`;
-
-    let caseStudySections = '';
-    if (p.the_idea) caseStudySections += `<div class="cs-block"><div class="cs-label">The idea</div><p>${p.the_idea}</p></div>`;
-    if (p.how_i_built_it) caseStudySections += `<div class="cs-block"><div class="cs-label">How I built it</div><p>${p.how_i_built_it}</p></div>`;
-    if (p.the_tricky_part) caseStudySections += `<div class="cs-block"><div class="cs-label">The tricky part</div><p>${p.the_tricky_part}</p></div>`;
-    if (p.what_i_learned) caseStudySections += `<div class="cs-block"><div class="cs-label">What I learned</div><p>${p.what_i_learned}</p></div>`;
-
-    html += `
-      <article class="proj-case-study" data-reveal>
-        <div class="cs-header">
-          <div class="cs-media">
-            ${p.thumbnail_url ? `<img src="${p.thumbnail_url}" alt="${p.title}" class="cs-thumb" loading="lazy">` : ''}
-          </div>
-          <div class="cs-intro">
-            <span class="cs-tagline">${p.category_badge || `${num} / CASE STUDY`}</span>
-            <h3 class="cs-title">${p.title}</h3>
-            <p class="cs-lead">${p.lead_description || ''}</p>
-            <div class="p-tags">${tagsHtml}</div>
-            <div class="cs-links">${linksHtml}</div>
-          </div>
-        </div>
-        ${caseStudySections ? `<div class="cs-body-grid">${caseStudySections}</div>` : ''}
-      </article>
-    `;
-  });
-
-  // Render Other Prototypes / Experiments
-  if (others.length > 0) {
-    html += `
-      <div class="exp-subhead" data-reveal>
-        <h3>more experiments & prototypes</h3>
-        <p>other projects built across web redesigns, embedded iot hardware, and game physics.</p>
-      </div>
-      <div class="exp-grid">
-    `;
-
-    others.forEach((p, idx) => {
-      const num = String(featured.length + idx + 1).padStart(2, '0');
-      const tagsHtml = (p.tech_tags || []).map(t => `<span class="p-tag">${t}</span>`).join('');
       let linksHtml = '';
-      if (p.live_url) linksHtml += `<a href="${p.live_url}" target="_blank" rel="noopener" class="exp-link">visit site ↗</a>`;
-      if (p.github_url) linksHtml += `<a href="${p.github_url}" target="_blank" rel="noopener" class="exp-link">source code ↗</a>`;
+      if (p.live_url) {
+        linksHtml += `<a href="${escHtml(p.live_url)}" target="_blank" rel="noopener noreferrer" class="proj-link primary">live demo ↗</a>`;
+      }
+      if (p.github_url) {
+        const cls = p.live_url ? 'secondary' : 'primary';
+        const label = p.live_url ? 'source code ↗' : 'view source code ↗';
+        linksHtml += `<a href="${escHtml(p.github_url)}" target="_blank" rel="noopener noreferrer" class="proj-link ${cls}">${label}</a>`;
+      }
+      if (!p.live_url && !p.github_url && /vr\s*horror/i.test(p.title || '')) {
+        linksHtml = `
+          <a href="javascript:void(0)" onclick="openMediaModal('video')" class="proj-link primary">watch gameplay clip 🎬</a>
+          <a href="javascript:void(0)" onclick="openMediaModal('photo')" class="proj-link secondary">view gallery 📸</a>
+        `;
+      }
 
-      html += `
-        <article class="exp-card" data-reveal>
-          ${p.thumbnail_url ? `
-            <div class="exp-media">
-              <img src="${p.thumbnail_url}" alt="${p.title}" loading="lazy">
-            </div>` : ''}
-          <div class="exp-content">
-            <span class="exp-num">${p.category_badge || `${num} / PROJECT`}</span>
-            <h4 class="exp-title">${p.title}</h4>
-            <p class="exp-desc">${p.lead_description || ''}</p>
-            <div class="p-tags">${tagsHtml}</div>
-            <div class="exp-actions">${linksHtml}</div>
+      let breakdownHtml = '';
+      const cols = [
+        ['the idea', p.the_idea],
+        ['how i built it', p.how_i_built_it],
+        ['the tricky part', p.the_tricky_part],
+        ['what i learned', p.what_i_learned]
+      ].filter(([, text]) => text && String(text).trim());
+
+      if (cols.length > 0) {
+        breakdownHtml = `<div class="cs-breakdown">${cols.map(([label, text]) => `
+          <div class="cs-col">
+            <h4 class="cs-label">${label}</h4>
+            <p>${escHtml(text)}</p>
           </div>
+        `).join('')}</div>`;
+      }
+
+      return `
+        <article class="cs-card" data-reveal>
+          <div class="cs-hero">
+            <div class="cs-media">
+              ${p.thumbnail_url ? `<img src="${escHtml(p.thumbnail_url)}" alt="${escHtml(p.title)}" loading="lazy">` : ''}
+            </div>
+            <div class="cs-meta">
+              <div class="cs-tagline">${escHtml(p.category_badge || `${num} / CASE STUDY`)}</div>
+              <h3 class="cs-title">${escHtml(p.title)}</h3>
+              <p class="cs-lead">${escHtml(p.lead_description || '')}</p>
+              <div class="proj-tech">${tagsHtml}</div>
+              <div class="proj-links">${linksHtml}</div>
+            </div>
+          </div>
+          ${breakdownHtml}
         </article>
       `;
-    });
-
-    html += `</div>`;
+    }).join('') : '';
+    observeReveals(featuredContainer);
   }
 
-  container.innerHTML = html;
+  // Render Other Prototypes into .proj-grid
+  if (otherContainer) {
+    if (moreHead) moreHead.style.display = others.length > 0 ? '' : 'none';
+    otherContainer.style.display = others.length > 0 ? '' : 'none';
+
+    if (others.length > 0) {
+      otherContainer.innerHTML = others.map((p, idx) => {
+        const num = String(featured.length + idx + 1).padStart(2, '0');
+        const tagsHtml = (p.tech_tags || []).map(t => `<span>${escHtml(t)}</span>`).join('');
+        let linksHtml = '';
+        if (p.live_url) {
+          linksHtml += `<a href="${escHtml(p.live_url)}" target="_blank" rel="noopener noreferrer" class="proj-link primary">${idx === 1 ? 'project demo ↗' : 'visit site ↗'}</a>`;
+        }
+        if (p.github_url) {
+          linksHtml += `<a href="${escHtml(p.github_url)}" target="_blank" rel="noopener noreferrer" class="proj-link ${p.live_url ? 'secondary' : 'primary'}">source code ↗</a>`;
+        }
+
+        return `
+          <div class="proj-card" data-reveal style="transition-delay:${(idx * 0.1).toFixed(1)}s">
+            ${p.thumbnail_url ? `
+              <div class="proj-card-img">
+                <img src="${escHtml(p.thumbnail_url)}" alt="${escHtml(p.title)}" loading="lazy">
+              </div>` : ''}
+            <div class="proj-card-body">
+              <div class="proj-num">${escHtml(p.category_badge || `${num} / PROJECT`)}</div>
+              <div class="proj-name">${escHtml(p.title)}</div>
+              <p class="proj-desc">${escHtml(p.lead_description || '')}</p>
+              <div class="proj-tech">${tagsHtml}</div>
+              <div class="proj-links">${linksHtml}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      observeReveals(otherContainer);
+    }
+  }
 }
 
 // ── 3. PERSONAL PAGE HYDRATOR ───────────────────────────────
@@ -347,10 +407,10 @@ async function hydratePersonal(content) {
       grid.innerHTML = games.map(g => `
         <div class="cartridge-box">
           <div class="cartridge-label">
-            ${g.image_url ? `<img src="${g.image_url}" alt="${g.title}" loading="lazy">` : ''}
+            ${g.image_url ? `<img src="${escHtml(g.image_url)}" alt="${escHtml(g.title)}" loading="lazy">` : ''}
             <div class="cartridge-meta">
-              <h5>${g.title}</h5>
-              <span>${g.subtitle || ''}</span>
+              <h5>${escHtml(g.title)}</h5>
+              <span>${escHtml(g.subtitle || '')}</span>
               <div class="cartridge-rating">${'★'.repeat(g.rating || 5)}${'☆'.repeat(5 - (g.rating || 5))}</div>
             </div>
           </div>
@@ -363,16 +423,134 @@ async function hydratePersonal(content) {
   if (content && content.guitar_can_play) {
     const canPlayEl = document.querySelector('#gtrQuestPlay, #canPlayList, .songs-can-play');
     if (canPlayEl) {
-      canPlayEl.innerHTML = content.guitar_can_play.split(',').map(s => `<li><span>✓</span> ${s.trim()}</li>`).join('');
+      canPlayEl.innerHTML = content.guitar_can_play.split(',').map(s => `<li><span>✓</span> ${escHtml(s.trim())}</li>`).join('');
     }
   }
 }
 
 // ── 4. PROFESSIONAL PAGE HYDRATOR ───────────────────────────
-async function hydrateProfessional(content) {
+function syncJournalActionLink(row, selector, url, label, className) {
+  if (!row) return;
+  let link = row.querySelector(selector);
+  if (url) {
+    if (!link) {
+      link = document.createElement('a');
+      link.className = className;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      row.prepend(link);
+    }
+    link.href = url;
+    if (label && !link.textContent.trim()) link.textContent = label;
+    link.style.display = '';
+  } else if (link) {
+    link.style.display = 'none';
+  }
+}
+
+async function hydrateProfessional() {
   const projects = await window.sbHelpers.getProjects();
-  if (projects && projects.length > 0) {
-    const profProjects = projects.filter(p => p.page_visibility === 'both' || p.page_visibility === 'professional' || !p.page_visibility);
-    // Can optionally hydrate professional cards
+  if (!projects || projects.length === 0) return;
+
+  const profProjects = projects.filter(p => p.page_visibility === 'both' || p.page_visibility === 'professional' || !p.page_visibility);
+  if (profProjects.length === 0) return;
+
+  const matched = new Set();
+
+  // Match Spread 2 Left Page (Vernacular Chatbot)
+  const spread2Left = document.querySelector('.spread-chapter[data-spread-idx="2"] .left-page');
+  const chatbotProj = profProjects.find(p => /vernacular|chatbot/i.test(p.title || '') || /VernacularChatbot/i.test(p.github_url || ''));
+  if (spread2Left && chatbotProj) {
+    matched.add(chatbotProj);
+    const desc = spread2Left.querySelector('p.p-lead-text');
+    if (desc && chatbotProj.lead_description) desc.textContent = chatbotProj.lead_description;
+    if (Array.isArray(chatbotProj.tech_tags) && chatbotProj.tech_tags.length > 0) {
+      const chipList = spread2Left.querySelector('.p-chip-list');
+      if (chipList) chipList.innerHTML = chatbotProj.tech_tags.map(t => `<span class="p-chip">${escHtml(t)}</span>`).join('');
+    }
+    const row = spread2Left.querySelector('.p-action-row');
+    syncJournalActionLink(row, 'a.p-btn-dark', chatbotProj.live_url, 'Live Demonstration ↗', 'p-btn-dark');
+    syncJournalActionLink(row, 'a.p-btn-outline', chatbotProj.github_url, 'Source Code ↗', 'p-btn-outline');
+  }
+
+  // Match Spread 2 Right Page (VR Horror Experience)
+  const spread2Right = document.querySelector('.spread-chapter[data-spread-idx="2"] .right-page');
+  const vrProj = profProjects.find(p => /vr\s*horror/i.test(p.title || ''));
+  if (spread2Right && vrProj) {
+    matched.add(vrProj);
+    const desc = spread2Right.querySelector('p.p-lead-text');
+    if (desc && vrProj.lead_description) desc.textContent = vrProj.lead_description;
+    const row = spread2Right.querySelector('.p-action-row');
+    if (row) {
+      if (vrProj.live_url) syncJournalActionLink(row, 'a[data-cms-live]', vrProj.live_url, 'Live Demo ↗', 'p-btn-outline');
+      if (vrProj.github_url) syncJournalActionLink(row, 'a[data-cms-gh]', vrProj.github_url, 'Source Code ↗', 'p-btn-outline');
+    }
+  }
+
+  // Match Spread 3 secondary invention entries
+  const slotMatchers = [
+    { match: p => /fruit\s*ninja/i.test(p.title || '') || /python-fruit-ninja/i.test(p.github_url || ''), entryText: /fruit\s*ninja/i },
+    { match: p => /asep|haptic/i.test(p.title || '') || /haptic-helmet-nav/i.test(p.github_url || ''), entryText: /asep|haptic/i },
+    { match: p => /cbse/i.test(p.title || '') || /CBSE-Website/i.test(p.github_url || ''), entryText: /cbse/i },
+    { match: p => /gyro|aem/i.test(p.title || '') || /gyro-ball-controller/i.test(p.github_url || ''), entryText: /gyro|aem/i }
+  ];
+
+  const entries = Array.from(document.querySelectorAll('.spread-chapter[data-spread-idx="3"] .p-project-entry'));
+  slotMatchers.forEach(({ match, entryText }) => {
+    const proj = profProjects.find(match);
+    const entry = entries.find(el => entryText.test(el.textContent || ''));
+    if (!proj || !entry) return;
+    matched.add(proj);
+
+    const titleEl = entry.querySelector('.p-project-title');
+    if (titleEl && proj.title) titleEl.textContent = proj.title;
+
+    const bodyEl = entry.querySelector('.p-project-body');
+    if (bodyEl && proj.lead_description) bodyEl.textContent = proj.lead_description;
+
+    const ghLink = entry.querySelector('a[href*="github.com"]');
+    if (ghLink) {
+      if (proj.github_url) {
+        ghLink.href = proj.github_url;
+        ghLink.style.display = '';
+      } else {
+        ghLink.style.display = 'none';
+      }
+    }
+
+    const liveLink = entry.querySelector('a:not([href*="github.com"])');
+    if (liveLink) {
+      if (proj.live_url) {
+        liveLink.href = proj.live_url;
+        liveLink.style.display = '';
+      } else {
+        liveLink.style.display = 'none';
+      }
+    }
+  });
+
+  // Append any extra CMS projects added beyond the 6 built-in journal entries
+  const extras = profProjects.filter(p => !matched.has(p));
+  const spread3Right = document.querySelector('.spread-chapter[data-spread-idx="3"] .right-page');
+  if (spread3Right) {
+    spread3Right.querySelectorAll('.p-project-entry[data-cms-extra="true"]').forEach(el => el.remove());
+    const foot = spread3Right.querySelector('.page-running-foot');
+    extras.forEach((p, idx) => {
+      const card = document.createElement('div');
+      card.className = 'p-project-entry';
+      card.setAttribute('data-cms-extra', 'true');
+      card.style.marginTop = '1rem';
+      card.innerHTML = `
+        <div class="p-project-top">
+          <span class="p-project-id">${escHtml(p.category_badge || `APPENDIX ${String(idx + 1).padStart(2, '0')}`)}</span>
+          ${p.github_url ? `<a href="${escHtml(p.github_url)}" target="_blank" rel="noopener" class="p-btn-outline" style="padding:2px 8px;font-size:0.68rem">GitHub ↗</a>` : ''}
+        </div>
+        <h4 class="p-project-title">${escHtml(p.title)}</h4>
+        <p class="p-project-body">${escHtml(p.lead_description || '')}</p>
+        ${p.live_url ? `<a href="${escHtml(p.live_url)}" target="_blank" rel="noopener" class="p-btn-outline" style="font-size:0.72rem;padding:3px 8px">Live Demo ↗</a>` : ''}
+      `;
+      if (foot) spread3Right.insertBefore(card, foot);
+      else spread3Right.appendChild(card);
+    });
   }
 }
